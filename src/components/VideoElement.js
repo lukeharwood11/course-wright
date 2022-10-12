@@ -16,20 +16,28 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
 
     const renderEditMode = () => {
         return (
-            <div>
+            <div className={"border w-full border-black rounded-md p-2 mb-5 flex justify-center flex-col"}>
                 <div className={"flex justify-center flex-col"} >
-                    <h1 className={"text-4xl text-center"}>Title</h1>
-                    <input className="w-full" defaultValue={title} onChange={(event) => onTitleChange(section.id, event)}/>
-                    <h1 className={"text-4xl text-center"}>YouTube URL</h1>
-                    <input className="w-full" defaultValue={src} onChange={(event) => onUrlChange(section.id, event)}/>
-                    <h1 className={"text-4xl text-center"}>Description</h1>
-                    <Textarea className="w-full" defaultValue={text} onChange={(event) => onChange(section.id, event)}/>
+                    <div>
+                        <h1 className={"text-1xl font-bold"}>Title</h1>
+                        <input className="w-full rounded-md p-2" defaultValue={title} onChange={(event) => onTitleChange(section.id, event)}/>
+                    </div>
+                    <div>
+                        <h1 className={"text-1xl font-bold"}>YouTube URL</h1>
+                        <input className="w-full rounded-md p-2" defaultValue={src} onChange={(event) => onUrlChange(section.id, event)}/>
+                    </div>
+                    <div className={""}>
+                        <h1 className={"text-1xl font-bold"}>Description</h1>
+                        <Textarea className="w-full resize-none rounded-md p-2" defaultValue={text} onChange={(event) => onChange(section.id, event)}/>
+                    </div>
                 </div>
-                <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-40 h-10 rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
-                <button onClick={() => {
-                    console.log("SAVE!")
-                    onSave(section.id, true)
-                }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-40 h-10 rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
+                <div className={"flex justify-center align-center"}>
+                    <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-min h-min rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
+                    <button onClick={() => {
+                        console.log("SAVE!")
+                        onSave(section.id, true)
+                    }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-min h-min rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
+                </div>
             </div>
         );
     }
@@ -44,7 +52,6 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                   allowFullScreen></iframe>}
                 {text && <div className={"bg-white rounded-lg p-2"}><p>{text}</p></div>}
-                <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-full, h-3/4 rounded-md px-4 py-2 bg-red-300 text-white">delete</button>
                 <button onClick={() => onSave(section.id, false)} className="border border-black font-semibold transition-colors hover:bg-white hover:text-blue-500 w-full, h-3/4 rounded-md px-4 py-2 bg-blue-500 text-white">edit</button>
             </div>
 

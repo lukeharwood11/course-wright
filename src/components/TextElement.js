@@ -26,10 +26,10 @@ const TextElement = ({onChange, onDelete, onSave, onTextTypeChange, section}) =>
                             <label className={`text-black inline-block ${renderValue("font-bold", "instructions")}`} >Instructions Block</label>
                         </div>
                     </form>
-                    <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-40 h-10 rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
+                    <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-min h-min rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
                     <button onClick={() => {
                         onSave(section.id, true)
-                    }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-40 h-10 rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
+                    }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-min h-min rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
                 </div>
             </div>
         );
