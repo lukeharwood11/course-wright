@@ -13,7 +13,7 @@ html, body, #app, #app>div, root {
     width: 100%;
 }
 
-code {
+.markdown code {
     background-color: rgba(125, 114, 114, 0.34);
     border-radius: 2px;
     padding: 0 4px;
@@ -22,47 +22,47 @@ code {
     font-size: 20px;
 }
 
-h1 {
+.markdown h1 {
     font-size: 35px;
     font-weight: bold;
     text-align: center;
 }
 
-h2 {
+.markdown h2 {
     font-size: 30px;
     font-weight: bold;
 }
 
-h3 {
+.markdown h3 {
     font-size: 27px;
     font-weight: bold;
 }
 
-h4 {
+.markdown h4 {
     font-size: 25px;
     font-weight: bold;
 }
 
-p {
+.markdown p {
     font-family: "Roboto", serif;
     font-size: 20px;
 }
 
-ol {
+.markdown ol {
     padding: 0 2em;
     list-style-type: decimal;
     font-family: "Roboto", serif;
     font-size: 20px;
 }
 
-ul {
+.markdown ul {
     padding: 0 2em;
     font-family: "Roboto", serif;
     font-size: 20px;
     list-style-type: circle
 }
 
-blockquote {
+.markdown blockquote {
     margin-left: 2em;
     font-family: "Roboto", serif;
     font-size: 20px;

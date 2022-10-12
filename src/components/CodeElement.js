@@ -1,6 +1,7 @@
 import React from 'react'
 
-const CodeElement = (props) => {
+const CodeElement = ({section}) => {
+    console.log(section)
     return (
         <></>
     );
