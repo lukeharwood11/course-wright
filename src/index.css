@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html, body, #app, #app>div, root {
     height: 100%;
@@ -10,4 +11,63 @@ html, body, #app, #app>div, root {
 .full-height {
     height: 100%;
     width: 100%;
+}
+
+code {
+    background-color: rgba(125, 114, 114, 0.34);
+    border-radius: 2px;
+    padding: 0 4px;
+    color: black;
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+p {
+    font-family: "Roboto", serif;
+    font-size: 20px;
+}
+
+ol {
+    padding: 0 2em;
+    list-style-type: decimal;
+    font-family: "Roboto", serif;
+    font-size: 20px;
+}
+
+ul {
+    padding: 0 2em;
+    font-family: "Roboto", serif;
+    font-size: 20px;
+    list-style-type: circle
+}
+
+blockquote {
+    margin-left: 2em;
+    font-family: "Roboto", serif;
+    font-size: 20px;
+    font-style: italic;
+    background-color: white;
+    border-radius: 1em;
+    padding: .5em 2em;
 }

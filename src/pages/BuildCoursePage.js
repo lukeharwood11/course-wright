@@ -1,5 +1,5 @@
 import React from 'react'
-import {CourseBuilder} from "../components/CourseBuilder";
+import CourseBuilder from "../components/CourseBuilder";
 import {SideBar} from "../components/SideBar";
 
 
