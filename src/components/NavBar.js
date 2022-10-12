@@ -11,10 +11,10 @@ export class NavBar extends Component {
                 <a className="rounded-md px-2 text-white font-bold text-2xl m-2" href="#">Course Builder</a>
                 <div className="" id="navbarSupportedContent">
                     <ul className="flex justify-around w-full">
-                        <li className="m-2 text-white font-bold text-1xl"><a className="nav-link" href="#">Home</a></li>
-                        <li className="m-2 text-white font-bold text-1xl"><a className="nav-link" href="#">About</a></li>
-                        <li className="m-2 text-white font-bold text-1xl"><a className="nav-link" href="#">Contact</a></li>
-                        <li className="m-2 text-white font-bold text-1xl"><a className="nav-link active" aria-current="page" href="#">Blog</a></li>
+                        <li className="p-1 rounded-md hover:bg-white hover:text-blue-500 transition-colors m-2 text-white font-bold text-1xl"><a className="nav-link" href="#">Home</a></li>
+                        <li className="p-1 rounded-md hover:bg-white hover:text-blue-500 transition-colors m-2 text-white font-bold text-1xl"><a className="nav-link" href="#">About</a></li>
+                        <li className="p-1 rounded-md hover:bg-white hover:text-blue-500 transition-colors m-2 text-white font-bold text-1xl"><a className="nav-link" href="#">Contact</a></li>
+                        <li className="p-1 rounded-md hover:bg-white hover:text-blue-500 transition-colors m-2 text-white font-bold text-1xl"><a className="nav-link active" aria-current="page" href="#">Log In</a></li>
                     </ul>
                 </div>
             </nav>

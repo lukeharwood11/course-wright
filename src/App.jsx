@@ -1,7 +1,7 @@
 import React, {createContext} from 'react';
 import './App.css';
 import { Route, Routes } from "react-router";
-import {CourseBuilder} from "./pages/CourseBuilder";
+import {BuildCoursePage} from "./pages/BuildCoursePage"
 import {NavBar} from "./components/NavBar";
 
 export const AppContext = createContext(undefined)
@@ -17,7 +17,7 @@ export const StateContainer = ({children}) => {
 const Router = () => {
     return (
         <Routes>
-            <Route path='/' element={<CourseBuilder/>}></Route>
+            <Route path='/' element={<BuildCoursePage/>}></Route>
             <Route path='/signup' element={<div>Sign Up </div>}></Route>
         </Routes>
     );
@@ -25,9 +25,9 @@ const Router = () => {
 
 function App() {
   return (
-    <div className="App">
+    <div className="h-full w-full">
       <NavBar/>
-      <main className="flex justify-center w-full">
+      <main className="w-full h-full">
             <Router/>
       </main>
       <footer>
