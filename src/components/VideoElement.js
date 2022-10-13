@@ -1,15 +1,14 @@
 import React from "react";
 import Textarea from "react-expanding-textarea";
+import urlParser from "js-video-url-parser";
 
 
 const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, section}) => {
     const {src, title, text, editMode} = section
-    console.log(section)
     const parseUrl = () => {
         if (src !== "") {
-            const split = src.split("=")
-            console.log(split[split.length-1])
-            return split[split.length - 1]
+            const {id} = urlParser.parse(src)
+            return id ? id : undefined
         }
         return undefined
     }
@@ -35,7 +34,7 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
                     <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-min h-min rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
                     <button onClick={() => {
                         console.log("SAVE!")
-                        onSave(section.id, true)
+                        onSave(section.id, src.trim() !== "" || title.trim() !== "" || text.trim() !== "")
                     }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-min h-min rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
                 </div>
             </div>
