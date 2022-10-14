@@ -1,6 +1,7 @@
 import React from "react";
 import Textarea from "react-expanding-textarea";
 import urlParser from "js-video-url-parser";
+import {motion} from 'framer-motion'
 
 
 const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, section}) => {
@@ -15,7 +16,9 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
 
     const renderEditMode = () => {
         return (
-            <div className={"border w-full border-black rounded-md p-2 mb-5 flex justify-center flex-col"}>
+            <motion.div
+                initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}
+                className={"border w-full border-black rounded-md p-2 mb-5 flex justify-center flex-col"}>
                 <div className={"flex justify-center flex-col"} >
                     <div>
                         <h1 className={"text-1xl font-bold"}>Title</h1>
@@ -33,11 +36,10 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
                 <div className={"flex justify-center align-center"}>
                     <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-min h-min rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
                     <button onClick={() => {
-                        console.log("SAVE!")
                         onSave(section.id, src.trim() !== "" || title.trim() !== "" || text.trim() !== "")
                     }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-min h-min rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
                 </div>
-            </div>
+            </motion.div>
         );
     }
 

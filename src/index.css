@@ -2,10 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,700&display=swap');@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,700&display=swap');
 
 html, body, #app, #app>div, root {
     height: 100%;
     width: 100%;
+}
+
+.code-area {
+    font-family: "JetBrains Mono", "serif"
+}
+
+code {
+    font-family: "JetBrains Mono", "serif";
 }
 
 .full-height {

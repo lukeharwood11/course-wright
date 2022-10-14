@@ -2,7 +2,7 @@ import React, {createContext} from 'react';
 import './App.css';
 import { Route, Routes } from "react-router";
 import {BuildCoursePage} from "./pages/BuildCoursePage"
-import {NavBar} from "./components/NavBar";
+import NavBar from "./components/NavBar";
 
 export const AppContext = createContext(undefined)
 

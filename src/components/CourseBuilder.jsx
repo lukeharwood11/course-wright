@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
-import Textarea from 'react-expanding-textarea'
+import React from 'react'
 import TextElement from "./TextElement";
 import VideoElement from "./VideoElement";
 import CodeElement from "./CodeElement";
 import {useStickyState} from '../utils/io'
+import {BsYoutube, BsFillNodePlusFill, BsCodeSlash} from "react-icons/bs";
+import {AnimatePresence, motion} from "framer-motion";
 
 const CourseBuilder = () => {
     const [sections, setSections] = useStickyState([], "activeSections")
@@ -43,41 +44,32 @@ const CourseBuilder = () => {
 
     const handleSave = (id, exitEditMode) => {
         const s = [...sections]
-        console.log(!exitEditMode)
         s.find(section => section.id === id).editMode = !exitEditMode
-        console.log(s)
         setSections(s)
     }
 
     const handleChange = (id, event) => {
-        console.log(event, id)
         const s = [...sections]
-        s.find(section => section.id === id).text = event.target.value
-        console.log(s)
+        const section = s.find(section => section.id === id)
+        section.text = event.target.value
         setSections(s)
     }
 
-    const handleTextTypeChanged = (id, event) => {
-        console.log(event, id)
+    const handleTextTypeChanged = (id, textType) => {
         const s = [...sections]
-        s.find(section => section.id === id).textType = event.target.value
-        console.log(s)
+        s.find(section => section.id === id).textType = textType
         setSections(s)
     }
 
     const handleVideoTitleChanged = (id, event) => {
-        console.log(event, id)
         const s = [...sections]
         s.find(section => section.id === id).title = event.target.value
-        console.log(s)
         setSections(s)
     }
 
     const handleVideoUrlChanged = (id, event) => {
-        console.log(event, id)
         const s = [...sections]
         s.find(section => section.id === id).src = event.target.value
-        console.log(s)
         setSections(s)
     }
 
@@ -97,9 +89,9 @@ const CourseBuilder = () => {
     }
 
     return (
-        <div className="p-3 mt-3 rounded-md w-1/2 bg-gray-100 flex items-center justify-center flex-col h-min">
-            {false && <h1 className="p-4 text-white text-5xl font-bold">Welcome to the Course Builder</h1>}
-            {sections.map((section) => {
+        <motion.div className="p-3 mt-3 rounded-md w-full sm:w-1/2 bg-gray-100 flex items-center justify-center flex-col h-min">
+            <AnimatePresence>
+                {sections.map((section) => {
                 switch (section.type) {
                     case "code":
                         return <CodeElement onChange={handleChange} section={section} key={section.id} onSave={handleSave} onDelete={() => handleDelete(section.id)} id={section.id}/>
@@ -111,13 +103,15 @@ const CourseBuilder = () => {
                         return
                 }
             })}
+            </AnimatePresence>
             <div>
-                <button onClick={handleNewText} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500">Add Text</button>
-                <button onClick={handleNewVideo} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500">Add Video</button>
-                <button onClick={handleNewCode} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500">Add Code</button>
-                <button onClick={handleSaveAll} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-full px-4 py-2 m-2 bg-green text-blue-500">Save All</button>
+
+                <motion.button whileHover={{scale: 1.2}} onClick={handleNewText} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500"><BsFillNodePlusFill/></motion.button>
+                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewVideo} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500"><BsYoutube/></motion.button>
+                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewCode} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500"><BsCodeSlash/></motion.button>
+                <motion.button whileHover={{scale: 1.2}}  onClick={handleSaveAll} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-full px-4 py-2 m-2 bg-green text-blue-500">Save All</motion.button>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
