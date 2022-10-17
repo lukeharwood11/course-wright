@@ -1,6 +1,6 @@
 import React from "react";
 
-export const useStickyState = (defaultValue, key) => {
+const useMemoryState = (defaultValue, key) => {
     const [value, setValue] = React.useState(() => {
         const stickyValue = window.localStorage.getItem(key);
         return stickyValue !== null
@@ -12,3 +12,5 @@ export const useStickyState = (defaultValue, key) => {
     }, [key, value]);
     return [value, setValue];
 }
+
+export default useMemoryState;

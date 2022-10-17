@@ -3,7 +3,7 @@ import CourseBuilder from "../components/CourseBuilder";
 import {SideBar} from "../components/SideBar";
 
 
-export const BuildCoursePage = (props) => {
+const BuildCoursePage = (props) => {
     return (
         <div className="w-full h-full">
             <SideBar/>
@@ -13,3 +13,5 @@ export const BuildCoursePage = (props) => {
         </div>
     );
 }
+
+export default BuildCoursePage;

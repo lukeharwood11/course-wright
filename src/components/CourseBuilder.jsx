@@ -2,13 +2,13 @@ import React from 'react'
 import TextElement from "./TextElement";
 import VideoElement from "./VideoElement";
 import CodeElement from "./CodeElement";
-import {useStickyState} from '../utils/io'
+import useMemoryState from "../hooks/useMemoryState";
 import {BsYoutube, BsFillNodePlusFill, BsCodeSlash} from "react-icons/bs";
 import {AnimatePresence, motion} from "framer-motion";
 
 const CourseBuilder = () => {
-    const [sections, setSections] = useStickyState([], "activeSections")
-    const [id, setId] = useStickyState(-1, "builderIds")
+    const [sections, setSections] = useMemoryState([], "activeSections")
+    const [id, setId] = useMemoryState(-1, "builderIds")
 
     const handleDelete = (id) => {
         const newSections = sections.filter((section)=> section.id !== id)
@@ -76,14 +76,15 @@ const CourseBuilder = () => {
     const handleSaveAll = () => {
         const s = [...sections]
         s.map((section) => {
-            if ((section.type == "code" || section.type == "text") && section.text.trim() !== "") {
+            if ((section.type === "code" || section.type === "text") && section.text.trim() !== "") {
                 section.editMode = false
-            } else if (section.type == "video") {
+            } else if (section.type === "video") {
                 const {text, title, src} = section
                 if (text.trim() !== "" || title.trim() !== "" || src.trim() !== "") {
                     section.editMode = false
                 }
             }
+            return section
         })
         setSections(s)
     }

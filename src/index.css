@@ -9,6 +9,57 @@ html, body, #app, #app>div, root {
     width: 100%;
 }
 
+html,body, #st-full-pg {
+    margin: 0;
+}
+
+.i-bg {
+    background-color: #ffa69e;
+}
+
+.ii-bg {
+    background-color: #B2CEDE;
+}
+
+.iii-bg {
+    background-color: #8CDFD6;
+}
+
+.iiii-bg {
+    background-color: #6dc0d5;
+}
+
+.iiiii-bg {
+    background-color: #5a716a;
+}
+
+.i-text {
+    color: #ffa69e;
+}
+
+.ii-text {
+    color: #B2CEDE;
+}
+
+.iii-text {
+    color: #8CDFD6;
+}
+
+.iiii-text {
+    color: #6dc0d5;
+}
+
+.iiiii-text {
+    color: #5a716a;
+}
+
+.dialog {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    font-family: "Roboto", serif;
+}
+
 .code-area {
     font-family: "JetBrains Mono", "serif"
 }

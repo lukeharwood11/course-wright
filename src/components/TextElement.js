@@ -15,7 +15,7 @@ const TextElement = ({onChange, onDelete, onSave, onTextTypeChange, section}) =>
                 initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}
                 className="flex items-center flex-col w-full">
 
-                <Textarea defaultValue={text} onChange={(event) => onChange(section.id, event)} className={`p-4 border-box resize-none mx-3 rounded-md bg-gray-100 ${renderValue("italic", "instructions")} w-5/6 border border-black ${renderValue("font-bold bg-blue-100 text-blue-500", "key")}`}/>
+                <Textarea defaultValue={text} onChange={(event) => onChange(section.id, event)} className={`p-4 border-box resize-none mx-3 rounded-md bg-gray-100 ${renderValue("italic", "instructions")} w-full border border-black ${renderValue("font-bold bg-blue-100 text-blue-500", "key")}`}/>
                 <div className={"flex justify-between items-center"}>
                     <div>
                         <motion.button whileTap={{scale:.8}} whileHover={{scale: 1.2}} className={`rounded-lg w-30 mr-2 ${textType === "key" ? "bg-blue-500 text-white" : "bg-white text-blue-500"}`} onClick={(event) => onTextTypeChange(section.id, "key")} id="key" ><BsKey size={"2em"}/></motion.button>
