@@ -17,7 +17,7 @@ const NavBar = () => {
                 className={`w-full h-full h-min w-min`}>
                 <ul className="flex justify-around w-full">
                     <li className={"flex items-center"}>
-                        <motion.button whileHover={{scale: 1.5, x: -5}} transition={{type: "tween"}} className="p-1 text-gray-800">
+                        <motion.button whileHover={{scale: 1.5, x: -5}} transition={{type: "tween"}} className="p-1 text-white">
                             <BiMessageDetail size={30}/>
                         </motion.button>
                     </li>
