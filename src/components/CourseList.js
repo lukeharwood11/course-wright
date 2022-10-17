@@ -12,7 +12,7 @@ const CourseList = () => {
     useEffect(() => {
 
         return () => {
-
+            // api call to build course list
         }
     }, [])
 
