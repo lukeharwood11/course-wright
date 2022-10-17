@@ -45,7 +45,7 @@ const CodeElement = ({section, onSave, onDelete, onChange}) => {
                      {text}
                  </code>
              </pre>
-             <CopyButton style="" onClick={handleCopy} size={"2em"}/>
+             <CopyButton onClick={handleCopy} size={"2em"}/>
          </div>);
     }
 
