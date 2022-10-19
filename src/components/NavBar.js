@@ -23,7 +23,7 @@ const NavBar = () => {
                     </li>
                     { activeUser ?
                         <li className="p-1 rounded-md transition-colors m-2 text-white font-bold text-1xl"><a className="whitespace-nowrap" aria-current="page" href="/">Hello, {activeUser.name}!</a></li> :
-                        <li className="p-1 rounded-md transition-colors m-2 text-white font-bold text-1xl"><a className="whitespace-nowrap" aria-current="page" href="/sign-in">Log In</a></li>
+                        <li className="p-1 rounded-md transition-colors m-2 text-white font-bold text-1xl"><a className="whitespace-nowrap" aria-current="page" href="/sign-in">Sign In</a></li>
                     }
                 </ul>
             </div>
