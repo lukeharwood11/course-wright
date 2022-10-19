@@ -38,14 +38,12 @@ const Router = () => {
 
 function App() {
   return (
-      <>
-          <NavBar/>
+      <div className={"w-full h-full"}>
           <main className="w-full h-full">
+              <NavBar/>
               <Router/>
           </main>
-          <footer>
-          </footer>
-      </>
+      </div>
   );
 }
 
