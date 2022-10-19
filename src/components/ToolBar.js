@@ -14,7 +14,7 @@ function ToolBar(props) {
                     key={0}
                     initial={{opacity: 0, width: 0}}
                     animate={{opacity: 1, width: "100%"}}
-                    transition={{ease: "anticipate", duration: 1.5}}
+                    transition={{ease: "backOut", duration: 1}}
                     exit={{opacity: 0, width: 0}}
                     onSubmit={props.onSubmit}
                     type={"text"}
