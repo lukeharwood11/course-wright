@@ -13,6 +13,10 @@ html,body, #st-full-pg {
     margin: 0;
 }
 
+.roboto {
+    font-family: Roboto, serif;
+}
+
 .i-bg {
     background-color: #ffa69e;
 }

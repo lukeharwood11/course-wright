@@ -41,9 +41,7 @@ function App() {
       <>
           <NavBar/>
           <main className="w-full h-full">
-              <AnimatePresence>
-                  <Router/>
-              </AnimatePresence>
+              <Router/>
           </main>
           <footer>
           </footer>
