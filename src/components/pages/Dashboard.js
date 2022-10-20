@@ -1,17 +1,17 @@
 import React, {useState} from "react";
-import { SideBar } from "../components/SideBar";
-import CourseBuilder from "../components/CourseBuilder";
+import { SideBar } from "../coursebuilder/SideBar";
+import CourseBuilder from "../coursebuilder/CourseBuilder";
 import {AnimatePresence, motion} from "framer-motion";
 import { BsFillFileEarmarkPlusFill } from "react-icons/bs";
-import CourseList from "../components/CourseList";
-import CourseOptionPanel from "../components/CourseOptionPanel";
+import CourseList from "../CourseList";
+import CourseOptionPanel from "../CourseOptionPanel";
 import { MdManageSearch } from "react-icons/md";
-import DashboardLowerPanel from "../components/DashboardLowerPanel";
+import DashboardLowerPanel from "../DashboardLowerPanel";
 import {BiUserCircle} from 'react-icons/bi'
 import {BsSearch} from 'react-icons/bs'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 import * as PropTypes from "prop-types";
-import ToolBar from "../components/ToolBar";
+import ToolBar from "../ToolBar";
 
 const Dashboard = (props) => {
     const [searchActive, setSearchActive] = useState(false)

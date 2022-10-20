@@ -1,7 +1,7 @@
 import React from 'react'
 import Textarea from "react-expanding-textarea";
 import {motion} from "framer-motion";
-import CopyButton from "./CopyButton";
+import CopyButton from "../CopyButton";
 
 const CodeElement = ({section, onSave, onDelete, onChange}) => {
     const {text, editMode, id} = section

@@ -2,7 +2,7 @@ import React from 'react'
 import TextElement from "./TextElement";
 import VideoElement from "./VideoElement";
 import CodeElement from "./CodeElement";
-import useMemoryState from "../hooks/useMemoryState";
+import useMemoryState from "../../hooks/useMemoryState";
 import {BsYoutube, BsFillNodePlusFill, BsCodeSlash} from "react-icons/bs";
 import {AnimatePresence, motion} from "framer-motion";
 

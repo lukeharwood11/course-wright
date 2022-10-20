@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react'
 import {IoIosMenu} from 'react-icons/io'
 import {motion} from "framer-motion";
-import {AppContext} from "../App";
+import {AuthContext} from "../App";
 import {BiMessageDetail} from "react-icons/bi";
 
 const NavBar = () => {
-    const {activeUser} = useContext(AppContext)
+    const {activeUser} = useContext(AuthContext)
     return (
         <>
         <nav className="flex items-center justify-between bg-blue-500">

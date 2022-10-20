@@ -1,6 +1,6 @@
 import React from 'react'
-import CourseBuilder from "../components/CourseBuilder";
-import {SideBar} from "../components/SideBar";
+import CourseBuilder from "../coursebuilder/CourseBuilder";
+import {SideBar} from "../coursebuilder/SideBar";
 
 
 const BuildCoursePage = (props) => {

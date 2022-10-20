@@ -1,14 +1,14 @@
 import React, {createContext, useContext, useState} from 'react';
 import './App.css';
 import { Route, Routes } from "react-router";
-import BuildCoursePage from "./pages/BuildCoursePage"
+import BuildCoursePage from "./components/pages/BuildCoursePage"
 import NavBar from "./components/NavBar";
-import SignInPage from "./pages/SignInPage";
-import {AnimatePresence} from "framer-motion";
-import CreateAccountPage from "./pages/CreateAccountPage";
-import Dashboard from "./pages/Dashboard";
+import SignInPage from "./components/pages/SignInPage";
+import { AnimatePresence } from "framer-motion";
+import CreateAccountPage from "./components/pages/CreateAccountPage";
+import Dashboard from "./components/pages/Dashboard";
 
-export const AppContext = createContext(undefined)
+export const AuthContext = createContext({})
 
 export const StateContainer = ({children}) => {
     const initialPaths = [
@@ -21,14 +21,14 @@ export const StateContainer = ({children}) => {
     const [activeUser, setActiveUser] = useState(null)
 
     return (
-        <AppContext.Provider value={{paths, setPaths, activeUser, setActiveUser}}>
+        <AuthContext.Provider value={{paths, setPaths, activeUser, setActiveUser}}>
             {children}
-        </AppContext.Provider>
+        </AuthContext.Provider>
     );
 }
 
 const Router = () => {
-    const {paths} = useContext(AppContext)
+    const {paths} = useContext(AuthContext)
     return (
         <Routes>
             {paths.map((path, i) => <Route path={`/${path.path}`} element={path.page} key={i}></Route>)}
@@ -38,12 +38,9 @@ const Router = () => {
 
 function App() {
   return (
-      <div className={"w-full h-full"}>
           <main className="w-full h-full">
-              <NavBar/>
               <Router/>
           </main>
-      </div>
   );
 }
 
