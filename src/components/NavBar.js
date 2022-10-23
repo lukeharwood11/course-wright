@@ -1,11 +1,9 @@
 import React, {useContext, useState} from 'react'
 import {IoIosMenu} from 'react-icons/io'
 import {motion} from "framer-motion";
-import {AuthContext} from "../App";
 import {BiMessageDetail} from "react-icons/bi";
 
 const NavBar = () => {
-    const {activeUser} = useContext(AuthContext)
     return (
         <>
         <nav className="flex items-center justify-between bg-blue-500">
@@ -21,8 +19,7 @@ const NavBar = () => {
                             <BiMessageDetail size={30}/>
                         </motion.button>
                     </li>
-                    { activeUser ?
-                        <li className="p-1 rounded-md transition-colors m-2 text-white font-bold text-1xl"><a className="whitespace-nowrap" aria-current="page" href="/">Hello, {activeUser.name}!</a></li> :
+                    {
                         <li className="p-1 rounded-md transition-colors m-2 text-white font-bold text-1xl"><a className="whitespace-nowrap" aria-current="page" href="/sign-in">Sign In</a></li>
                     }
                 </ul>

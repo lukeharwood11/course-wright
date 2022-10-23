@@ -1,7 +1,7 @@
 import {BsSearch} from "react-icons/bs";
 import {AnimatePresence, motion} from "framer-motion";
 import {AiOutlineArrowRight} from "react-icons/ai";
-import {BiUserCircle} from "react-icons/bi";
+import {RiUser3Line} from "react-icons/ri";
 import React from "react";
 
 function ToolBar(props) {
@@ -33,7 +33,7 @@ function ToolBar(props) {
             }
         </AnimatePresence>
         <a href={"/sign-in"}>
-            <button className="rounded-full bg-white m-2"><BiUserCircle className="text-blue-500" size={40}/></button>
+            <button className="rounded-full bg-white mr-5"><RiUser3Line className="text-blue-500" size={40}/></button>
         </a>
     </div>;
 }

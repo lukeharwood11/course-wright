@@ -6,7 +6,7 @@ import useMemoryState from "../../hooks/useMemoryState";
 import {BsYoutube, BsFillNodePlusFill, BsCodeSlash} from "react-icons/bs";
 import {AnimatePresence, motion} from "framer-motion";
 
-const CourseBuilder = () => {
+const LessonBuilder = () => {
     const [sections, setSections] = useMemoryState([], "activeSections")
     const [id, setId] = useMemoryState(-1, "builderIds")
 
@@ -116,4 +116,4 @@ const CourseBuilder = () => {
     );
 }
 
-export default CourseBuilder;
+export default LessonBuilder;
