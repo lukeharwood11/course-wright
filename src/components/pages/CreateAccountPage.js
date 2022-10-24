@@ -232,7 +232,7 @@ const CreateAccountPage = (props) => {
                 <p
                     className={"text-right text-gray-200 p-2"}>Already have an account? <a className={"text-gray-700 underline"} href={"/sign-in"}>Sign in!</a></p>
                 <h1 className={"text-2xl text-white"}>{msg}</h1>
-            </form>}
+            </form>
         </motion.div>
     );
 }
