@@ -7,6 +7,7 @@ import Logo from "../Logo";
 import useAuth from "../../hooks/useAuth";
 import useMemoryState from "../../hooks/useMemoryState";
 import axios from "../../api/axios"
+import Loading from "../Loading";
 
 const SIGN_IN_URL = "/auth"
 
@@ -20,12 +21,15 @@ const SignInPage = (props) => {
     const location = useLocation()
     const from = location?.state?.from.pathname || '/'
     const [msg, setMsg] = useState("")
+    const [loading, setLoading] = useState(false)
+
     useEffect(() => {
         emailRef.current.focus()
     }, [])
 
     const handleSignIn = async (e) => {
         e.preventDefault()
+        setLoading(true)
         try {
             const response = await axios.post(
                 SIGN_IN_URL,
@@ -56,10 +60,12 @@ const SignInPage = (props) => {
                 setMsg("Login Failed")
             }
         }
+        setLoading(false)
     }
 
 
     return (
+        loading ? <Loading/> :
         <motion.div
             initial={{ opacity: 0, y: "-1vh" }}
             animate={{ opacity: 1, y:0 }}

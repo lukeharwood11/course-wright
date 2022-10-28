@@ -12,6 +12,8 @@ import Dashboard from "./components/pages/Dashboard";
 import NotFound from "./components/pages/NotFound";
 import AuthorizeUser from "./components/AuthorizeUser";
 import RefreshHandler from "./components/RefreshHandler";
+import CreateAccountProvider from "./context/CreateAccountContext";
+import Loading from "./components/Loading";
 
 function App() {
     return (
@@ -19,10 +21,7 @@ function App() {
             <Route path={"/"} element={<Layout />}>
                 <Route index element={<HomePage />} />
                 <Route path={"sign-in"} element={<SignInPage />} />
-                <Route
-                    path={"create-account"}
-                    element={<CreateAccountPage />}
-                />
+                <Route path={"create-account"} element={<CreateAccountPage />}/>
                 {/* protected routes here */}
                 <Route element={<RefreshHandler />}>
                     <Route element={<AuthorizeUser />}>
