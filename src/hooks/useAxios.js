@@ -14,7 +14,7 @@ const useAxios = () => {
             return response;
           }, async (error) => {
             const config = error.config
-            if (error.response.status === 403 && !config.retry) {
+            if (error?.response?.status === 403 && !config.retry) {
                 config.retry = true
                 const accessToken = await refresh()
                 config.headers.Authorization = `Bearer ${accessToken}`
