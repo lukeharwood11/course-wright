@@ -1,15 +1,12 @@
 import { Outlet } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-const Layout = () => {
+import { Toaster } from 'react-hot-toast'
 
-    //            <Helmet>
-    //                 <meta charSet="utf-8" />
-    //                 <title>Course Wright</title>
-    //             </Helmet>
+const Layout = () => {
 
     return (
         <main className="w-full h-full">
-
+            <Toaster/>
             <Outlet/>
         </main>
     )

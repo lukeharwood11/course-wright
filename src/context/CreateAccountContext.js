@@ -20,11 +20,11 @@ const CreateAccountProvider = ({children}) => {
     const [repeatPwdMsg, setRepeatPwdMsg] = useState("")
 
     const clearMemoryState = () => {
-        window.localStorage.setItem("formFirstName", JSON.stringify(""))
-        window.localStorage.setItem("formLastName", JSON.stringify(""))
-        window.localStorage.setItem("formEmail", JSON.stringify(""))
-        window.localStorage.setItem("accountType", JSON.stringify(""))
-        window.localStorage.setItem("slide-index", JSON.stringify(""))
+        window.sessionStorage.setItem("formFirstName", JSON.stringify(""))
+        window.sessionStorage.setItem("formLastName", JSON.stringify(""))
+        window.sessionStorage.setItem("formEmail", JSON.stringify(""))
+        window.sessionStorage.setItem("accountType", JSON.stringify(""))
+        window.sessionStorage.setItem("slide-index", JSON.stringify(""))
     }
 
     return (

@@ -19,7 +19,9 @@ function App() {
     return (
         <Routes>
             <Route path={"/"} element={<Layout />}>
-                <Route index element={<HomePage />} />
+                <Route element={<RefreshHandler/>}>
+                    <Route index element={<HomePage />} />
+                </Route>
                 <Route path={"sign-in"} element={<SignInPage />} />
                 <Route path={"create-account"} element={<CreateAccountPage />}/>
                 {/* protected routes here */}

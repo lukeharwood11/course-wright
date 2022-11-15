@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import useMemoryState from "../../hooks/useMemoryState";
 import axios from "../../api/axios"
 import Loading from "../Loading";
+import toast from "react-hot-toast";
 
 const SIGN_IN_URL = "/auth"
 
@@ -20,7 +21,6 @@ const SignInPage = (props) => {
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from.pathname || '/'
-    const [msg, setMsg] = useState("")
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -29,6 +29,7 @@ const SignInPage = (props) => {
 
     const handleSignIn = async (e) => {
         e.preventDefault()
+        const id = toast.loading("Signing you in...")
         setLoading(true)
         try {
             const response = await axios.post(
@@ -41,23 +42,23 @@ const SignInPage = (props) => {
             )
             setEmail("")
             setPassword("")
-            setMsg("")
 
             const { user, accessToken } = response.data
             setAuth({ user, accessToken })
+            toast.success(`Welcome ${ user.firstName }!`, { id: id })
             navigate(from, { replace: true })
         
 
         } catch (err) {
             if (!err?.response) {
-                setMsg('No Server Response')
+                toast.error('No Server Response', { id: id })
             } else if (err.response?.status === 400) {
-                setMsg("Missing Username or Password")
+                toast.error("Missing Username or Password", { id: id })
             } else if (err.response?.status === 401) {
-                setMsg("Incorrect Email or password.")
+                toast.error("Incorrect Email or password.", { id: id })
                 setPassword("")
             } else {
-                setMsg("Login Failed")
+                toast.error("Login Failed", { id: id })
             }
         }
         setLoading(false)
@@ -106,7 +107,6 @@ const SignInPage = (props) => {
                 </div>
                 <p
                     className={"text-right text-gray-200 p-2"}>Don't have an account? <a className={"text-gray-700 underline"} href={"/create-account"}>Create one!</a></p>
-                <h3 className={"text-xl logo text-red-400"}>{ msg }</h3>
             </form>
         </motion.div>
     );

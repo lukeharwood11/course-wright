@@ -5,6 +5,7 @@ import axios from "../api/axios";
 import useCreateAccountContext from "../hooks/useCreateAccountContext";
 import AccountTypeSlide from "./AccountTypeSlide";
 import StudentInfoSlide from "./StudentInfoSlide";
+import toast from "react-hot-toast";
 
 
 const CreateAccountSlideBox = ({ setLoading }) => {
@@ -38,6 +39,7 @@ const CreateAccountSlideBox = ({ setLoading }) => {
     const handleCreateAccount = async (e) => {
         e.preventDefault()
         setLoading(true)
+        const id = toast.loading("Creating New Account...")
         if (validInput()) {
             try {
                 await axios.post(
@@ -51,23 +53,23 @@ const CreateAccountSlideBox = ({ setLoading }) => {
                 )
                 // successful, so clear from memory
                 clearMemoryState()
-
+                toast.success("Account Created!", { id: id })
                 navigate("/sign-in")
             } catch (e) {
                 if (!e?.response) {
-                    setMsg("No Server Response.")
+                    toast.error("No Server Response.", { id: id })
                 } else if (e?.response.status === 409) {
                     setEmail("")
-                    setEmailMsg("Email already exists.")
+                    toast.error("Email already exists.", { id: id })
                     setMsg("")
                 } else if (e?.response.status === 403) {
-                    setMsg(e?.message)
+                    toast.error(e?.message, { id: id })
                 } else {
-                    setMsg("Failed to create account... please try again.")
+                    toast.error("Failed to create account... please try again.", { id: id })
                 }
             }
         } else {
-            setMsg("Check to see that all required fields are filled out.")
+            toast.error("Check to see that all required fields are filled out.", { id: id })
         }
         setLoading(false)
     }
