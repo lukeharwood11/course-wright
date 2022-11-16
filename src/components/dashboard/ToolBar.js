@@ -29,7 +29,7 @@ function ToolBar({ searchActive, onClick, onClick1, onSubmit }) {
                     onSubmit={onSubmit}
                     type={"text"}
                     placeholder={"Search for courses or users"}
-                    className={"font drop-shadow-2xl text-blue-500 roboto rounded-full bg-white m-2 p-2 outline-0 w-full"}/>
+                    className={"font drop-shadow-2xl text-blue-500  rounded-full bg-white m-2 p-2 outline-0 w-full"}/>
             }
             {searchActive &&
                 <motion.button

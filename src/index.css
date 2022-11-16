@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,700&display=swap');@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,700&display=swap');
 
 html, body, #app, #app>div, root {
@@ -12,10 +12,7 @@ html, body, #app, #app>div, root {
 
 html,body, #st-full-pg {
     margin: 0;
-}
-
-.roboto {
-    font-family: Roboto, serif;
+    font-family: Poppins, Serif;
 }
 
 .logo {
@@ -66,7 +63,7 @@ html,body, #st-full-pg {
     display: flex;
     justify-items: center;
     justify-content: center;
-    font-family: "Roboto", serif;
+    font-family: "", serif;
 }
 
 .code-area {
@@ -113,27 +110,27 @@ code {
 }
 
 .markdown p {
-    font-family: "Roboto", serif;
+    font-family: "", serif;
     font-size: 20px;
 }
 
 .markdown ol {
     padding: 0 2em;
     list-style-type: decimal;
-    font-family: "Roboto", serif;
+    font-family: "", serif;
     font-size: 20px;
 }
 
 .markdown ul {
     padding: 0 2em;
-    font-family: "Roboto", serif;
+    font-family: "", serif;
     font-size: 20px;
     list-style-type: circle
 }
 
 .markdown blockquote {
     margin-left: 2em;
-    font-family: "Roboto", serif;
+    font-family: "", serif;
     font-size: 20px;
     font-style: italic;
     background-color: white;
@@ -143,7 +140,6 @@ code {
 
 .course-grid {
     display: grid;
-    padding: 2rem;
     grid-area: left-top;
     gap: 1rem;
     grid-template-columns: repeat(3, 1fr);
@@ -154,7 +150,7 @@ code {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr .2fr;
+    grid-template-rows: .6fr 1fr .2fr;
     grid-template-areas:
     "left-top right"
     "left-bottom right"
@@ -173,7 +169,7 @@ code {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
     "meta-data meta-data"
-    "tags authors"
+    "tags enrollment"
     "structure enrollment";
     grid-area: left-bottom;
 }
@@ -197,7 +193,7 @@ code {
     grid-area: meta-data;
     display: grid;
     column-gap: 1rem;
-    grid-template-columns: 1fr .5fr .5fr .2fr;
+    grid-template-columns: 2fr 1fr 1fr .5fr;
     grid-template-areas:
     "name code save delete";
 }
@@ -231,18 +227,16 @@ code {
     grid-area: tags;
 }
 
-.course-authors {
-    display: flex;
-    gap: .2rem;
-    grid-area: authors;
-}
-
 .course-enrollment {
     grid-area: enrollment;
+    border-radius: .5rem;
+    border: solid 1px lightgray;
 }
 
 .course-structure {
     grid-area: structure;
+    border-radius: .5rem;
+    border: solid 1px lightgray;
 }
 
 
@@ -274,21 +268,46 @@ code {
 }
 
 .course-button {
-    padding: .3rem;
+    border-radius: .5rem;
+    height: auto;
     background-color: white;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr .3fr .2fr;
-    justify-content: space-between;
-    flex-direction: column;
+    grid-template-columns: .2fr 1fr .2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+            "code name button"
+            "code student-count button";
+}
+
+.course-button-more {
+    grid-area: button;
+    border-radius: 0 .5rem .5rem 0;
+}
+
+.course-student-count {
+    display: flex;
+    font-weight: lighter;
+    color: #AAAAAA;
+    justify-content: center;
+    align-items: center;
+    grid-area: student-count;
 }
 
 .course-button-name {
-    font-family: Roboto, serif;
+    font-size: 15px;
+    display: flex;
+    font-weight: lighter;
+    justify-content: center;
+    align-items: center;
+    grid-area: name;
 }
 
 .course-button-code {
-    display:flex;
+    color: white;
+    font-weight: lighter;
+    border-radius: .5rem 0 0 .5rem;
+    display: flex;
+    grid-area: code;
     align-items: center;
     justify-content: center;
 }

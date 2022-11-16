@@ -52,7 +52,7 @@ const CourseList = () => {
             <Loading spinner inverted/>
             :
             courses.length !== 0 ?
-            <div className={"course-grid bg-blue-500 drop-shadow-lg"}>
+            <div className={"course-grid"}>
                     { courses.slice(0, 5).map((course, i) => {
                         return <CourseTitleButton selected={course.id === selectedCourse} key={i} course={course}/>
                     })

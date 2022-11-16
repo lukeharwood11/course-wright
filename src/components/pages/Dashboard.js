@@ -14,7 +14,9 @@ const Dashboard = (props) => {
     return (
         <DashboardContextProvider>
             <div className="dashboard-layout">
-                <CourseList />
+                <div className={"bg-blue-500 drop-shadow-lg p-3"}>
+                    <CourseList />
+                </div>
                 <CoursePreview editActive={ true } />
                 <div className="search bg-white drop-shadow-lg">
                     <ToolBar

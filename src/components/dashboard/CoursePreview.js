@@ -21,7 +21,7 @@ const CoursePreview = ({ editActive }) => {
                         type={"text"}
                         autoComplete={false}
                         placeholder={"Course Name"}
-                        className={"course-name font drop-shadow-2xl text-blue-500 roboto rounded-full bg-white p-2 outline-0"}/>
+                        className={"course-name font drop-shadow-2xl text-blue-500  rounded-full bg-white p-2 outline-0"}/>
                     <motion.input
                         key={"course-code"}
                         initial={{opacity: 0}}
@@ -30,13 +30,11 @@ const CoursePreview = ({ editActive }) => {
                         exit={{opacity: 0, width: 0}}
                         type={"text"}
                         placeholder={"Course Code"}
-                        className={"course-code font drop-shadow-2xl text-blue-500 roboto rounded-full bg-white p-2 outline-0"}/>
+                        className={"course-code font drop-shadow-2xl text-blue-500  rounded-full bg-white p-2 outline-0"}/>
                     <motion.button className={"button course-save-button save-button bg-blue-500"}>Save Changes</motion.button>
                     <motion.button className={"button course-delete-button delete-button"}>Delete</motion.button>
                 </div>
                 <TagsDisplay tags={["educational", "stem", "comp-sci"]}/>
-                <AuthorsDisplay authors={["you (author)"]}/>
-
                 <motion.div
                     key={"course-structure"}
                     initial={{opacity: 0}}
@@ -44,7 +42,7 @@ const CoursePreview = ({ editActive }) => {
                     transition={{ease: "backOut", duration: 1}}
                     exit={{opacity: 0, width: 0}}
                     type={"text"}
-                    className={"course-structure font drop-shadow-2xl text-blue-500 roboto bg-white p-2 outline-0"}>
+                    className={"course-structure font drop-shadow-2xl text-blue-500  bg-white p-2 outline-0"}>
                 </motion.div>
 
                 <motion.div
@@ -54,7 +52,7 @@ const CoursePreview = ({ editActive }) => {
                     transition={{ease: "backOut", duration: 1}}
                     exit={{opacity: 0, width: 0}}
                     type={"text"}
-                    className={"course-enrollment font drop-shadow-2xl text-blue-500 roboto bg-white p-2 outline-0"}>
+                    className={"course-enrollment font drop-shadow-2xl text-blue-500  bg-white p-2 outline-0"}>
                 </motion.div>
 
 
