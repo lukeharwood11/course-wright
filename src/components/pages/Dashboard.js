@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CourseList from "../dashboard/CourseList";
-import DashboardLowerPanel from "../dashboard/DashboardLowerPanel";
+import CoursePreview from "../dashboard/CoursePreview";
 import ToolBar from "../dashboard/ToolBar";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth"
@@ -15,7 +15,7 @@ const Dashboard = (props) => {
         <DashboardContextProvider>
             <div className="dashboard-layout">
                 <CourseList />
-                <DashboardLowerPanel />
+                <CoursePreview editActive={ true } />
                 <div className="search bg-white drop-shadow-lg">
                     <ToolBar
                         key={1}
