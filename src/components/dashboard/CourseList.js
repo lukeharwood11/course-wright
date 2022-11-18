@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import CourseTitleButton from "./CourseTitleButton";
 import {FaSadCry} from "react-icons/fa";
-import { AiOutlineSmallDash, AiOutlinePlusSquare } from "react-icons/ai"
+import {AiOutlineSmallDash, AiOutlinePlus, AiFillAppstore} from "react-icons/ai"
 import toast from "react-hot-toast";
 import {axiosPrivate} from "../../api/axios";
 import useAxios from "../../hooks/useAxios";
@@ -9,10 +9,11 @@ import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading";
 import useDashboardContext from "../../hooks/useDashboardContext";
 import {motion} from "framer-motion";
+import Modal from "../elements/Modal";
 
 const CourseList = () => {
-    const { selectedCourse, setSelectedCourse } = useDashboardContext()
-    const [courses, setCourses] = useState([]);
+    const [modal, setModal] = useState(false)
+    const { courses, setCourses, addCourse, selectedCourse, setSelectedCourse } = useDashboardContext()
     const [loading, setLoading] = useState(true)
     const axiosPrivate = useAxios();
 
@@ -41,34 +42,52 @@ const CourseList = () => {
     }, []);
 
     useEffect(() => {
-        if (selectedCourse === "" && courses.length > 0) {
-            setSelectedCourse(courses[0].id)
+        if (selectedCourse === -1 && courses.length > 0) {
+            setSelectedCourse(0)
         }
     }, [courses, selectedCourse, setSelectedCourse])
-
 
     return (
         loading ?
             <Loading spinner inverted/>
             :
-            courses.length !== 0 ?
-            <div className={"course-grid"}>
-                    { courses.slice(0, 5).map((course, i) => {
-                        return <CourseTitleButton selected={course.id === selectedCourse} key={i} course={course}/>
+            (!courses || courses?.length === 0) ?
+                <h3 className={"text-gray-700 inline-block w-full text-center text-2xl"}>No active courses <FaSadCry className={"inline"}/></h3>
+                :
+                <div className={"course-grid no-select"}>
+                    { modal && <Modal handleClose={() => setModal(false)}>
+                        <h1>Be patient...</h1>
+                    </Modal>
+                        }
+                    { courses.slice(0, 8).map((course, i) => {
+                        return <CourseTitleButton index={i} selected={i === selectedCourse} key={i} course={course}/>
                     })
 
-                }
-                {
-                    <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        className={`box-border flex justify-center items-center`}
-                        initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}>
-                        <AiOutlinePlusSquare className={"text-white"} size={ 45 }/>
-                    </motion.button>
-                }
-            </div>
-                :
-                <h3 className={"text-gray-700 inline-block w-full text-center text-2xl"}>No active courses <FaSadCry className={"inline"}/></h3>
+                    }
+                    {
+                        <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            className={`add-course-button`}
+                            initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}>
+                            <button
+                                onClick={() => {
+                                    setModal(true)
+                                }}
+                            >
+                                <p className={"inline-block"}>View All</p>
+                                <AiFillAppstore size={ 30 }/>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    addCourse({ name: "My Course", id: "new", code: "", studentCount: 0})
+                                }}
+                            >
+                                <p className={"inline-block"}>Add</p>
+                                <AiOutlinePlus size={ 30 }/>
+                            </button>
+                        </motion.div>
+                    }
+                </div>
     );
 }
 

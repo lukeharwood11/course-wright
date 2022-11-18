@@ -25,7 +25,7 @@ const CodeElement = ({section, onSave, onDelete, onChange}) => {
                         <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-min h-min rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
                         <button onClick={() => {
                             onSave(section.id, text.trim() !== "")
-                        }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-min h-min rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
+                        }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-indigo-500 w-min h-min rounded-md m-2 px-4 py-2 bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white">Save</button>
                     </div>
                 </motion.div>
         );

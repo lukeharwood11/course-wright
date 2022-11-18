@@ -10,7 +10,7 @@ const NotFound = () => {
             animate={{ opacity: 1, y:0 }}
             transition={{ ease: "anticipate", duration: 1}}
             exit={{opacity: 0, scale: 0}}
-            className={"overflow-hidden h-full dialog bg-blue-500 items-center flex justify-center flex-wrap"}>
+            className={"overflow-hidden h-full dialog bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 items-center flex justify-center flex-wrap"}>
             <Logo/>
             <div className={"w-max-100"}>
                 <h1

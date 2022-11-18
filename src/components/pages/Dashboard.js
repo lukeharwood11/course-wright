@@ -7,29 +7,30 @@ import useAuth from "../../hooks/useAuth"
 import toast from "react-hot-toast";
 import DashboardNavBar from "../DashboardNavBar";
 import DashboardContextProvider from "../../context/DashboardContext";
+import useDashboardContext from "../../hooks/useDashboardContext";
+import {dashboardModes} from "../../constants";
+import MessagesPanel from "../MessagesPanel";
+import SearchPanel from "../SearchPanel";
+import DashboardMainView from "../DashboardMainView";
 
 const Dashboard = (props) => {
-    const [searchActive, setSearchActive] = useState(false);
 
     return (
         <DashboardContextProvider>
             <div className="dashboard-layout">
-                <div className={"bg-blue-500 drop-shadow-lg p-3"}>
+                <div className={"drop-shadow-lg p-3"}>
                     <CourseList />
                 </div>
                 <CoursePreview editActive={ true } />
                 <div className="search bg-white drop-shadow-lg">
                     <ToolBar
                         key={1}
-                        onClick={() => {
-                            setSearchActive((prevState) => !prevState);
-                        }}
-                        searchActive={searchActive}
                         onSubmit={() => {
                             console.log("submission");
                         }}
                         onClick1={() => console.log("Submit Button.")}
                     />
+                    <DashboardMainView/>
                 </div>
                 <DashboardNavBar/>
             </div>

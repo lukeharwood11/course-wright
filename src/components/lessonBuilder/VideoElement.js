@@ -37,7 +37,7 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
                     <button onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-min h-min rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</button>
                     <button onClick={() => {
                         onSave(section.id, src.trim() !== "" || title.trim() !== "" || text.trim() !== "")
-                    }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-min h-min rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</button>
+                    }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-indigo-500 w-min h-min rounded-md m-2 px-4 py-2 bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white">Save</button>
                 </div>
             </motion.div>
         );
@@ -53,7 +53,7 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                   allowFullScreen></iframe>}
                 {text && <div className={"bg-white rounded-lg p-2"}><p>{text}</p></div>}
-                <button onClick={() => onSave(section.id, false)} className="border border-black font-semibold transition-colors hover:bg-white hover:text-blue-500 w-full, h-3/4 rounded-md px-4 py-2 bg-blue-500 text-white">edit</button>
+                <button onClick={() => onSave(section.id, false)} className="border border-black font-semibold transition-colors hover:bg-white hover:text-indigo-500 w-full, h-3/4 rounded-md px-4 py-2 bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white">edit</button>
             </div>
 
         );

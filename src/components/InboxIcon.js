@@ -7,7 +7,7 @@ const InboxIcon = ({ count }) => {
             count > 9 ? "9+" : count
     return (
         <div className={"relative"}>
-            <BsInbox className="text-blue-500" size={30}/>
+            <BsInbox className="text-indigo-500" size={30}/>
             { count !== 0 && <p className={`inbox-count ${count > 9 ? "text-xs": "rounded-lg"}`}>{ countText }</p>}
         </div>
     )

@@ -6,7 +6,7 @@ import {BiMessageDetail} from "react-icons/bi";
 const NavBar = () => {
     return (
         <>
-        <nav className="flex items-center justify-between bg-blue-500">
+        <nav className="flex items-center justify-between bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500">
             <div className={"flex justify-between"}>
                 <a className="rounded-md px-2 text-white font-bold text-2xl m-2" href="/">Course Builder</a>
             </div>

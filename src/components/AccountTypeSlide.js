@@ -3,7 +3,7 @@ import {FaBookReader} from "react-icons/fa";
 import {GiTeacher} from "react-icons/gi";
 import {VscOrganization} from "react-icons/vsc";
 import AccountTypeButton from "./AccountTypeButton";
-import { accountTypes } from "../api/constants";
+import { accountTypes } from "../constants";
 import useCreateAccountContext from "../hooks/useCreateAccountContext";
 
 export const AccountTypeSlide = ({ handleNext }) => {

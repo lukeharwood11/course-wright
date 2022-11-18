@@ -107,10 +107,10 @@ const LessonBuilder = () => {
             </AnimatePresence>
             <div>
 
-                <motion.button whileHover={{scale: 1.2}} onClick={handleNewText} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500"><BsFillNodePlusFill/></motion.button>
-                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewVideo} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500"><BsYoutube/></motion.button>
-                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewCode} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-blue-500"><BsCodeSlash/></motion.button>
-                <motion.button whileHover={{scale: 1.2}}  onClick={handleSaveAll} className="border border-black font-semibold transition-colors hover:bg-blue-500 hover:text-white rounded-full px-4 py-2 m-2 bg-green text-blue-500">Save All</motion.button>
+                <motion.button whileHover={{scale: 1.2}} onClick={handleNewText} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsFillNodePlusFill/></motion.button>
+                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewVideo} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsYoutube/></motion.button>
+                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewCode} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsCodeSlash/></motion.button>
+                <motion.button whileHover={{scale: 1.2}}  onClick={handleSaveAll} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-full px-4 py-2 m-2 bg-green text-indigo-500">Save All</motion.button>
             </div>
         </motion.div>
     );

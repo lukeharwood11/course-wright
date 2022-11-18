@@ -59,20 +59,20 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
             onSubmit={ handleCreateAccount }
             className={"h-4/5 drop-shadow-2xl w-1/3 box-border flex items-center flex-col justify-center rounded-lg"}>
             <div className={"flex "}>
-                <h1 className={"inline flex justify-center items-center border-b-2 border-gray-100 mb-2 p-2 text-white text-2xl"}>Create Account</h1></div>
+                <h1 className={"inline flex justify-center items-center border-b-2 border-gray-100 mb-2 p-2 text-white text-xl"}>Create Account</h1></div>
             <div className={"h-30 flex w-full items-center justify-center"}>
-                <div className={"flex justify-center items-center rounded-lg w-1/7"}><AiOutlineUser className={"bg-white p-2 text-blue-500 rounded-full"} size={ 45 }/></div>
+                <div className={"flex justify-center items-center rounded-lg w-1/7"}><AiOutlineUser className={"bg-white p-2 text-indigo-500 rounded-full"} size={ 45 }/></div>
                 <input
                     onChange={ (e) => setFirstName(e.target.value) }
                     value={ firstName }
                     ref={ nameRef }
                     type={"text"}
-                    className={"text-blue-500 bg-white inline rounded-full p-3 w-5/6 text-2xl m-2"}
+                    className={"text-indigo-500 bg-white inline rounded-full p-3 w-5/6 text-xl m-2"}
                     placeholder={"First Name"}/>
             </div>
 
             <div className={"h-30 flex w-full items-center justify-center"}>
-                <div className={"flex justify-center items-center rounded-lg w-1/7"}><AiOutlineUser className={"bg-white p-2 text-blue-500 rounded-full"} size={ 45 }/></div>
+                <div className={"flex justify-center items-center rounded-lg w-1/7"}><AiOutlineUser className={"bg-white p-2 text-indigo-500 rounded-full"} size={ 45 }/></div>
                 <input
                     onChange={ (e) => {
                         setLastName(e.target.value)
@@ -80,12 +80,12 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
                     value={ lastName }
                     ref={ lastNameRef }
                     type={"text"}
-                    className={"text-blue-500 bg-white inline rounded-full p-3 w-5/6 text-2xl m-2"}
+                    className={"text-indigo-500 bg-white inline rounded-full p-3 w-5/6 text-xl m-2"}
                     placeholder={"Last Name"}/>
             </div>
 
             <div className={"h-30 flex w-full items-center justify-center"}>
-                <div className={"flex justify-center items-center rounded-lg w-1/7"}><AiOutlineMail className={"bg-white p-2 text-blue-500 rounded-full"} size={ 45 }/></div>
+                <div className={"flex justify-center items-center rounded-lg w-1/7"}><AiOutlineMail className={"bg-white p-2 text-indigo-500 rounded-full"} size={ 45 }/></div>
                 <input
                     onChange={ handleEmailChange }
                     value={ email }
@@ -97,7 +97,7 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
                     }}
                     type={"email"}
                     autoComplete={"username"}
-                    className={"text-blue-500 bg-white inline rounded-full p-3 w-5/6 text-2xl m-2"}
+                    className={"text-indigo-500 bg-white inline rounded-full p-3 w-5/6 text-xl m-2"}
                     placeholder={"Email"}/>
             </div>
 
@@ -114,13 +114,13 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
             </AnimatePresence>
 
             <div className={"h-30 flex w-full items-center justify-center"}>
-                <div className={"flex justify-center items-center rounded-lg w-1/7"}><RiLockPasswordLine className={"bg-white text-blue-500 p-2 rounded-full"} size={ 45 }/></div>
+                <div className={"flex justify-center items-center rounded-lg w-1/7"}><RiLockPasswordLine className={"bg-white text-indigo-500 p-2 rounded-full"} size={ 45 }/></div>
                 <input
                     onChange={ (e) => setPassword(e.target.value) }
                     value={ password }
                     ref={ passwordRef }
                     autoComplete={"new-password"}
-                    className={`${validPassword() ? "text-blue-500" : "text-red-400"} text-blue-500 bg-white inline rounded-full p-3 w-5/6 text-2xl m-2`}
+                    className={`${validPassword() ? "text-indigo-500" : "text-red-400"} text-indigo-500 bg-white inline rounded-full p-3 w-5/6 text-xl m-2`}
                     placeholder={"Password"}
                     type={"password"}/>
             </div>
@@ -137,11 +137,11 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
 
 
             <div className={"h-30 flex w-full  items-center justify-center"}>
-                <div className={"flex justify-center items-center rounded-lg w-1/7"}><RiLockPasswordFill className={"bg-white text-blue-500 p-2 rounded-full"} size={ 45 }/></div>
+                <div className={"flex justify-center items-center rounded-lg w-1/7"}><RiLockPasswordFill className={"bg-white text-indigo-500 p-2 rounded-full"} size={ 45 }/></div>
                 <input
                     onChange={ (e) => setRepeatPassword(e.target.value) }
                     value={ repeatPassword }
-                    className={`${validMatchPassword() ? "text-blue-500" : "text-red-400"} text-blue-500 bg-white inline rounded-full p-3 w-5/6 text-2xl m-2`}
+                    className={`${validMatchPassword() ? "text-indigo-500" : "text-red-400"} text-indigo-500 bg-white inline rounded-full p-3 w-5/6 text-xl m-2`}
                     placeholder={"Confirm Password"}
                     type={"password"}/>
             </div>
@@ -159,12 +159,12 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
             <div className={"h-30 flex w-full items-center justify-center"}>
                 <motion.button
                     type={"button"}
-                    onClick={ handleBack } whileHover={{ scale: 1.1 }} className={"flex justify-center items-center rounded-lg w-1/7"}><BsArrowLeft className={"bg-white p-2 text-blue-500 rounded-full"} size={ 45 }/></motion.button>
+                    onClick={ handleBack } whileHover={{ scale: 1.1 }} className={"flex justify-center items-center rounded-lg w-1/7"}><BsArrowLeft className={"bg-white p-2 text-indigo-500 rounded-full"} size={ 45 }/></motion.button>
                 <motion.button
                     type={"submit"}
                     whileTap={ validInput ? { scale: .9 } : { } }
                     disabled={ !validInput}
-                    className={`${ validInput ? "bg-white" : "bg-gray-500 opacity-50"} transition-opacity inline rounded-full text-blue-500 p-3 w-5/6 text-2xl m-2`}>Create Account</motion.button>
+                    className={`${ validInput ? "bg-white" : "bg-gray-500 opacity-50"} transition-opacity inline rounded-full text-indigo-500 p-3 w-5/6 text-xl m-2`}>Create Account</motion.button>
             </div>
             <p
                 className={"text-right text-gray-200 p-2"}>Already have an account? <a className={"text-gray-700 underline"} href={"/sign-in"}>Sign in!</a></p>

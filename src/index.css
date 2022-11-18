@@ -12,7 +12,7 @@ html, body, #app, #app>div, root {
 
 html,body, #st-full-pg {
     margin: 0;
-    font-family: Poppins, Serif;
+    font-family: Poppins, serif;
 }
 
 .logo {
@@ -61,9 +61,10 @@ html,body, #st-full-pg {
 
 .dialog {
     display: flex;
+    font-size: 20px;
     justify-items: center;
     justify-content: center;
-    font-family: "", serif;
+    font-family: Poppins, serif;
 }
 
 .code-area {
@@ -159,12 +160,16 @@ code {
 
 .search {
     grid-area: right;
+    display: grid;
+    grid-template-rows: 75px 1fr;
 }
 
 .preview {
+    font-size: .75rem;
     padding: 1rem;
     display: grid;
     gap: 1rem;
+    min-width: 0;
     grid-template-rows: .1fr .1fr 1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -205,18 +210,22 @@ code {
 
 .course-name {
     grid-area: name;
+    min-width: 0;
 }
 
 .course-code {
     grid-area: code;
+    min-width: 0;
 }
 
 .course-save-button {
     grid-area: save;
+    min-width: 0;
 }
 
 .course-delete-button {
     grid-area: delete;
+    min-width: 0;
 }
 
 .course-meta-view {
@@ -268,20 +277,56 @@ code {
 }
 
 .course-button {
+    min-height: 65px;
+    cursor: pointer;
+    font-size: .75rem;
     border-radius: .5rem;
     height: auto;
     background-color: white;
     display: grid;
     grid-template-columns: .2fr 1fr .2fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr .5fr;
     grid-template-areas:
             "code name button"
             "code student-count button";
 }
 
 .course-button-more {
+    display: flex;
+    align-items: center;
     grid-area: button;
     border-radius: 0 .5rem .5rem 0;
+    transition: background-color .2s;
+}
+
+.course-button-more:hover {
+    background-color: lightgray;
+}
+
+.add-course-button {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    border-radius: .5rem;
+    border-color: rgb(99 102 241);
+    color: rgb(99 102 241)
+}
+
+.add-course-button button {
+    font-size: .75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: .75rem;
+    transition: background-color .25s, color .25s;
+}
+
+.add-course-button button:hover {
+    background-color: rgb(99 102 241);
+    color: white;
 }
 
 .course-student-count {
@@ -294,11 +339,9 @@ code {
 }
 
 .course-button-name {
-    font-size: 15px;
-    display: flex;
+    text-align: center;
+    font-size: .9rem;
     font-weight: lighter;
-    justify-content: center;
-    align-items: center;
     grid-area: name;
 }
 
@@ -310,6 +353,7 @@ code {
     grid-area: code;
     align-items: center;
     justify-content: center;
+    transition: background-color .25s;
 }
 
 .inbox-count {
@@ -321,4 +365,98 @@ code {
     position: absolute;
     right: -.5rem;
     top: -.5rem;
+}
+
+.messages-panel {
+    display: grid;
+    width: 100%;
+    grid-template-rows: 1fr 6rem;
+    grid-template-columns: .75fr 1fr;
+    grid-template-areas:
+    "side-bar messages"
+    "side-bar control";
+}
+
+.messaging-display {
+    grid-area: messages;
+}
+
+.messaging-control-panel {
+    grid-area: control;
+    display: flex;
+}
+
+.message-dialog {
+    resize: none;
+    border: solid rgb(99 102 241);
+    border-radius: .75rem;
+    padding-left: 1rem;
+    outline: none;
+}
+
+.messaging-sidebar {
+    grid-area: side-bar;
+}
+
+.search-panel {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.modal-window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    background-color: white;
+    position: relative;
+}
+
+.modal-background-global {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-background-local {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.pop {
+    position: relative;
+}
+
+.pop-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+    top: -100px;
+    z-index: 99;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }

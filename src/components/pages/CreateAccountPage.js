@@ -18,7 +18,7 @@ const CreateAccountPage = () => {
                     animate={{ opacity: 1, y:0 }}
                     transition={{ ease: "anticipate", duration: 1}}
                     exit={{opacity: 0, scale: 0}}
-                    className={"overflow-hidden drop-shadow-lg h-full dialog bg-blue-500 items-center flex justify-center"}>
+                    className={"overflow-hidden drop-shadow-lg h-full dialog bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 items-center flex justify-center"}>
                     <Logo/>
                     <CreateAccountSlideBox setLoading={ setLoading }/>
                 </motion.div>}

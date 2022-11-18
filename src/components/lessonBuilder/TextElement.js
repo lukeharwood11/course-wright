@@ -15,18 +15,18 @@ const TextElement = ({onChange, onDelete, onSave, onTextTypeChange, section}) =>
                 initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}
                 className="flex items-center flex-col w-full">
 
-                <Textarea defaultValue={text} onChange={(event) => onChange(section.id, event)} className={`p-4 border-box resize-none mx-3 rounded-md bg-gray-100 ${renderValue("italic", "instructions")} w-full border border-black ${renderValue("font-bold bg-blue-100 text-blue-500", "key")}`}/>
+                <Textarea defaultValue={text} onChange={(event) => onChange(section.id, event)} className={`p-4 border-box resize-none mx-3 rounded-md bg-gray-100 ${renderValue("italic", "instructions")} w-full border border-black ${renderValue("font-bold bg-blue-100 text-indigo-500", "key")}`}/>
                 <div className={"flex justify-between items-center"}>
                     <div>
-                        <motion.button whileTap={{scale:.8}} whileHover={{scale: 1.2}} className={`rounded-lg w-30 mr-2 ${textType === "key" ? "bg-blue-500 text-white" : "bg-white text-blue-500"}`} onClick={(event) => onTextTypeChange(section.id, "key")} id="key" ><BsKey size={"2em"}/></motion.button>
-                        <motion.button whileTap={{scale:.8}} whileHover={{scale: 1.2}} className={`rounded-lg w-30 mr-2 ${textType === "normal" ? "bg-blue-500 text-white" : "bg-white text-blue-500"}`} onClick={(event) => onTextTypeChange(section.id, "normal")} id="normal"><BiMessageAltDetail size={"2em"}/></motion.button>
-                        <motion.button whileTap={{scale:.8}} whileHover={{scale: 1.2}} className={`rounded-lg w-30 mr-2 ${textType === "instructions" ? "bg-blue-500 text-white" : "bg-white text-blue-500"}`} onClick={(event) => onTextTypeChange(section.id, "instructions")} id="instructions"><BsListNested size={"2em"}/></motion.button>
+                        <motion.button whileTap={{scale:.8}} whileHover={{scale: 1.2}} className={`rounded-lg w-30 mr-2 ${textType === "key" ? "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white" : "bg-white text-indigo-500"}`} onClick={(event) => onTextTypeChange(section.id, "key")} id="key" ><BsKey size={"2em"}/></motion.button>
+                        <motion.button whileTap={{scale:.8}} whileHover={{scale: 1.2}} className={`rounded-lg w-30 mr-2 ${textType === "normal" ? "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white" : "bg-white text-indigo-500"}`} onClick={(event) => onTextTypeChange(section.id, "normal")} id="normal"><BiMessageAltDetail size={"2em"}/></motion.button>
+                        <motion.button whileTap={{scale:.8}} whileHover={{scale: 1.2}} className={`rounded-lg w-30 mr-2 ${textType === "instructions" ? "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white" : "bg-white text-indigo-500"}`} onClick={(event) => onTextTypeChange(section.id, "instructions")} id="instructions"><BsListNested size={"2em"}/></motion.button>
                     </div>
                     <div>
                         <motion.button whileTap={{scale:.8}} onClick={onDelete} className="border border-black font-semibold transition-colors hover:bg-white hover:text-red-300 w-min h-min rounded-md m-2 px-4 py-2 bg-red-300 text-white">Delete</motion.button>
                         <motion.button whileTap={{scale:.8}} onClick={() => {
                             onSave(section.id, text.trim() !== "")
-                        }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-blue-500 w-min h-min rounded-md m-2 px-4 py-2 bg-blue-500 text-white">Save</motion.button>
+                        }} className="font-semibold border border-black transition-colors hover:bg-white hover:text-indigo-500 w-min h-min rounded-md m-2 px-4 py-2 bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white">Save</motion.button>
                     </div>
                 </div>
             </motion.div>
@@ -48,7 +48,7 @@ const TextElement = ({onChange, onDelete, onSave, onTextTypeChange, section}) =>
         }
 
         if (textType === "key") {
-            return "bg-blue-500 text-white rounded-lg p-5"
+            return "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white rounded-lg p-5"
         }
         return ""
     }

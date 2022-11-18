@@ -16,21 +16,21 @@ const DashboardNavBar = (props) => {
         <div className={"dashboard-nav-bar bg-white flex items-center justify-center gap-5"}>
             <motion.button onClick={() => {
                 handleNav("/")
-            }} whileHover={hover}> <BsHouseDoor className="text-blue-500" size={40}/></motion.button>
+            }} whileHover={hover}> <BsHouseDoor className="text-indigo-500" size={40}/></motion.button>
             <motion.button whileHover={hover} onClick={() => {
                 handleNav("/sign-in")
-            }}><RiUser3Line className="text-blue-500" size={40}/></motion.button>
+            }}><RiUser3Line className="text-indigo-500" size={40}/></motion.button>
             <motion.button whileHover={{
                 ...hover,
                 rotate: 180
             }} onClick={() => {
                 handleNav("#")
-            }}><BsGearWideConnected className="text-blue-500" size={40}/></motion.button>
+            }}><BsGearWideConnected className="text-indigo-500" size={40}/></motion.button>
             <motion.button whileHover={{
                 ...hover
             }} onClick={() => {
                 handleNav("#")
-            }}><BsCalendar3 className="text-blue-500" size={40}/></motion.button>
+            }}><BsCalendar3 className="text-indigo-500" size={40}/></motion.button>
         </div>
     );
 }
