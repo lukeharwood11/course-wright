@@ -15,6 +15,7 @@ const DashboardContextProvider = ({ children }) => {
                 return prevState
             }
             c.push(course)
+            setSelectedCourse(prevState.length)
             return c
         })
     }

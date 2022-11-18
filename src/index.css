@@ -10,6 +10,13 @@ html, body, #app, #app>div, root {
     width: 100%;
 }
 
+:root {
+    --indigo: #818cf8;
+    --purple: #a855f7;
+    --blue: #3b82f6;
+}
+
+
 html,body, #st-full-pg {
     margin: 0;
     font-family: Poppins, serif;
@@ -303,7 +310,7 @@ code {
     background-color: lightgray;
 }
 
-.add-course-button {
+.course-button-extra-panel {
     display: grid;
     justify-content: center;
     align-items: center;
@@ -314,7 +321,7 @@ code {
     color: rgb(99 102 241)
 }
 
-.add-course-button button {
+.course-button-extra-panel button {
     font-size: .75rem;
     display: flex;
     justify-content: center;
@@ -324,9 +331,16 @@ code {
     transition: background-color .25s, color .25s;
 }
 
-.add-course-button button:hover {
-    background-color: rgb(99 102 241);
+.course-button-extra-panel button:hover {
     color: white;
+}
+
+.view-all-button:hover {
+    background-color: var(--purple);
+}
+
+.add-course-button:hover {
+    background-color: var(--indigo);
 }
 
 .course-student-count {

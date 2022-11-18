@@ -13,6 +13,11 @@ const CoursePreview = ({ editActive }) => {
     const { courses, selectedCourse } = useDashboardContext()
     const course = selectedCourse >= 0 ? courses[selectedCourse] : undefined
 
+    const validateChanges = () => {
+        // todo implement
+        return true
+    }
+
     useEffect(() => {
         setChange(false)
         if (course) {

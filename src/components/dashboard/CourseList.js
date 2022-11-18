@@ -67,9 +67,10 @@ const CourseList = () => {
                     {
                         <motion.div
                             whileHover={{ scale: 1.1 }}
-                            className={`add-course-button`}
+                            className={`course-button-extra-panel`}
                             initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}>
                             <button
+                                className={"view-all-button"}
                                 onClick={() => {
                                     setModal(true)
                                 }}
@@ -78,6 +79,7 @@ const CourseList = () => {
                                 <AiFillAppstore size={ 30 }/>
                             </button>
                             <button
+                                className={"add-course-button"}
                                 onClick={() => {
                                     addCourse({ name: "My Course", id: "new", code: "", studentCount: 0})
                                 }}
