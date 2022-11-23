@@ -47,8 +47,6 @@ const SignInPage = (props) => {
             setAuth({ user, accessToken })
             toast.success(`Welcome ${ user.firstName }!`, { id: id })
             navigate(from, { replace: true })
-        
-
         } catch (err) {
             if (!err?.response) {
                 toast.error('No Server Response', { id: id })
@@ -60,8 +58,9 @@ const SignInPage = (props) => {
             } else {
                 toast.error("Login Failed", { id: id })
             }
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
     }
 
 

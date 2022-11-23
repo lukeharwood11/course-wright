@@ -17,7 +17,11 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
     const renderEditMode = () => {
         return (
             <motion.div
-                initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}
+                layout
+                initial={{ opacity: 0}}
+                animate={{ opacity: 1 }}
+                transition={{ ease: "anticipate", duration: .5}}
+                exit={{opacity: 0, scale: 0}}
                 className={"border w-full border-black rounded-md p-2 mb-5 flex justify-center flex-col"}>
                 <div className={"flex justify-center flex-col"} >
                     <div>
@@ -46,7 +50,9 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
     const renderViewMode = () => {
         const vidUrl = parseUrl()
         return  (
-            <div className="rounded-lg font-bold bg-white p-2 flex justify-center flex-col">
+            <motion.div
+                layout
+                className="rounded-lg font-bold bg-white p-2 flex justify-center flex-col">
                 {title && <h1 className={"text-4xl text-center"}>{title}</h1>}
                 {vidUrl && <iframe className="" width="560" height="315" src={`https://www.youtube.com/embed/${vidUrl}`}
                                   title="YouTube video player" frameBorder="0"
@@ -54,7 +60,7 @@ const VideoElement = ({onChange, onUrlChange, onTitleChange, onSave, onDelete, s
                                   allowFullScreen></iframe>}
                 {text && <div className={"bg-white rounded-lg p-2"}><p>{text}</p></div>}
                 <button onClick={() => onSave(section.id, false)} className="border border-black font-semibold transition-colors hover:bg-white hover:text-indigo-500 w-full, h-3/4 rounded-md px-4 py-2 bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white">edit</button>
-            </div>
+            </motion.div>
 
         );
     }

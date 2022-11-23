@@ -4,9 +4,10 @@ import {BsThreeDotsVertical} from "react-icons/bs";
 import toast from "react-hot-toast";
 import {useState} from "react";
 import Modal from "../elements/Modal";
+import {useNavigate} from "react-router-dom";
 
 const CourseTitleButton = ({index, selected, course, tags}) => {
-    const {name, code, date, studentCount} = course
+    const {name, code, date, studentCount, id} = course
     const { setSelectedCourse } = useDashboardContext()
     tags = [{id: "1", name: "school"}, {id: "2", name:"science"}]
     const r = /([A-Z]+)-/
@@ -17,6 +18,7 @@ const CourseTitleButton = ({index, selected, course, tags}) => {
     const colors = ["sky", "red", "orange", "amber", "green", "emerald", "purple"]
     const color = colors[Math.round(Math.random() * colors.length)]
     const [modal, setModal] = useState(false)
+    const navigate = useNavigate()
 
     const handleMore = (e) => {
         e.stopPropagation()
@@ -32,24 +34,29 @@ const CourseTitleButton = ({index, selected, course, tags}) => {
     }
 
     return (
-        <AnimatePresence>
-            { modal && <Modal key={"modal"} handleClose={ closeModel }>
-                <div>
-                    <h1 className={"font-thin"}>
-                        Course Options... Coming Soon
-                    </h1>
-                </div>
-            </Modal> }
+        <motion.div layout>
+            <AnimatePresence>
+                { modal && <Modal key={"modal"} handleClose={ closeModel }>
+                    <div>
+                        <h1 className={"font-thin"}>
+                            Course Options... Coming Soon
+                        </h1>
+                    </div>
+                </Modal> }
+            </AnimatePresence>
             <motion.div
                 onDoubleClick={() => {
-                    toast.success(`${code === "" ? backup: code}: ${name}`)
+                    toast.success(`${code === "" ? backup: code }: ${name}`)
+                    navigate(`/course/${id}`)
                 }}
                 onClick={() => {
                     setSelectedCourse(index)
                 }}
                 className={`course-button box-border drop-shadow-xl`}
-                initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}
-                transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}>
+                initial={{ opacity: 0, scale: 0, y: "-1vh" }}
+                animate={{ opacity: 1, scale: 1, y:0 }}
+                transition={{ ease: "anticipate", duration: .5 }}
+                exit={{opacity: 0, scale: 0}}>
                 <h3 className={"course-button-name"}>{ name }</h3>
                 <h4 className={`course-button-code ${selected ? "bg-purple-500": "bg-indigo-500"}`}>{ formattedCode }</h4>
                 <div className={"course-button-more"}>
@@ -57,7 +64,7 @@ const CourseTitleButton = ({index, selected, course, tags}) => {
                 </div>
                 <p className={"course-student-count"}>{ studentCount } students</p>
             </motion.div>
-        </AnimatePresence>
+        </motion.div>
     );
 }
 

@@ -2,11 +2,11 @@ import React from 'react'
 import TextElement from "./TextElement";
 import VideoElement from "./VideoElement";
 import CodeElement from "./CodeElement";
-import useMemoryState from "../../hooks/useMemoryState";
+import useMemoryState from "../../../hooks/useMemoryState";
 import {BsYoutube, BsFillNodePlusFill, BsCodeSlash} from "react-icons/bs";
 import {AnimatePresence, motion} from "framer-motion";
 
-const LessonBuilder = () => {
+const PageView = () => {
     const [sections, setSections] = useMemoryState([], "activeSections")
     const [id, setId] = useMemoryState(-1, "builderIds")
 
@@ -90,8 +90,13 @@ const LessonBuilder = () => {
     }
 
     return (
-        <motion.div className="p-3 mt-3 rounded-md w-full sm:w-1/2 bg-gray-100 flex items-center justify-center flex-col h-min">
-            <AnimatePresence>
+        <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            end={{ opacity: 0 }}
+            layout
+            className={"page-view"}>
+            <AnimatePresence initial={false} mode={"popLayout"}>
                 {sections.map((section) => {
                 switch (section.type) {
                     case "code":
@@ -105,15 +110,15 @@ const LessonBuilder = () => {
                 }
             })}
             </AnimatePresence>
-            <div>
+            <motion.div layout>
 
                 <motion.button whileHover={{scale: 1.2}} onClick={handleNewText} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsFillNodePlusFill/></motion.button>
                 <motion.button whileHover={{scale: 1.2}}  onClick={handleNewVideo} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsYoutube/></motion.button>
                 <motion.button whileHover={{scale: 1.2}}  onClick={handleNewCode} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsCodeSlash/></motion.button>
                 <motion.button whileHover={{scale: 1.2}}  onClick={handleSaveAll} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-full px-4 py-2 m-2 bg-green text-indigo-500">Save All</motion.button>
-            </div>
-        </motion.div>
+            </motion.div>
+        </motion.section>
     );
 }
 
-export default LessonBuilder;
+export default PageView;

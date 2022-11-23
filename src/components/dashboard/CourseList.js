@@ -8,7 +8,7 @@ import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading";
 import useDashboardContext from "../../hooks/useDashboardContext";
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import Modal from "../elements/Modal";
 
 const CourseList = () => {
@@ -55,20 +55,25 @@ const CourseList = () => {
                 <h3 className={"text-gray-700 inline-block w-full text-center text-2xl"}>No active courses <FaSadCry className={"inline"}/></h3>
                 :
                 <div className={"course-grid no-select"}>
-                    { modal && <Modal handleClose={() => setModal(false)}>
-                        <h1>Be patient...</h1>
-                    </Modal>
+                    <AnimatePresence>
+                        { modal &&
+                            <Modal key={"modal"} handleClose={() => setModal(false)}>
+                                <h1>Be patient...</h1>
+                            </Modal>
                         }
+                    </AnimatePresence>
+                        <AnimatePresence mode={"sync"}>
                     { courses.slice(0, 8).map((course, i) => {
                         return <CourseTitleButton index={i} selected={i === selectedCourse} key={i} course={course}/>
                     })
-
                     }
-                    {
                         <motion.div
-                            whileHover={{ scale: 1.1 }}
+                            layout
                             className={`course-button-extra-panel`}
-                            initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}>
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ ease: "anticipate", duration: .5 }}
+                            exit={{ opacity: 0 }}>
                             <button
                                 className={"view-all-button"}
                                 onClick={() => {
@@ -88,7 +93,7 @@ const CourseList = () => {
                                 <AiOutlinePlus size={ 30 }/>
                             </button>
                         </motion.div>
-                    }
+                    </AnimatePresence>
                 </div>
     );
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Textarea from "react-expanding-textarea";
 import {motion} from "framer-motion";
-import CopyButton from "../CopyButton";
+import CopyButton from "../../CopyButton";
 
 const CodeElement = ({section, onSave, onDelete, onChange}) => {
     const {text, editMode, id} = section
@@ -9,8 +9,12 @@ const CodeElement = ({section, onSave, onDelete, onChange}) => {
     const renderEditMode = () => {
         return (
                 <motion.div
-                    initial={{ opacity: 0, scale: 0, y: "-1vh" }} animate={{ opacity: 1, scale: 1, y:0 }}  transition={{ ease: "anticipate", duration: .5}} exit={{opacity: 0, scale: 0}}
-                    className={"mb-2 flex flex-col w-full items-center justify-center"}>
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ ease: "anticipate", duration: .5}}
+                    exit={{opacity: 0, scale: 0}}
+                    className={""}>
                     <Textarea
                         onKeyDown={(e) => {
                             if (e.key === "Tab") {
@@ -37,7 +41,9 @@ const CodeElement = ({section, onSave, onDelete, onChange}) => {
 
     const renderViewMode = () => {
         return (
-         <div onClick={(e) => {
+         <motion.div
+             layout
+             onClick={(e) => {
              onSave(id, false)
          }} className="flex justify-between mb-2 rounded-md p-3 bg-gray-500 w-full text-white">
              <pre>
@@ -46,7 +52,7 @@ const CodeElement = ({section, onSave, onDelete, onChange}) => {
                  </code>
              </pre>
              <CopyButton onClick={handleCopy} size={"2em"}/>
-         </div>);
+         </motion.div>);
     }
 
     return editMode ? renderEditMode() : renderViewMode()

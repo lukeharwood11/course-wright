@@ -5,7 +5,7 @@ import ToolBar from "../dashboard/ToolBar";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth"
 import toast from "react-hot-toast";
-import DashboardNavBar from "../DashboardNavBar";
+import NavBar from "../NavBar";
 import DashboardContextProvider from "../../context/DashboardContext";
 import useDashboardContext from "../../hooks/useDashboardContext";
 import {dashboardModes} from "../../constants";
@@ -32,7 +32,7 @@ const Dashboard = (props) => {
                     />
                     <DashboardMainView/>
                 </div>
-                <DashboardNavBar/>
+                <NavBar/>
             </div>
         </DashboardContextProvider>
     );

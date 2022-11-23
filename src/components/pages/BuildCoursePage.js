@@ -1,6 +1,6 @@
 import React from 'react'
-import LessonBuilder from "../lessonBuilder/LessonBuilder";
-import {SideBar} from "../lessonBuilder/SideBar";
+import PageView from "../course/page/PageView";
+import {SideBar} from "../course/page/SideBar";
 
 
 const BuildCoursePage = (props) => {
@@ -8,7 +8,7 @@ const BuildCoursePage = (props) => {
         <div className="w-full h-full">
             <SideBar/>
             <div className="flex justify-center">
-                <LessonBuilder/>
+                <PageView/>
             </div>
         </div>
     );

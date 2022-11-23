@@ -15,23 +15,27 @@ const MessagesPanel = () => {
             exit={{ opacity: 0 }}
             className={"messages-panel"}>
             <div className={"messaging-sidebar bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500"}></div>
-            <div className={"messaging-display bg-gray-100"}></div>
-            <div className={"messaging-control-panel bg-white"}>
-                <div className={"flex items-center justify-center"}>
-                    <Textarea
-                        onKeyDown={(e) => {
-                            if (e.key === "Tab") {
-                                e.preventDefault()
-                            }
-                        }}
-                        defaultValue={""}
-                        onChange={(event) => {
+            <div className={"messages bg-gray-100"}>
+                <div className={"messaging-display"}>
 
-                        }}
-                        className={"message-dialog"}/>
-                    <button className={"p-1 rounded-sm text-indigo-500 bg-white drop-shadow-xl"}><FaRegPaperPlane size={20}/></button>
                 </div>
+                <div className={"messaging-control-panel bg-white"}>
+                    <div className={"flex w-full items-center justify-center"}>
+                        <Textarea
+                            onKeyDown={(e) => {
+                                if (e.key === "Tab") {
+                                    e.preventDefault()
+                                }
+                            }}
+                            defaultValue={""}
+                            onChange={(event) => {
 
+                            }}
+                            className={"message-dialog"}/>
+                        <button className={"p-1 text-indigo-500"}><FaRegPaperPlane size={20}/></button>
+                    </div>
+
+                </div>
             </div>
         </motion.div>
     );

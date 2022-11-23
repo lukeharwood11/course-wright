@@ -20,13 +20,43 @@ const DashboardContextProvider = ({ children }) => {
         })
     }
 
-    const [selectedCourse, setSelectedCourse] = useState(-1)
+    const updateCourse = (course) => {
+        setCourses((prevState) => {
+            let c = [...prevState]
+            c = c.map((c) => {
+                if (c.id === course.id) {
+                    if (course.id === "new") course.id = "awaiting-id"
+                    return course
+                }
+                return c
+            })
+            return c
+        })
+    }
+
+    const deleteCourse = (course) => {
+        setCourses((prevState) => {
+            const courses = [...prevState]
+            return courses.filter((c) => c.id !== course.id)
+        })
+    }
+
+    const setSelectedCourse = (course) => {
+        if (change) {
+            toast("Unsaved changes.\nPlease save/cancel.")
+        } else {
+            setCourse(course)
+        }
+    }
+
+    const [change, setChange] = useState(false)
+    const [selectedCourse, setCourse] = useState(-1)
     const [courses, setCourses] = useState([])
     const [mode, setMode] = useMemoryState(dashboardModes.MESSAGE)
 
     return (
         <DashboardContext.Provider
-            value={{addCourse, selectedCourse, setSelectedCourse, mode, setMode, courses, setCourses}}>
+            value={{addCourse, updateCourse, deleteCourse, change, setChange, selectedCourse, setSelectedCourse, mode, setMode, courses, setCourses}}>
             {children}
         </DashboardContext.Provider>
     );

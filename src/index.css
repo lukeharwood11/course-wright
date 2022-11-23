@@ -8,6 +8,15 @@
 html, body, #app, #app>div, root {
     height: 100%;
     width: 100%;
+    --contexify-menu-bgColor: #fff;
+    --contexify-separator-color: rgba(0,0,0,0.2);
+    --contexify-item-color: #333;
+    --contexify-activeItem-color: #fff;
+    --contexify-activeItem-bgColor: #818cf8;
+    --contexify-rightSlot-color: #6f6e77;
+    --contexify-activeRightSlot-color: #fff;
+    --contexify-arrow-color: #6f6e77;
+    --contexify-activeArrow-color: #fff;
 }
 
 :root {
@@ -118,27 +127,23 @@ code {
 }
 
 .markdown p {
-    font-family: "", serif;
     font-size: 20px;
 }
 
 .markdown ol {
     padding: 0 2em;
     list-style-type: decimal;
-    font-family: "", serif;
     font-size: 20px;
 }
 
 .markdown ul {
     padding: 0 2em;
-    font-family: "", serif;
     font-size: 20px;
     list-style-type: circle
 }
 
 .markdown blockquote {
     margin-left: 2em;
-    font-family: "", serif;
     font-size: 20px;
     font-style: italic;
     background-color: white;
@@ -162,7 +167,7 @@ code {
     grid-template-areas:
     "left-top right"
     "left-bottom right"
-    "dashboard-nav-bar dashboard-nav-bar"
+    "nav-bar nav-bar"
 }
 
 .search {
@@ -186,6 +191,13 @@ code {
     grid-area: left-bottom;
 }
 
+.preview-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: lightgray;
+}
+
 .button {
     border-radius: 2rem;
     padding: 0 .5rem;
@@ -198,6 +210,14 @@ code {
 
 .save-button {
     color: white;
+    border-radius: 2rem 0 0 2rem;
+    padding: 0 .5rem;
+}
+
+.cancel-button {
+    color: white;
+    border-radius: 0 2rem 2rem 0;
+    padding: 0 .5rem;
 }
 
 .course-meta-edit {
@@ -221,6 +241,7 @@ code {
 }
 
 .course-code {
+    max-width: 7rem;
     grid-area: code;
     min-width: 0;
 }
@@ -228,6 +249,7 @@ code {
 .course-save-button {
     grid-area: save;
     min-width: 0;
+    display: flex;
 }
 
 .course-delete-button {
@@ -256,8 +278,8 @@ code {
 }
 
 
-.dashboard-nav-bar {
-    grid-area: dashboard-nav-bar;
+.nav-bar {
+    grid-area: nav-bar;
     box-shadow: 2px 2px 10px 2px;
 }
 
@@ -384,28 +406,36 @@ code {
 .messages-panel {
     display: grid;
     width: 100%;
-    grid-template-rows: 1fr 6rem;
-    grid-template-columns: .75fr 1fr;
+    grid-template-columns: .50fr 1fr;
     grid-template-areas:
     "side-bar messages"
-    "side-bar control";
+}
+
+.messages {
+    grid-area: messages;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .messaging-display {
-    grid-area: messages;
+    background-color: lightgray;
 }
 
 .messaging-control-panel {
-    grid-area: control;
     display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 1rem;
 }
 
 .message-dialog {
     resize: none;
-    border: solid rgb(99 102 241);
+    border: solid var(--indigo);
     border-radius: .75rem;
-    padding-left: 1rem;
+    padding: .5rem 1rem;
     outline: none;
+    width: 90%;
 }
 
 .messaging-sidebar {
@@ -474,3 +504,64 @@ code {
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
+
+.course-view {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+    grid-template-rows: .2fr 1.4fr .2fr;
+}
+
+.course-view-side-bar {
+    grid-template-areas:
+    "header header"
+    "side-bar page"
+    "nav-bar nav-bar"
+}
+
+.course-view-no-side-bar {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "header"
+    "page"
+    "nav-bar"
+}
+
+.course-side-bar {
+    display: flex;
+    grid-area: side-bar;
+    background-color: transparent;
+}
+
+.page-view {
+    grid-area: page;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.scrollable {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+
+.mini-logo {
+    font-size: 1.5rem;
+}
+
+.course-header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: lighter;
+    padding: .5rem;
+    gap: .5rem;
+    box-shadow: black 0 0 20px 0;
+    margin-bottom: 1rem;
+}
+

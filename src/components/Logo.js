@@ -1,5 +1,6 @@
 import {motion} from "framer-motion";
 import React from "react";
+import fitty from "fitty";
 
 
 const Logo = ({loading=false}) => {
@@ -58,6 +59,32 @@ const Logo = ({loading=false}) => {
                 </motion.span>
             </h2>
         </motion.div>
+    );
+}
+
+export const MiniLogo = ({ size, fontClass }) => {
+    return (
+        <div
+            style={{ width: size, height: size}}
+            className={"flex justify-center items-center rounded-lg bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500"}>
+            <h1
+                id={"plain-logo"}
+                className={`logo ${fontClass}`}>
+                <motion.span
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x:0 }}
+                    exit={{opacity: 0 }}
+                    className={"inline-block text-white"}>
+                    C
+                </motion.span>
+                <motion.span
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x:0 }}
+                    transition={{ delay: .5}}
+                    exit={{opacity: 0 }}
+                    className={"inline-block text-gray-300"}>W
+                </motion.span></h1>
+        </div>
     );
 }
 

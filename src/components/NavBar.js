@@ -1,31 +1,44 @@
-import React, {useContext, useState} from 'react'
-import {IoIosMenu} from 'react-icons/io'
+import { BsHouseDoor, BsGearWideConnected, BsCalendar3 } from 'react-icons/bs'
 import {motion} from "framer-motion";
-import {BiMessageDetail} from "react-icons/bi";
+import {RiUser3Line} from "react-icons/ri";
+import {useNavigate} from "react-router-dom";
 
-const NavBar = () => {
+import React from "react";
+import {MiniLogo} from "./Logo";
+const NavBar = (props) => {
+    const navigate = useNavigate()
+    const handleNav = (to) => {
+        navigate(to)
+    }
+    const hover = {
+        scale: 1.1,
+    }
     return (
-        <>
-        <nav className="flex items-center justify-between bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500">
-            <div className={"flex justify-between"}>
-                <a className="rounded-md px-2 text-white font-bold text-2xl m-2" href="/">Course Builder</a>
-            </div>
-            <div
-                id={"main-nav"}
-                className={`w-full h-full h-min w-min`}>
-                <ul className="flex justify-around w-full">
-                    <li className={"flex items-center"}>
-                        <motion.button whileHover={{scale: 1.1, x: -5}} transition={{type: "tween"}} className="p-1 text-white">
-                            <BiMessageDetail size={30}/>
-                        </motion.button>
-                    </li>
-                    {
-                        <li className="p-1 rounded-md transition-colors m-2 text-white font-bold text-1xl"><a className="whitespace-nowrap" aria-current="page" href="/sign-in">Sign In</a></li>
-                    }
-                </ul>
-            </div>
-        </nav>
-    </>);
+        <div className={"nav-bar bg-white flex items-center justify-center gap-5"}>
+            <motion.button onClick={() => {
+                handleNav("/dashboard")
+            }} whileHover={hover}> <BsHouseDoor className="text-indigo-500" size={40}/></motion.button>
+            <motion.button whileHover={hover} onClick={() => {
+                handleNav("/sign-in")
+            }}><RiUser3Line className="text-indigo-500" size={40}/></motion.button>
+            <motion.button whileHover={{
+                ...hover,
+                rotate: 180
+            }} onClick={() => {
+                handleNav("#")
+            }}><BsGearWideConnected className="text-indigo-500" size={40}/></motion.button>
+            <motion.button whileHover={{
+                ...hover
+            }} onClick={() => {
+                handleNav("#")
+            }}><BsCalendar3 className="text-indigo-500" size={40}/></motion.button>
+            <motion.button whileHover={{
+                ...hover
+            }} onClick={() => {
+                handleNav("/")
+            }}><MiniLogo size={40} fontClass={"mini-logo"}/></motion.button>
+        </div>
+    );
 }
 
 export default NavBar;
