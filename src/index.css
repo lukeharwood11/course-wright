@@ -531,7 +531,8 @@ code {
 .course-side-bar {
     display: flex;
     grid-area: side-bar;
-    background-color: transparent;
+    border-radius: 0 .75rem .75rem 0;
+    overflow-y: scroll;
 }
 
 .page-view {
@@ -565,3 +566,42 @@ code {
     margin-bottom: 1rem;
 }
 
+.course-component {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: .3fr 1fr;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: black 1px 1px 5px 0;
+    border-radius: .5rem;
+    padding: .1rem 1rem;
+    color: rgb(50, 50, 50);
+}
+
+.course-component-view {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1rem;
+}
+
+.expandable-button {
+    display: flex;
+    flex-direction: column;
+}
+
+.expandable-button-children {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 1px 1px 5px 0 black;
+    padding: 1rem;
+    gap: .5rem;
+    border-radius: .5rem;
+    border-left: gray solid 10px;
+}
+
+.course-filter-input {
+    padding: .5rem 1rem;
+}

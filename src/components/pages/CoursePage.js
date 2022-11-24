@@ -12,18 +12,13 @@ const CoursePage = () => {
 
     useEffect(() => {
         // TODO send a get request for this course
-
     }, [])
 
     return (
         <CourseContextProvider>
             <LayoutGroup>
                 <motion.section className={`course-view ${sideBarActive ? "course-view-side-bar" : "course-view-no-side-bar"}`}>
-                    <AnimatePresence>
-                        {
-                            sideBarActive && <CourseSideBar open={ sideBarActive } key={"side-bar"} handleToggle={() => setSideBarActive((prevState) => !prevState)}/>
-                        }
-                    </AnimatePresence>
+                    { sideBarActive && <CourseSideBar open={ sideBarActive } key={"side-bar"} handleToggle={() => setSideBarActive((prevState) => !prevState)}/> }
                     <PageView key={"page-view"}/>
                     <CourseHeader menuOpen={ sideBarActive } title={ "Course Name"} handleToggle={() => setSideBarActive(prevState => !prevState)} />
                     <NavBar/>

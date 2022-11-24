@@ -35,8 +35,6 @@ const CourseList = () => {
         })
         return () => {
             isMounted = false;
-            // if the component unmounts before fulfilling the request,
-            // our state will try to set, and we'll get an error
             controller.abort()
         };
     }, []);

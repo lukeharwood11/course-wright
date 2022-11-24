@@ -1,6 +1,7 @@
 import {AnimatePresence, motion} from "framer-motion";
 import {Item, Menu, Separator, Submenu, useContextMenu} from "react-contexify";
 import "react-contexify/ReactContexify.css"
+import CourseComponentView from "./CourseComponentView";
 
 
 const CourseSideBar = ({ open }) => {
@@ -18,20 +19,17 @@ const CourseSideBar = ({ open }) => {
             onContextMenu={ (e) => show({ event: e }) }
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ ease: "anticipate" }}
+            transition={{ ease: "anticipate", duration: 1 }}
             exit={{ opacity: 0 }}
-            className={open ? "course-side-bar bg-black": "fixed bg-black"}>
+            className={"course-side-bar bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500"}>
             <Menu id={"side-bar"}>
-                <Item id="copy" data={"copy"} onClick={handleItemClick}>Copy</Item>
-                <Item id="cut" data={"cut"} onClick={handleItemClick}>Cut</Item>
-                <Separator />
-                <Item disabled data={"cut"} >Disabled</Item>
-                <Separator />
-                <Submenu label="Foobar">
-                    <Item id="reload" data={"cut"} onClick={handleItemClick}>Reload</Item>
-                    <Item id="something" data={"cut"} onClick={handleItemClick}>Do something else</Item>
+                <Item id="directory" data={"directory"} onClick={handleItemClick}>Add Directory</Item>
+                <Item id="description" data={"description"} onClick={handleItemClick}>Add Description Page</Item>
+                <Submenu label={"Upload"}>
+                    <Item id="file" data={"file"} onClick={handleItemClick}>File</Item>
                 </Submenu>
             </Menu>
+            <CourseComponentView directories={[{name: "First", pages: ["Page 1", "Page 2"]}, {name: "Second", pages: ["Page 1", "Page 2"]}, {name: "Third", pages: ["Page 1", "Page 2"]}]}/>
         </motion.section>
     )
 }

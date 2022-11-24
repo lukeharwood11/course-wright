@@ -14,7 +14,7 @@ const CourseHeader = ({ menuOpen, handleToggle, title}) => {
                 className={"rounded-lg p-1 bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 text-white"}
                 onClick={ handleToggle } >
                 {
-                    menuOpen ? <AiOutlineClose size={45}/> : <AiOutlineMenu size={45}/>
+                    menuOpen ? <AiOutlineClose size={35}/> : <AiOutlineMenu size={35}/>
                 }
             </motion.button>
             <h1>{ title }</h1>
