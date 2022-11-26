@@ -5,7 +5,7 @@ import Textarea from "react-expanding-textarea";
 
 const MessagesPanel = () => {
     useEffect(() => {
-        console.log("Messages, mounted.")
+
     }, [])
     return (
         <motion.div

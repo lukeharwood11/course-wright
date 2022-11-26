@@ -13,7 +13,7 @@ import Modal from "../elements/Modal";
 
 const CourseList = () => {
     const [modal, setModal] = useState(false)
-    const { courses, setCourses, addCourse, selectedCourse, setSelectedCourse } = useDashboardContext()
+    const { courses, setCourses, addCourse, selectedCourse, setSelectedCourse, lockCourseCreation } = useDashboardContext()
     const [loading, setLoading] = useState(true)
     const axiosPrivate = useAxios();
 
@@ -25,7 +25,9 @@ const CourseList = () => {
                 .then(r => {
                     isMounted && setCourses(r.data.courses)
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                })
                 .finally(() => {
                     setLoading(false)
                 })
@@ -49,50 +51,65 @@ const CourseList = () => {
         loading ?
             <Loading spinner inverted/>
             :
-            (!courses || courses?.length === 0) ?
-                <h3 className={"text-gray-700 inline-block w-full text-center text-2xl"}>No active courses <FaSadCry className={"inline"}/></h3>
-                :
-                <div className={"course-grid no-select"}>
-                    <AnimatePresence>
-                        { modal &&
-                            <Modal key={"modal"} handleClose={() => setModal(false)}>
-                                <h1>Be patient...</h1>
-                            </Modal>
-                        }
-                    </AnimatePresence>
-                        <AnimatePresence mode={"sync"}>
-                    { courses.slice(0, 8).map((course, i) => {
-                        return <CourseTitleButton index={i} selected={i === selectedCourse} key={i} course={course}/>
-                    })
+            <div className={"course-grid no-select"}>
+                <AnimatePresence>
+                    { modal &&
+                        <Modal key={"modal"} handleClose={() => setModal(false)}>
+                            <h1>Be patient...</h1>
+                        </Modal>
                     }
-                        <motion.div
-                            layout
-                            className={`course-button-extra-panel`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ ease: "anticipate", duration: .5 }}
-                            exit={{ opacity: 0 }}>
-                            <button
-                                className={"view-all-button"}
-                                onClick={() => {
-                                    setModal(true)
-                                }}
-                            >
-                                <p className={"inline-block"}>View All</p>
-                                <AiFillAppstore size={ 30 }/>
-                            </button>
-                            <button
-                                className={"add-course-button"}
-                                onClick={() => {
-                                    addCourse({ name: "My Course", id: "new", code: "", studentCount: 0})
-                                }}
-                            >
-                                <p className={"inline-block"}>Add</p>
-                                <AiOutlinePlus size={ 30 }/>
-                            </button>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
+                </AnimatePresence>
+                    <AnimatePresence mode={"sync"}>
+                { courses.slice(0, 8)?.map((course, i) => {
+                    return <CourseTitleButton index={i} selected={i === selectedCourse} key={i} course={course}/>
+                })
+                }
+                    <motion.div
+                        layout
+                        className={`course-button-extra-panel`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ ease: "anticipate", duration: .5 }}
+                        exit={{ opacity: 0 }}>
+                        <button
+                            className={"view-all-button"}
+                            onClick={() => {
+                                setModal(true)
+                            }}
+                        >
+                            <p className={"inline-block"}>View All</p>
+                            <AiFillAppstore size={ 30 }/>
+                        </button>
+
+                        <button
+                            className={!lockCourseCreation ? "add-course-button": "bg-gray-200"}
+                            onClick={() => {
+                                if (!lockCourseCreation) {
+                                    addCourse({
+                                        name: "My Course",
+                                        code: "MY-1010",
+                                        studentCount: 0,
+                                        id: "new",
+                                        pcId: "new",
+                                        role: 1010,
+                                        active: false,
+                                        subject: "",
+                                        dateCreated: "",
+                                        lastModified: "",
+                                        license: "",
+                                        visibility: "private",
+                                        published: false,
+                                        tags: []
+                                    })
+                                }
+                            }}
+                        >
+                            <p className={"inline-block"}>Add</p>
+                            <AiOutlinePlus size={ 30 }/>
+                        </button>
+                    </motion.div>
+                </AnimatePresence>
+            </div>
     );
 }
 

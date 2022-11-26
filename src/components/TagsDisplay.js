@@ -1,16 +1,10 @@
 import {motion} from "framer-motion";
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import CreatableSelect from "react-select/creatable";
 
-const TagsDisplay = ({ tags }) => {
+const TagsDisplay = ({ tags, setTags }) => {
+    const [input, setInput] = useState("")
 
-    const ref = useRef()
-    const [text, setText] = useState("hi")
-    const options = [
-        { value:"stem", label:"stem", color: "#0000FF"},
-        { value:"work", label:"work", color: "#FF00FF"},
-        { value:"school", label:"school", color: "#FFFF00"}
-    ]
     return (
         <motion.div
             initial={{opacity: 0}}
@@ -19,7 +13,17 @@ const TagsDisplay = ({ tags }) => {
             exit={{opacity: 0, width: 0}}
             className={"course-tags"}
         >
-            <CreatableSelect isMulti onvalue={options}/>
+            <CreatableSelect
+                placeholder={"Add tags"}
+                inputValue={input}
+                onInputChange={(value) => setInput(value)}
+                value={ tags }
+                onChange={ (value) => setTags([...value].map(v => {
+                    return {
+                        value: v.value, label: v.label
+                    }
+                })) }
+                isMulti />
         </motion.div>
     );
 }

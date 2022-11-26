@@ -6,7 +6,7 @@ import CourseComponentView from "./CourseComponentView";
 
 const CourseSideBar = ({ open }) => {
 
-    function handleItemClick({ event, props, triggerEvent, data }){
+    function handleItemClick({ data }){
         console.log( data );
     }
 

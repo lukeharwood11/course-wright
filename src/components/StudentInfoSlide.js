@@ -142,7 +142,7 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
                     onChange={ (e) => setRepeatPassword(e.target.value) }
                     value={ repeatPassword }
                     className={`${validMatchPassword() ? "text-indigo-500" : "text-red-400"} text-indigo-500 bg-white inline rounded-full p-3 w-5/6 text-xl m-2`}
-                    placeholder={"Confirm Password"}
+                    placeholder={"ConfirmDialog Password"}
                     type={"password"}/>
             </div>
             <AnimatePresence>

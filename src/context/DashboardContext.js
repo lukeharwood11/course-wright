@@ -10,6 +10,9 @@ const DashboardContextProvider = ({ children }) => {
     const addCourse = (course) => {
         setCourses((prevState) => {
             const c = [...prevState]
+            if (lockCourseCreation) {
+                return prevState
+            }
             if (c.filter((i) => i.id === "new").length > 0) {
                 toast.error("Finish your course...")
                 return prevState
@@ -22,15 +25,14 @@ const DashboardContextProvider = ({ children }) => {
 
     const updateCourse = (course) => {
         setCourses((prevState) => {
-            let c = [...prevState]
-            c = c.map((c) => {
-                if (c.id === course.id) {
-                    if (course.id === "new") course.id = "awaiting-id"
+            let courseCopy = [...prevState]
+            courseCopy = courseCopy.map((c) => {
+                if (c.id === course.id || c.id === "new") {
                     return course
                 }
                 return c
             })
-            return c
+            return courseCopy
         })
     }
 
@@ -42,6 +44,7 @@ const DashboardContextProvider = ({ children }) => {
     }
 
     const setSelectedCourse = (course) => {
+        if (selectedCourse === course) return
         if (change) {
             toast("Unsaved changes.\nPlease save/cancel.")
         } else {
@@ -53,10 +56,11 @@ const DashboardContextProvider = ({ children }) => {
     const [selectedCourse, setCourse] = useState(-1)
     const [courses, setCourses] = useState([])
     const [mode, setMode] = useMemoryState(dashboardModes.MESSAGE)
+    const [lockCourseCreation, setLockCourseCreation] = useState(false)
 
     return (
         <DashboardContext.Provider
-            value={{addCourse, updateCourse, deleteCourse, change, setChange, selectedCourse, setSelectedCourse, mode, setMode, courses, setCourses}}>
+            value={{lockCourseCreation, setLockCourseCreation, addCourse, updateCourse, deleteCourse, change, setChange, selectedCourse, setSelectedCourse, mode, setMode, courses, setCourses}}>
             {children}
         </DashboardContext.Provider>
     );

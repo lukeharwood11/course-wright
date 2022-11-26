@@ -8,13 +8,30 @@ import Modal from "../elements/Modal";
 import toast from "react-hot-toast";
 import {MdCancel} from "react-icons/md";
 import MaskedInput from "react-text-mask/dist/reactTextMask";
+import useAxios from "../../hooks/useAxios";
 
 
-const CoursePreview = ({ editActive }) => {
+const CoursePreviewEdit = () => {
+
+}
+
+const CoursePreviewView = () => {
+    return (
+        <></>
+    )
+}
+
+const CoursePreview = ({ }) => {
     const [modal, setModal] = useState(false)
-    const [courseObj, setCourseObj] = useState({})
-    const { courses, selectedCourse, change, setChange, deleteCourse, updateCourse } = useDashboardContext()
-    const course = selectedCourse >= 0 ? courses[selectedCourse] : undefined
+    const emptyCourse = { name: "", code: "", tags: [] }
+    const [course, setCourse] = useState(undefined)
+    const [courseObj, setCourseObj] = useState(emptyCourse)
+    const { lockCourseCreation, setLockCourseCreation, courses, selectedCourse, change, setChange, deleteCourse, updateCourse } = useDashboardContext()
+    const axios = useAxios()
+
+    useEffect(() => {
+        setCourse(selectedCourse >= 0 ? courses[selectedCourse] : undefined)
+    }, [selectedCourse, courses])
 
     const validateChanges = () => {
         // todo implement
@@ -23,15 +40,43 @@ const CoursePreview = ({ editActive }) => {
 
     const handleSaveChanges = () => {
         const id = toast.loading("Saving Course...")
-        if (courseObj.id === "new") {
-            // todo post request, remove change status if failed.
-       } else {
-            // todo do something else, remove change status if failed
-        }
-        updateCourse(courseObj)
-        setCourseObj(course)
         setChange(false)
-        toast.success("Course Saved.", { id: id })
+        if (courseObj.id === "new") {
+            setLockCourseCreation(true)
+            axios.post("/courses", {
+                name: courseObj.name,
+                code: courseObj.code,
+                subject: "none",
+                tags: courseObj.tags.map(t => t.label)
+            }, {}).then((r) => {
+                courseObj.pcId = r.data.privateCourseId
+                courseObj.id = r.data.courseId
+                updateCourse(courseObj)
+                setCourseObj(course)
+                toast.success("New Course Created!", { id })
+            }).catch(err => {
+                setChange(true)
+                console.log(err)
+                toast.error("An error occurred, try again later.", { id })
+            }).finally(() => {
+                setLockCourseCreation(false)
+            })
+       } else {
+            axios.put(`/course/${courseObj.id}`, {
+                name: courseObj.name,
+                code: courseObj.code,
+                subject: "none",
+                tags: courseObj.tags.map(t => t.label)
+            }, {}).then((r) => {
+                updateCourse(courseObj)
+                setCourseObj(course)
+                toast.success("Course Updated!", { id })
+            }).catch(err => {
+                setChange(true)
+                console.log(err)
+                toast.error("An error occurred, try again later.", { id })
+            })
+        }
     }
 
     const handleCancelChanges = () => {
@@ -50,123 +95,9 @@ const CoursePreview = ({ editActive }) => {
         }
     }, [course])
 
-    const editMode = () =>  {
-        return (
-            <>
-                <AnimatePresence>
+    useEffect(() => {
 
-                {
-                    modal &&
-                        <Modal handleClose={() => setModal(false)} key={"modal"}>
-
-                        </Modal>
-                }
-                </AnimatePresence>
-                {
-                    course ?
-                    <>
-                        <div className={"course-meta-edit"}>
-                            <motion.input
-                                onFocus={(e) => e.preventDefault()}
-                                key={"course-name"}
-                                initial={{opacity: 0}}
-                                animate={{opacity: 1}}
-                                transition={{ease: "backOut", duration: 1}}
-                                exit={{opacity: 0, width: 0}}
-                                type={"text"}
-                                value={courseObj ? courseObj.name : ""}
-                                onChange={(e) => {
-                                    setChange(true)
-                                    setCourseObj((prevState) => {
-                                        return {
-                                            ...prevState,
-                                            name: e.target.value
-                                        }
-                                    })
-                                }}
-                                placeholder={"Course Name"}
-                                className={"course-name font drop-shadow-2xl text-indigo-500  rounded-full bg-white p-2 outline-0"}/>
-                            <motion.div
-                                key={"course-code"}
-                                initial={{opacity: 0}}
-                                animate={{opacity: 1}}
-                                transition={{ease: "backOut", duration: 1}}
-                                exit={{opacity: 0, width: 0}}
-                            >
-                                <MaskedInput
-                                    className={"course-code drop-shadow-2xl text-indigo-500  rounded-full bg-white p-2 outline-0"}
-                                    value={courseObj ? courseObj.code : ""}
-                                    placeholder={"Code (XX-XXXX)"}
-                                    onChange={(e) => {
-                                        setChange(true)
-                                        setCourseObj((prevState) => {
-                                            return {
-                                                ...prevState,
-                                                code: e.target.value
-                                            }
-                                        })
-                                    }}
-                                    mask={[/[A-Za-z]/, /[A-Za-z]/, '-', /\d/, /\d/, /\d/, /\d/]}
-                                />
-                            </motion.div>
-                            <div className={"course-save-button"}>
-                                <motion.button
-                                    disabled={!change}
-                                    onClick={ handleSaveChanges }
-                                    whileHover={{
-                                        scale: change? 1.1: 1,
-                                        x: change ? -10: 0
-                                    }}
-                                    className={`left-button-pill drop-shadow-lg save-button ${change ? "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500" : "bg-gray-300"}`}>
-                                    Save Changes
-                                </motion.button>
-                                <motion.button
-                                    onClick={ handleCancelChanges }
-                                    whileHover={{
-                                        scale: change? 1.1: 1,
-                                        x: change ? 3: 0
-                                    }}
-                                    disabled={!change}
-                                    className={`right-button-pill drop-shadow-lg cancel-button ${change ? "bg-purple-500" : "bg-gray-300"}`}>
-                                    <MdCancel/>
-
-                                </motion.button>
-                            </div>
-                            <motion.button onClick={() => setModal(true)} className={"button bg-white flex justify-center items-center drop-shadow-md"}>
-                                <FaBars size={15}/>
-                            </motion.button>
-                        </div>
-                        <TagsDisplay tags={["educational", "stem", "comp-sci"]}/>
-                        <motion.div
-                        key={"course-structure"}
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        transition={{ease: "backOut", duration: 1}}
-                        exit={{opacity: 0, width: 0}}
-                        type={"text"}
-                        className={"course-structure drop-shadow-xl text-indigo-500  bg-white p-2 outline-0"}>
-                        </motion.div>
-
-                        <motion.div
-                        key={"course-students"}
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        transition={{ease: "backOut", duration: 1}}
-                        exit={{opacity: 0, width: 0}}
-                        type={"text"}
-                        className={"course-enrollment drop-shadow-xl text-indigo-500  bg-white p-2 outline-0"}>
-                        </motion.div>
-                    </>  : <motion.h3
-                            key={"empty-tag"}
-                            initial={{opacity: 0}}
-                            animate={{opacity: 1}}
-                            transition={{ease: "backOut", duration: 1}}
-                            exit={{opacity: 0, width: 0}}
-                            className={"text-2xl"}>Select a course to preview</motion.h3>
-                }
-            </>
-        );
-    }
+    }, [courseObj])
 
     const viewMode = () => {
         return (
@@ -178,7 +109,127 @@ const CoursePreview = ({ editActive }) => {
 
     return (
         <div className={course ? "preview" : "preview preview-empty"}>
-            {editActive ? editMode() : viewMode()}
+                <AnimatePresence>
+
+                    {
+                        modal &&
+                        <Modal handleClose={() => setModal(false)} key={"modal"}>
+
+                        </Modal>
+                    }
+                </AnimatePresence>
+                {
+                    course ?
+                        <>
+                            <div className={"course-meta-edit"}>
+                                <motion.input
+                                    onFocus={(e) => e.preventDefault()}
+                                    key={"course-name"}
+                                    initial={{opacity: 0}}
+                                    animate={{opacity: 1}}
+                                    transition={{ease: "backOut", duration: 1}}
+                                    exit={{opacity: 0, width: 0}}
+                                    type={"text"}
+                                    value={ courseObj.name }
+                                    onChange={(e) => {
+                                        setChange(true)
+                                        setCourseObj((prevState) => {
+                                            return {
+                                                ...prevState,
+                                                name: e.target.value
+                                            }
+                                        })
+                                    }}
+                                    placeholder={"Course Name"}
+                                    className={"course-name font drop-shadow-2xl text-indigo-500  rounded-full bg-white p-2 outline-0"}/>
+                                <motion.div
+                                    key={"course-code"}
+                                    initial={{opacity: 0}}
+                                    animate={{opacity: 1}}
+                                    transition={{ease: "backOut", duration: 1}}
+                                    exit={{opacity: 0, width: 0}}
+                                >
+                                    <MaskedInput
+                                        className={"course-code drop-shadow-2xl text-indigo-500  rounded-full bg-white p-2 outline-0"}
+                                        value={ courseObj.code }
+                                        placeholder={"Course Code"}
+                                        onChange={(e) => {
+                                            setChange(true)
+                                            setCourseObj((prevState) => {
+                                                return {
+                                                    ...prevState,
+                                                    code: e.target.value
+                                                }
+                                            })
+                                        }}
+                                        mask={[/[A-Za-z]/, /[A-Za-z]/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                    />
+                                </motion.div>
+                                <div className={"course-save-button"}>
+                                    <motion.button
+                                        disabled={!change}
+                                        onClick={ handleSaveChanges }
+                                        whileHover={{
+                                            scale: change? 1.1: 1,
+                                            x: change ? -10: 0
+                                        }}
+                                        className={`left-button-pill drop-shadow-lg save-button ${change ? "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500" : "bg-gray-300"}`}>
+                                        Save Changes
+                                    </motion.button>
+                                    <motion.button
+                                        onClick={ handleCancelChanges }
+                                        whileHover={{
+                                            scale: change? 1.1: 1,
+                                            x: change ? 3: 0
+                                        }}
+                                        disabled={!change}
+                                        className={`right-button-pill drop-shadow-lg cancel-button ${change ? "bg-purple-500" : "bg-gray-300"}`}>
+                                        <MdCancel/>
+
+                                    </motion.button>
+                                </div>
+                                <motion.button onClick={() => setModal(true)} className={"button bg-white flex justify-center items-center drop-shadow-md"}>
+                                    <FaBars size={15}/>
+                                </motion.button>
+                            </div>
+                            <TagsDisplay tags={ courseObj.tags }
+                                setTags={(tags) => {
+                                    setChange(true)
+                                    setCourseObj((prevState) => {
+                                        return {
+                                            ...prevState,
+                                            tags: tags
+                                        }
+                                    })
+                                }
+                            }/>
+                            <motion.div
+                                key={"course-structure"}
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                transition={{ease: "backOut", duration: 1}}
+                                exit={{opacity: 0, width: 0}}
+                                type={"text"}
+                                className={"course-structure drop-shadow-xl text-indigo-500  bg-white p-2 outline-0"}>
+                            </motion.div>
+
+                            <motion.div
+                                key={"course-students"}
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                transition={{ease: "backOut", duration: 1}}
+                                exit={{opacity: 0, width: 0}}
+                                type={"text"}
+                                className={"course-enrollment drop-shadow-xl text-indigo-500  bg-white p-2 outline-0"}>
+                            </motion.div>
+                        </>  : <motion.h3
+                            key={"empty-tag"}
+                            initial={{opacity: 0}}
+                            animate={{opacity: 1}}
+                            transition={{ease: "backOut", duration: 1}}
+                            exit={{opacity: 0, width: 0}}
+                            className={"text-2xl"}>Select a course to preview</motion.h3>
+                }
         </div>
     );
 }

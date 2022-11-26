@@ -22,7 +22,7 @@ const Dashboard = (props) => {
                     <CourseList />
                 </div>
                 <CoursePreview editActive={ true } />
-                <div className="search bg-white drop-shadow-lg">
+                <div className="search bg-white drop-shadow-lg z-0">
                     <ToolBar
                         key={1}
                         onSubmit={() => {
