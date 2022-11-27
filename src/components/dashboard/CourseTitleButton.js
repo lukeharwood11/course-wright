@@ -7,15 +7,12 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import Modal from "../elements/Modal";
 import {useNavigate} from "react-router-dom";
 import {Item, Menu, Submenu, useContextMenu} from "react-contexify";
+import {parseCourseCode} from "../../regex/regex";
 
-const CourseTitleButton = ({index, selected, course, tags}) => {
+const CourseTitleButton = ({selected, course, tags}) => {
     const {name, code, studentCount, id, pcId, published, role, active, subject, dateCreated, lastModified, license, visibility} = course
     const { setSelectedCourse } = useDashboardContext()
-    const r = /([A-Z]+)-/
-    const regexRes = r.exec(code)
-    const firstTwo = name.split(" ").slice(0, 2)
-    const backup = firstTwo.length === 1 ? firstTwo[0][0] : firstTwo[0][0] + firstTwo[1][0]
-    const formattedCode = regexRes ? regexRes[1] : backup
+    const formattedCode = parseCourseCode(name, code)
     const [modal, setModal] = useState(false)
     const navigate = useNavigate()
 
@@ -41,7 +38,7 @@ const CourseTitleButton = ({index, selected, course, tags}) => {
     });
 
     return (
-        <motion.div layout onContextMenu={(e) => e.preventDefault()} >
+        <>
             <AnimatePresence>
                 { modal && <Modal key={"modal"} handleClose={ closeModel }>
                     <div>
@@ -52,11 +49,15 @@ const CourseTitleButton = ({index, selected, course, tags}) => {
                 </Modal> }
             </AnimatePresence>
             <motion.div
+                layout
+                onContextMenu={(e) => {
+                    e.preventDefault()
+                }}
                 onDoubleClick={() => {
                     navigate(`/course/${id}`)
                 }}
                 onClick={() => {
-                    setSelectedCourse(index)
+                    setSelectedCourse(pcId)
                 }}
                 className={`course-button box-border drop-shadow-xl`}
                 initial={{ opacity: 0, scale: 0, y: "-1vh" }}
@@ -66,14 +67,14 @@ const CourseTitleButton = ({index, selected, course, tags}) => {
                 {
                     !published && <AiOutlineEyeInvisible className={"course-button-icon"} size={ 20 }/>
                 }
-                <h3 className={"course-button-name"}>{ name }</h3>
+                <h3 className={`course-button-name ${name.length > 25 ? "smaller" : "normal"}`}>{ name }</h3>
                 <h4 className={`course-button-code ${selected ? "bg-purple-500": "bg-indigo-500"}`}>{ formattedCode }</h4>
                 <div className={"course-button-more"}>
                     <motion.button onClick={ handleMore } className={"w-full h-full"}><BsThreeDotsVertical size={15}/></motion.button>
                 </div>
                 <p className={"course-student-count"}>{ studentCount } students</p>
             </motion.div>
-        </motion.div>
+        </>
     );
 }
 

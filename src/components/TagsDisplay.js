@@ -1,9 +1,11 @@
 import {motion} from "framer-motion";
 import React, {useEffect, useRef, useState} from "react";
 import CreatableSelect from "react-select/creatable";
+import makeAnimated from 'react-select/animated';
 
 const TagsDisplay = ({ tags, setTags }) => {
     const [input, setInput] = useState("")
+    const animatedComponents = makeAnimated();
 
     return (
         <motion.div
@@ -14,6 +16,7 @@ const TagsDisplay = ({ tags, setTags }) => {
             className={"course-tags"}
         >
             <CreatableSelect
+                components={animatedComponents}
                 placeholder={"Add tags"}
                 inputValue={input}
                 onInputChange={(value) => setInput(value)}

@@ -10,6 +10,7 @@ import Loading from "../Loading";
 import useDashboardContext from "../../hooks/useDashboardContext";
 import {AnimatePresence, motion} from "framer-motion";
 import Modal from "../elements/Modal";
+import MiniCourseContainer from "./MiniCourseView/MiniCourseContainer";
 
 const CourseList = () => {
     const [modal, setModal] = useState(false)
@@ -42,10 +43,14 @@ const CourseList = () => {
     }, []);
 
     useEffect(() => {
-        if (selectedCourse === -1 && courses.length > 0) {
-            setSelectedCourse(0)
+        if (selectedCourse === "" && courses.length > 0) {
+            setSelectedCourse(courses[0].pcId)
         }
     }, [courses, selectedCourse, setSelectedCourse])
+
+    const handleCloseModal = () => {
+        setModal(false)
+    }
 
     return (
         loading ?
@@ -54,14 +59,14 @@ const CourseList = () => {
             <div className={"course-grid no-select"}>
                 <AnimatePresence>
                     { modal &&
-                        <Modal key={"modal"} handleClose={() => setModal(false)}>
-                            <h1>Be patient...</h1>
+                        <Modal key={"modal"} handleClose={ handleCloseModal }>
+                            <MiniCourseContainer handleClose={ handleCloseModal }/>
                         </Modal>
                     }
                 </AnimatePresence>
                     <AnimatePresence mode={"sync"}>
                 { courses.slice(0, 8)?.map((course, i) => {
-                    return <CourseTitleButton index={i} selected={i === selectedCourse} key={i} course={course}/>
+                    return <CourseTitleButton index={i} selected={course.pcId === selectedCourse} key={course.pcId} course={course}/>
                 })
                 }
                     <motion.div

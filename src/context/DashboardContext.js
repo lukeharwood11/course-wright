@@ -13,12 +13,12 @@ const DashboardContextProvider = ({ children }) => {
             if (lockCourseCreation) {
                 return prevState
             }
-            if (c.filter((i) => i.id === "new").length > 0) {
+            if (c.filter((i) => i.pcId === "new").length > 0) {
                 toast.error("Finish your course...")
                 return prevState
             }
             c.push(course)
-            setSelectedCourse(prevState.length)
+            setSelectedCourse("new")
             return c
         })
     }
@@ -27,7 +27,7 @@ const DashboardContextProvider = ({ children }) => {
         setCourses((prevState) => {
             let courseCopy = [...prevState]
             courseCopy = courseCopy.map((c) => {
-                if (c.id === course.id || c.id === "new") {
+                if (c.pcId === course.pcId || c.pcId === "new") {
                     return course
                 }
                 return c
@@ -43,17 +43,17 @@ const DashboardContextProvider = ({ children }) => {
         })
     }
 
-    const setSelectedCourse = (course) => {
-        if (selectedCourse === course) return
+    const setSelectedCourse = (privateCourseId) => {
+        if (selectedCourse === privateCourseId) return
         if (change) {
             toast("Unsaved changes.\nPlease save/cancel.")
         } else {
-            setCourse(course)
+            setCourse(privateCourseId)
         }
     }
 
     const [change, setChange] = useState(false)
-    const [selectedCourse, setCourse] = useState(-1)
+    const [selectedCourse, setCourse] = useState("")
     const [courses, setCourses] = useState([])
     const [mode, setMode] = useMemoryState(dashboardModes.MESSAGE)
     const [lockCourseCreation, setLockCourseCreation] = useState(false)

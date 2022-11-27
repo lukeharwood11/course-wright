@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import {MdCancel} from "react-icons/md";
 import MaskedInput from "react-text-mask/dist/reactTextMask";
 import useAxios from "../../hooks/useAxios";
+import CourseOptionsPanel from "../course-options/CourseOptionsPanel";
 
 
 const CoursePreviewEdit = () => {
@@ -30,7 +31,7 @@ const CoursePreview = ({ }) => {
     const axios = useAxios()
 
     useEffect(() => {
-        setCourse(selectedCourse >= 0 ? courses[selectedCourse] : undefined)
+        setCourse(selectedCourse !== "" ? courses.find((c) => c.pcId === selectedCourse) : undefined)
     }, [selectedCourse, courses])
 
     const validateChanges = () => {
@@ -41,14 +42,16 @@ const CoursePreview = ({ }) => {
     const handleSaveChanges = () => {
         const id = toast.loading("Saving Course...")
         setChange(false)
-        if (courseObj.id === "new") {
+        const controller = new AbortController()
+        courseObj.code = courseObj.code.toUpperCase()
+        if (courseObj.pcId === "new") {
             setLockCourseCreation(true)
             axios.post("/courses", {
                 name: courseObj.name,
                 code: courseObj.code,
                 subject: "none",
-                tags: courseObj.tags.map(t => t.label)
-            }, {}).then((r) => {
+                tags: courseObj.tags.map(t => t.label.toLowerCase())
+            }, { signal: controller.signal }).then((r) => {
                 courseObj.pcId = r.data.privateCourseId
                 courseObj.id = r.data.courseId
                 updateCourse(courseObj)
@@ -62,12 +65,12 @@ const CoursePreview = ({ }) => {
                 setLockCourseCreation(false)
             })
        } else {
-            axios.put(`/course/${courseObj.id}`, {
+            axios.put(`/course/${courseObj.pcId}`, {
                 name: courseObj.name,
                 code: courseObj.code,
                 subject: "none",
-                tags: courseObj.tags.map(t => t.label)
-            }, {}).then((r) => {
+                tags: courseObj.tags.map(t => t.label.toLowerCase())
+            }, { signal: controller.signal }).then((r) => {
                 updateCourse(courseObj)
                 setCourseObj(course)
                 toast.success("Course Updated!", { id })
@@ -76,19 +79,22 @@ const CoursePreview = ({ }) => {
                 console.log(err)
                 toast.error("An error occurred, try again later.", { id })
             })
+            return () => {
+                controller.abort()
+            };
         }
     }
 
     const handleCancelChanges = () => {
         setChange(false)
-        if (courseObj.id === "new") deleteCourse(courseObj)
+        if (courseObj.pcId === "new") deleteCourse(courseObj)
         setCourseObj({...course})
     }
 
     useEffect(() => {
         setChange(false)
         if (course) {
-            if (course.id === "new") setChange(true)
+            if (course.pcId === "new") setChange(true)
             setCourseObj({...course})
         } else {
             setCourseObj({})
@@ -99,14 +105,6 @@ const CoursePreview = ({ }) => {
 
     }, [courseObj])
 
-    const viewMode = () => {
-        return (
-            <>
-
-            </>
-        )
-    }
-
     return (
         <div className={course ? "preview" : "preview preview-empty"}>
                 <AnimatePresence>
@@ -114,7 +112,7 @@ const CoursePreview = ({ }) => {
                     {
                         modal &&
                         <Modal handleClose={() => setModal(false)} key={"modal"}>
-
+                            <CourseOptionsPanel course={ course }/>
                         </Modal>
                     }
                 </AnimatePresence>
