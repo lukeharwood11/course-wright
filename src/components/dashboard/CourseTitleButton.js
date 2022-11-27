@@ -4,7 +4,7 @@ import {BsThreeDotsVertical} from "react-icons/bs";
 import toast from "react-hot-toast";
 import {useState} from "react";
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
-import Modal from "../elements/Modal";
+import CustomModal from "../elements/CustomModal";
 import {useNavigate} from "react-router-dom";
 import {Item, Menu, Submenu, useContextMenu} from "react-contexify";
 import {parseCourseCode} from "../../regex/regex";
@@ -40,13 +40,13 @@ const CourseTitleButton = ({selected, course, tags}) => {
     return (
         <>
             <AnimatePresence>
-                { modal && <Modal key={"modal"} handleClose={ closeModel }>
+                { modal && <CustomModal key={"modal"} handleClose={ closeModel }>
                     <div>
                         <h1 className={"font-thin"}>
                             Course Options... Coming Soon
                         </h1>
                     </div>
-                </Modal> }
+                </CustomModal> }
             </AnimatePresence>
             <motion.div
                 layout

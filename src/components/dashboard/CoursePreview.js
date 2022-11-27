@@ -4,13 +4,12 @@ import TagsDisplay from "../TagsDisplay";
 import {BsFillSdCardFill} from "react-icons/bs";
 import {FaBars} from 'react-icons/fa'
 import useDashboardContext from "../../hooks/useDashboardContext";
-import Modal from "../elements/Modal";
+import CustomModal from "../elements/CustomModal";
 import toast from "react-hot-toast";
 import {MdCancel} from "react-icons/md";
 import MaskedInput from "react-text-mask/dist/reactTextMask";
 import useAxios from "../../hooks/useAxios";
 import CourseOptionsPanel from "../course-options/CourseOptionsPanel";
-
 
 const CoursePreviewEdit = () => {
 
@@ -101,19 +100,15 @@ const CoursePreview = ({ }) => {
         }
     }, [course])
 
-    useEffect(() => {
-
-    }, [courseObj])
-
     return (
         <div className={course ? "preview" : "preview preview-empty"}>
                 <AnimatePresence>
 
                     {
                         modal &&
-                        <Modal handleClose={() => setModal(false)} key={"modal"}>
+                        <CustomModal handleClose={() => setModal(false)} key={"modal"}>
                             <CourseOptionsPanel course={ course }/>
-                        </Modal>
+                        </CustomModal>
                     }
                 </AnimatePresence>
                 {

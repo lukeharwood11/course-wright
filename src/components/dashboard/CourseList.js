@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading";
 import useDashboardContext from "../../hooks/useDashboardContext";
 import {AnimatePresence, motion} from "framer-motion";
-import Modal from "../elements/Modal";
+import CustomModal from "../elements/CustomModal";
 import MiniCourseContainer from "./MiniCourseView/MiniCourseContainer";
 
 const CourseList = () => {
@@ -59,9 +59,9 @@ const CourseList = () => {
             <div className={"course-grid no-select"}>
                 <AnimatePresence>
                     { modal &&
-                        <Modal key={"modal"} handleClose={ handleCloseModal }>
+                        <CustomModal key={"modal"} handleClose={ handleCloseModal }>
                             <MiniCourseContainer handleClose={ handleCloseModal }/>
-                        </Modal>
+                        </CustomModal>
                     }
                 </AnimatePresence>
                     <AnimatePresence mode={"sync"}>

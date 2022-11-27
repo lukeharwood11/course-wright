@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-const Modal = ({ close=false, handleClose, global, children }) => {
+const CustomModal = ({ close=false, handleClose, global, children }) => {
     return (
         <motion.section
             initial={{opacity: 0}}
@@ -23,4 +23,4 @@ const Modal = ({ close=false, handleClose, global, children }) => {
     );
 }
 
-export default Modal;
+export default CustomModal;
