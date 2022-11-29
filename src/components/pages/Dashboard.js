@@ -12,6 +12,7 @@ import {dashboardModes} from "../../constants";
 import MessagesPanel from "../MessagesPanel";
 import SearchPanel from "../SearchPanel";
 import DashboardMainView from "../DashboardMainView";
+import CustomModal from "../elements/CustomModal";
 
 const Dashboard = (props) => {
 

@@ -71,7 +71,9 @@ const CourseTitleButton = ({selected, course, tags}) => {
                 transition={{ ease: "anticipate", duration: .5 }}
                 exit={{opacity: 0, borderRadius: "50%"}}>
                 {
-                    !published && <AiOutlineEyeInvisible className={"course-button-icon"} size={ 20 }/>
+                    !published &&
+                        <AiOutlineEyeInvisible className={"course-button-icon"} size={ 20 }/>
+
                 }
                 {
                     isEditable() && <FaEdit className={"course-button-editable-icon"} size={ 15 }/>

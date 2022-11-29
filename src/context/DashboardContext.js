@@ -62,7 +62,9 @@ const DashboardContextProvider = ({ children }) => {
 
     return (
         <DashboardContext.Provider
-            value={{lockCourseCreation, setLockCourseCreation, addCourse, updateCourse, deleteCourse, change, setChange, selectedCourse, setSelectedCourse, mode, setMode, courses, setCourses}}>
+            value={{lockCourseCreation, setLockCourseCreation, addCourse,
+                updateCourse, deleteCourse, change, setChange, selectedCourse,
+                setSelectedCourse, mode, setMode, courses, setCourses}}>
             {children}
         </DashboardContext.Provider>
     );

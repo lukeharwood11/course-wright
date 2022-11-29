@@ -11,13 +11,20 @@ import useDashboardContext from "../../../hooks/useDashboardContext";
 import {AnimatePresence, motion} from "framer-motion";
 import CustomModal from "../../elements/CustomModal";
 import MiniCourseContainer from "../mini-course-view/MiniCourseContainer";
+import NewCourseButton from "./NewCourseButton";
 
 const CourseList = () => {
     const [modal, setModal] = useState(false)
+    const [content, setContent] = useState(<div></div>)
     const { courses, setCourses, addCourse, selectedCourse, setSelectedCourse, lockCourseCreation } = useDashboardContext()
     const [loading, setLoading] = useState(true)
     const axiosPrivate = useAxios();
     const { auth } = useAuth()
+
+    const displayModal = (newContent) => {
+        setContent(newContent)
+        setModal(true)
+    }
 
     useEffect(() => {
         let isMounted = true;
@@ -63,7 +70,9 @@ const CourseList = () => {
                 <AnimatePresence>
                     { modal &&
                         <CustomModal key={"modal"} handleClose={ handleCloseModal }>
-                            <MiniCourseContainer handleClose={ handleCloseModal }/>
+                            <AnimatePresence>
+                                { content }
+                            </AnimatePresence>
                         </CustomModal>
                     }
                 </AnimatePresence>
@@ -84,44 +93,13 @@ const CourseList = () => {
                             layout
                             className={"view-all-button"}
                             onClick={() => {
-                                setModal(true)
+                                displayModal(<MiniCourseContainer handleClose={ handleCloseModal }/>)
                             }}
                         >
                             <p className={"inline-block"}>View All</p>
                             <AiFillAppstore size={ 30 }/>
                         </motion.button>
-
-                        <motion.button
-                            layout
-                            className={!lockCourseCreation ? "add-course-button": "bg-gray-200"}
-                            onClick={() => {
-                                if (!lockCourseCreation) {
-                                    addCourse({
-                                        name: "My Course",
-                                        code: "MY-1010",
-                                        studentCount: 0,
-                                        id: "new",
-                                        role: 1010,
-                                        active: false,
-                                        subject: "",
-                                        dateCreated: "",
-                                        lastModified: "",
-                                        license: "",
-                                        visibility: "private",
-                                        published: false,
-                                        tags: [],
-                                        type: "c",
-                                        accounts: [{
-                                            ...auth.user,
-                                            role: 1010
-                                        }]
-                                    })
-                                }
-                            }}
-                        >
-                            <p className={"inline-block"}>Add</p>
-                            <AiOutlinePlus size={ 30 }/>
-                        </motion.button>
+                        <NewCourseButton handleCloseModal={() => setModal(false)} displayModal={ displayModal } handleAddCourse={ addCourse } lockCourseCreation={ lockCourseCreation }/>
                     </motion.div>
                 </AnimatePresence>
             </div>
