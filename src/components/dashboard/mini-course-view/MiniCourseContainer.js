@@ -5,17 +5,11 @@ import {useEffect, useState} from "react";
 
 const MiniCourseContainer = ({ handleClose }) => {
     const { courses, setCourses } = useDashboardContext()
-    // return (
-    //     <section className={"mini-course-container"}>
-    //         { courses.map((c, i) => <MiniCourseViewDraggable handleClose={ handleClose } index={ i } key={ i } course={ c } color={i % 2 === 0 ? "purple": "darker-purple"}/>)}
-    //     </section>
-    // )
-    //
 
     return (
         <Reorder.Group className={"w-full h-full"} axis="y" values={courses} onReorder={setCourses}>
-            {courses.map((item, i) => (
-                <MiniCourseViewDraggable key={ item.pcId } handleClose={ handleClose } course={ item } color={i % 2 === 0 ? "light-gray": "dark-gray"} />
+            {courses.map((course, i) => (
+                <MiniCourseViewDraggable key={ course.type === "c" ? course.id : course.pcId } handleClose={ handleClose } course={ course } color={i % 2 === 0 ? "light-gray": "dark-gray"} />
             ))}
         </Reorder.Group>
     )

@@ -316,6 +316,14 @@ code {
     border-radius: 50%;
 }
 
+.course-button-editable-icon {
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    background-color: transparent;
+    color: white;
+}
+
 .hide {
     display: none;
 }
@@ -704,12 +712,23 @@ code {
 .course-options-panel {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "header header" "body body";
+    grid-template-areas:
+            "header header"
+            "enrollment enrollment"
+            "settings settings";
     width: 100%;
     height: 100%;
     gap: 1rem;
     justify-content: center;
     align-items: center;
+}
+
+.course-enrollment {
+    grid-area: enrollment;
+}
+
+.course-settings {
+    grid-area: settings;
 }
 
 .course-options-header {
@@ -718,4 +737,33 @@ code {
 
 .course-options-body {
     grid-area: body;
+}
+
+.course-enrollment-preview-button {
+    color: #292929;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.me-tag {
+    position: absolute;
+    top: -5px;
+    left: -15px;
+    font-size: 10px;
+    background-color: var(--indigo);
+    color: white;
+    padding: .2rem .5rem;
+    border-radius: .75rem;
+    transform: rotate(-45deg);
+}
+
+.teacher {
+    background: gray;
+}
+
+.student {
+    background: lightgray;
 }

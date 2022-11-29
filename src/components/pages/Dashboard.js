@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CourseList from "../dashboard/CourseList";
-import CoursePreview from "../dashboard/CoursePreview";
+import CourseList from "../dashboard/course-list/CourseList";
+import CoursePreview from "../dashboard/course-preview/CoursePreview";
 import ToolBar from "../dashboard/ToolBar";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth"

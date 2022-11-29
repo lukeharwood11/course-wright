@@ -6,7 +6,7 @@ import {Reorder, useDragControls} from "framer-motion";
 import {selectOptions} from "@testing-library/user-event/dist/select-options";
 
 const MiniCourseViewDraggable = ({ course, color, handleClose }) => {
-    const { name, code, role, pcId } = course
+    const { name, code, role, type } = course
     const { setSelectedCourse } = useDashboardContext()
     const navigate = useNavigate()
     const controls = useDragControls()
@@ -15,11 +15,11 @@ const MiniCourseViewDraggable = ({ course, color, handleClose }) => {
         <Reorder.Item
             dragListener={false}
             dragControls={controls}
-            key={ pcId }
+            key={ type === 'c' ? course.id : course.pcId }
             value={course}>
             <div
                 onDoubleClick={() => {
-                    navigate(`/course/${pcId}`)
+                    navigate(`/course/${ type === 'c' ? course.id : course.pcId }`)
                 }}
                 onDrag={(e) => {
                    e.stopPropagation()
@@ -27,7 +27,8 @@ const MiniCourseViewDraggable = ({ course, color, handleClose }) => {
                 className={`mini-course-button ${ color }`}>
                 <button
                     onClick={() => {
-                        setSelectedCourse(pcId)
+                        const id = type === 'c' ? course.id : course.pcId
+                        setSelectedCourse(id, type)
                         handleClose()
                     }}
                     className={"mini-course-button-select text-white button bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500"}>select</button>

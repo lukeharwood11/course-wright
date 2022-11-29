@@ -10,13 +10,14 @@ const useAxios = () => {
     
     useEffect(() => {
 
-        const response = axiosPrivate.interceptors.response.use((response) => {
+        const response = axiosPrivate.interceptors.response.use( (response) => {
             return response;
           }, async (error) => {
             const config = error.config
             if (error?.response?.status === 403 && !config.retry) {
                 config.retry = true
                 const accessToken = await refresh()
+                console.log(accessToken)
                 config.headers.Authorization = `Bearer ${accessToken}`
                 return axiosPrivate(config)
             }
