@@ -14,28 +14,24 @@ const useAxios = () => {
             return response;
           }, async (error) => {
             const config = error.config
-            if (error?.response?.status === 403 && !config.retry) {
-                config.retry = true
+            if (error?.response?.status === 403 && !config._retry) {
+                config._retry = true
+                // useRefresh() sets the auth state
                 const accessToken = await refresh()
-                setAuth(p => {
-                    return {
-                        ...p,
-                        accessToken
-                    }
-                })
-                console.log("Failed Setting header.")
                 config.headers['Authorization'] = `Bearer ${accessToken}`
-                return axiosPrivate(config)
+                // destructuring and converting config.headers to json to fix DOM exception
+                return axiosPrivate({
+                    ...config,
+                    headers: config.headers.toJSON()
+                })
             }
             return Promise.reject(error);
         });
     
         const request = axiosPrivate.interceptors.request.use((config) => {
-            if (auth.accessToken) {
-                console.log("Attempted to set Header Again")
+            // if we are retrying we already set the accessToken
+            if (!config._retry && auth.accessToken) {
                 config.headers['Authorization'] = `Bearer ${auth.accessToken}`
-            } else {
-                console.log("Skipping setting auth")
             }
             return config;
           }, (error) => Promise.reject(error));
