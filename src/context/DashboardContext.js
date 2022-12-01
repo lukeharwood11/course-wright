@@ -2,6 +2,7 @@ import React, {createContext, useEffect, useMemo, useState} from "react";
 import useMemoryState from "../hooks/useMemoryState";
 import { dashboardModes } from "../constants";
 import toast from "react-hot-toast";
+import DashboardSaveChangesPopup from "../components/dashboard/DashboardSaveChangesPopup";
 
 export const DashboardContext = createContext({})
 
@@ -12,6 +13,8 @@ const DashboardContextProvider = ({ children }) => {
     const [courses, setCourses] = useState([])
     const [mode, setMode] = useMemoryState(dashboardModes.MESSAGE)
     const [lockCourseCreation, setLockCourseCreation] = useState(false)
+    const [fullModal, setFullModal] = useState(false)
+    const [fullModalContent, setFullModalContent] = useState(<div></div>)
 
 
     const addCourse = (course) => {
@@ -34,6 +37,7 @@ const DashboardContextProvider = ({ children }) => {
         setCourses((prevState) => {
             let courseCopy = [...prevState]
             courseCopy = courseCopy.map((c) => {
+                // FIXME, will this c.id === "new" cause issues?
                 if (c.id === course.id || c.id === "new") {
                     return course
                 }
@@ -54,15 +58,24 @@ const DashboardContextProvider = ({ children }) => {
     const setSelectedCourse = (id, type) => {
         if (selectedCourse.id === id && selectedCourse.type === type) return
         if (change) {
-            toast("Unsaved changes.\nPlease save/cancel.")
+            displayFullModal(<DashboardSaveChangesPopup handleClose={ handleCloseFullModal }/>)
         } else {
             setCourse({ id, type })
         }
     }
 
+    const displayFullModal = (content) => {
+        setFullModalContent(content)
+        setFullModal(true)
+    }
+
+    const handleCloseFullModal = () => {
+        setFullModal(false)
+    }
+
     return (
         <DashboardContext.Provider
-            value={{lockCourseCreation, setLockCourseCreation, addCourse,
+            value={{handleCloseFullModal, displayFullModal, fullModal, fullModalContent, lockCourseCreation, setLockCourseCreation, addCourse,
                 updateCourse, deleteCourse, change, setChange, selectedCourse,
                 setSelectedCourse, mode, setMode, courses, setCourses}}>
             {children}

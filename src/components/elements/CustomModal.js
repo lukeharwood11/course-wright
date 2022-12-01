@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-const CustomModal = ({ close=false, handleClose, global, children }) => {
+const CustomModal = ({ fullHeight=false, close=false, handleClose, global, children }) => {
     return (
         <motion.section
             initial={{opacity: 0}}
@@ -13,7 +13,7 @@ const CustomModal = ({ close=false, handleClose, global, children }) => {
                 transition={{ease: "backOut", duration: .5}}
                 exit={{ y: "-50vh" }}
                 onClick={(e) => e.stopPropagation()}
-                className={"modal-window"}>
+                className={`modal-window ${fullHeight ? "h-full" : ""}`}>
                 { children }
                 {
                     close && <button className={"button text-white bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500"} onClick={ handleClose }>Close</button>

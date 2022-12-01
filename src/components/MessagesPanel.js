@@ -9,8 +9,9 @@ const MessagesPanel = () => {
     }, [])
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0, y: "-1vh" }}
-            animate={{ opacity: 1, scale: 1, y:0 }}
+            layout
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ ease: "anticipate", duration: .5}}
             exit={{ opacity: 0 }}
             className={"messages-panel"}>

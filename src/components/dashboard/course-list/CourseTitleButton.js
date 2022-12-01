@@ -15,6 +15,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
     const { setSelectedCourse } = useDashboardContext()
     const formattedCode = parseCourseCode(name, code)
     const [modal, setModal] = useState(false)
+    const [tooltip, setTooltip] = useState(false)
     const navigate = useNavigate()
 
     const handleMore = (e) => {
@@ -72,8 +73,15 @@ const CourseTitleButton = ({selected, course, tags}) => {
                 exit={{opacity: 0, borderRadius: "50%"}}>
                 {
                     !published &&
-                        <AiOutlineEyeInvisible className={"course-button-icon"} size={ 20 }/>
-
+                    <div
+                        onMouseEnter={() => setTooltip(true)}
+                        onMouseLeave={() => setTooltip(false)}
+                        className={"course-button-icon"}>
+                        {
+                            tooltip && <p className={"tooltip"}>Not yet published</p>
+                        }
+                        <AiOutlineEyeInvisible size={ 20 }/>
+                    </div>
                 }
                 {
                     isEditable() && <FaEdit className={"course-button-editable-icon"} size={ 15 }/>
@@ -83,7 +91,9 @@ const CourseTitleButton = ({selected, course, tags}) => {
                 <div className={"course-button-more"}>
                     <motion.button onClick={ handleMore } className={"w-full h-full"}><BsThreeDotsVertical size={15}/></motion.button>
                 </div>
-                <p className={"course-student-count"}>{ accounts.length } member{ accounts.length === 1 ? "" : "s"}</p>
+                {
+                    type === 'c' ? <p className={"course-student-count"}>Editable Course</p> : <p className={"course-student-count"}>{ accounts.length } member{ accounts.length === 1 ? "" : "s"}</p>
+                }
             </motion.div>
         </>
     );

@@ -6,16 +6,34 @@ import {Modal, useModal} from "react-morphing-modal";
 import 'react-morphing-modal/dist/ReactMorphingModal.css';
 import {AiOutlineEyeInvisible, AiOutlineEye} from "react-icons/ai";
 import CourseEnrollmentPreview from "../CourseEnrollmentPreview";
+import useAxios from "../../../../hooks/useAxios";
+import toast from "react-hot-toast";
 
 const CourseOptionsPanel = ({ course }) => {
     const [change, setChange] = useState(false)
     const { lockCourseCreation, setLockCourseCreation, courses, selectedCourse, deleteCourse, updateCourse } = useDashboardContext()
     const [courseObj, setCourseObj] = useState({ ...course })
+    const axios = useAxios()
 
     // {name, code, studentCount, tags, id, pcId, published, role, active, subject, dateCreated, lastModified, license, visibility}
 
-    const handlePublish = (publish) => {
-
+    const handlePublish = () => {
+        const id = toast.loading(`${courseObj.published ? "Un-publishing" : "publishing"} course...`)
+        const controller = new AbortController()
+        axios.put(`/course/publish/${courseObj.id}`, {
+            publish: !courseObj.published
+        }, {signal: controller.signal})
+            .then(r => {
+                toast.success(`${courseObj.published ? "Un-published" : "Published"} course!`, { id })
+                // this sets changes for the current view
+                const obj = { ...courseObj, published: !courseObj.published}
+                setCourseObj(obj)
+                // this propagates changes back up to the dashboard context
+                updateCourse(obj)
+            })
+            .catch(err => {
+                toast.error(`Couldn't ${courseObj.published ? "un-publish": "publish"} course at this time.`, { id })
+            })
     }
 
     const options = [
@@ -50,11 +68,8 @@ const CourseOptionsPanel = ({ course }) => {
                             options={options}
                             value={{ value: courseObj.visibility, label: courseObj.visibility }}
                             onChange={(value) => {
-                                setCourseObj((prevState) => {
-                                    return {
-                                        ...prevState,
-                                        visibility: value.value
-                                    }
+                                setCourseObj((p) => {
+                                    return { ...p, visibility: value.value}
                                 })
                             }}
                         />
@@ -64,6 +79,7 @@ const CourseOptionsPanel = ({ course }) => {
                             courseObj.published ? <AiOutlineEye className="rounded-full" size={30}/> : <AiOutlineEyeInvisible className="rounded-full shadow-xl text-black" size={30}/>
                         }
                         <motion.button
+                            onClick={ handlePublish }
                             whileTap={{ scale: .95 }}
                             className={`button published-button inline-block text-white ${ courseObj.published ? "bg-red-900": "bg-indigo-500"}`}>{ courseObj.published ? "un-publish" : "publish"}</motion.button>
                     </div>

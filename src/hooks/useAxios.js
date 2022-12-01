@@ -5,7 +5,7 @@ import useRefresh from './useRefresh'
 
 const useAxios = () => {
 
-    const { auth } = useAuth()
+    const { auth, setAuth } = useAuth()
     const refresh = useRefresh()
     
     useEffect(() => {
@@ -17,8 +17,14 @@ const useAxios = () => {
             if (error?.response?.status === 403 && !config.retry) {
                 config.retry = true
                 const accessToken = await refresh()
-                console.log(accessToken)
-                config.headers.Authorization = `Bearer ${accessToken}`
+                setAuth(p => {
+                    return {
+                        ...p,
+                        accessToken
+                    }
+                })
+                console.log("Failed Setting header.")
+                config.headers['Authorization'] = `Bearer ${accessToken}`
                 return axiosPrivate(config)
             }
             return Promise.reject(error);
@@ -26,7 +32,10 @@ const useAxios = () => {
     
         const request = axiosPrivate.interceptors.request.use((config) => {
             if (auth.accessToken) {
-                config.headers.Authorization = `Bearer ${auth.accessToken}`
+                console.log("Attempted to set Header Again")
+                config.headers['Authorization'] = `Bearer ${auth.accessToken}`
+            } else {
+                console.log("Skipping setting auth")
             }
             return config;
           }, (error) => Promise.reject(error));

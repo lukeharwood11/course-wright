@@ -35,46 +35,6 @@ html,body, #st-full-pg {
     font-family: 'Bebas Neue', cursive;
 }
 
-.i-bg {
-    background-color: #ffa69e;
-}
-
-.ii-bg {
-    background-color: #B2CEDE;
-}
-
-.iii-bg {
-    background-color: #8CDFD6;
-}
-
-.iiii-bg {
-    background-color: #6dc0d5;
-}
-
-.iiiii-bg {
-    background-color: #5a716a;
-}
-
-.i-text {
-    color: #ffa69e;
-}
-
-.ii-text {
-    color: #B2CEDE;
-}
-
-.iii-text {
-    color: #8CDFD6;
-}
-
-.iiii-text {
-    color: #6dc0d5;
-}
-
-.iiiii-text {
-    color: #5a716a;
-}
-
 .dialog {
     display: flex;
     font-size: 20px;
@@ -228,13 +188,13 @@ code {
     background-color: darkred;
 }
 
-.save-button {
+.left-pill-button {
     color: white;
     border-radius: 2rem 0 0 2rem;
     padding: 0 .5rem;
 }
 
-.cancel-button {
+.right-pill-button {
     color: white;
     border-radius: 0 2rem 2rem 0;
     padding: 0 .5rem;
@@ -493,9 +453,15 @@ code {
 }
 
 .search-panel {
-    overflow-y: scroll;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow-y: auto;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    background-color: gray;
 }
 
 .no-select {
@@ -511,13 +477,12 @@ code {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
     width: 50%;
     background-color: white;
     position: relative;
     border-radius: .75rem;
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .modal-background-global {
@@ -783,4 +748,33 @@ code {
 
 .student {
     background: lightgray;
+}
+
+.tooltip {
+    position: fixed;
+    background-color: lightgray;
+    border-radius: .5rem;
+    color: #2f2f2f;
+    padding: .5rem 1rem;
+    z-index: 999;
+}
+
+.search-result {
+    padding: .5rem 1rem;
+    display: grid;
+    gap: .5rem;
+    grid-template-columns: 1fr 1fr 1fr .5fr;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5rem;
+}
+
+hr {
+    border-radius: .5rem;
+    width: 100%;
+    border: #484848 2px solid;
+}
+
+.dark-text {
+    color: #484848;
 }

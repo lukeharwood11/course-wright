@@ -69,7 +69,7 @@ const CourseList = () => {
             <div className={"course-grid no-select"}>
                 <AnimatePresence>
                     { modal &&
-                        <CustomModal key={"modal"} handleClose={ handleCloseModal }>
+                        <CustomModal fullHeight key={"modal"} handleClose={ handleCloseModal }>
                             <AnimatePresence>
                                 { content }
                             </AnimatePresence>

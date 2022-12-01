@@ -13,11 +13,10 @@ import CourseOptionsPanel from "./course-options/CourseOptionsPanel";
 import CourseEnrollmentPreview from "./CourseEnrollmentPreview";
 
 const CoursePreview = ({ }) => {
-    const [modal, setModal] = useState(false)
     const emptyCourse = { name: "", code: "", tags: [] }
     const [course, setCourse] = useState(undefined)
     const [courseObj, setCourseObj] = useState(emptyCourse)
-    const { lockCourseCreation, setLockCourseCreation, courses, selectedCourse, change, setChange, deleteCourse, updateCourse } = useDashboardContext()
+    const { fullModal, fullModalContent, displayFullModal, handleCloseFullModal, lockCourseCreation, setLockCourseCreation, courses, selectedCourse, change, setChange, deleteCourse, updateCourse } = useDashboardContext()
     const axios = useAxios()
 
     useEffect(() => {
@@ -71,9 +70,6 @@ const CoursePreview = ({ }) => {
                 console.log(err)
                 toast.error("An error occurred, try again later.", { id })
             })
-            return () => {
-                controller.abort()
-            };
         }
     }
 
@@ -98,9 +94,9 @@ const CoursePreview = ({ }) => {
                 <AnimatePresence>
 
                     {
-                        modal &&
-                        <CustomModal handleClose={() => setModal(false)} key={"modal"}>
-                            <CourseOptionsPanel course={ course }/>
+                        fullModal &&
+                        <CustomModal handleClose={ handleCloseFullModal } key={"modal"}>
+                            { fullModalContent }
                         </CustomModal>
                     }
                 </AnimatePresence>
@@ -159,7 +155,7 @@ const CoursePreview = ({ }) => {
                                             scale: change? 1.1: 1,
                                             x: change ? -10: 0
                                         }}
-                                        className={`left-button-pill drop-shadow-lg save-button ${change ? "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500" : "bg-gray-300"}`}>
+                                        className={`left-button-pill drop-shadow-lg left-pill-button ${change ? "bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500" : "bg-gray-300"}`}>
                                         Save Changes
                                     </motion.button>
                                     <motion.button
@@ -169,12 +165,12 @@ const CoursePreview = ({ }) => {
                                             x: change ? 3: 0
                                         }}
                                         disabled={!change}
-                                        className={`right-button-pill drop-shadow-lg cancel-button ${change ? "bg-purple-500" : "bg-gray-300"}`}>
+                                        className={`right-button-pill drop-shadow-lg right-pill-button ${change ? "bg-purple-500" : "bg-gray-300"}`}>
                                         <MdCancel/>
 
                                     </motion.button>
                                 </div>
-                                <motion.button onClick={() => setModal(true)} className={"button bg-white flex justify-center items-center drop-shadow-md"}>
+                                <motion.button onClick={ () => displayFullModal(<CourseOptionsPanel course={ course }/>)} className={"button bg-white flex justify-center items-center drop-shadow-md"}>
                                     <FaBars size={15}/>
                                 </motion.button>
                             </div>
