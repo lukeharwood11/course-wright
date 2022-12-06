@@ -5,7 +5,7 @@ import makeAnimated from 'react-select/animated';
 
 export const TagsDisplayView = ({ tags }) => {
     return (
-        <div className={"course-tags-container"}>
+        <div className={"course-tags-container course-preview-container"}>
             {
                 tags && tags.map(t => <h3 className={"text-xl course-button-tag font-bold bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 bg-clip-text bg-white text-transparent shadow-lg"}>{ t.value }</h3>)
             }

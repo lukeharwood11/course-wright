@@ -79,7 +79,6 @@ const DashboardContextProvider = ({ children }) => {
                     return course
                 } else if (c.id === course.id) {
                     // only update the fields that might have changed.
-                    console.log(course.accounts)
                     return {
                         ...c,
                         name: course.name,

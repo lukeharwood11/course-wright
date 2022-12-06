@@ -181,7 +181,7 @@ export const CoursePreviewView = ({ course, setEditMode }) => {
 
     return (
         <>
-            <div className={"course-meta-edit"}>
+            <div className={"course-meta-view"}>
                 <motion.h1
                     onFocus={(e) => e.preventDefault()}
                     key={"course-name"}
@@ -190,7 +190,7 @@ export const CoursePreviewView = ({ course, setEditMode }) => {
                     transition={{ease: "backOut", duration: 1}}
                     exit={{opacity: 0, width: 0}}
                     placeholder={"Course Name"}
-                    className={"course-name shadow-lg text-xl text-indigo-500 rounded-full bg-white p-2 outline-0"}> { course.name }</motion.h1>
+                    className={"course-name course-preview-container text-xl text-indigo-500 bg-white p-2"}> { course.name }</motion.h1>
                 <motion.div
                     key={"course-code"}
                     initial={{opacity: 0}}
@@ -203,12 +203,20 @@ export const CoursePreviewView = ({ course, setEditMode }) => {
                         className={"course-code text-indigo-500 bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 text-white rounded-full bg-white p-2 outline-0"}
                     >{ course.code }</h2>
                 </motion.div>
-                <div className={"course-save-button justify-end"}>
-                    <motion.button onClick={setEditMode} className={"flex hover:text-indigo-500 text-black transition-colors gap-3 justify-center items-center"}> <FaEdit size={20}/></motion.button>
-                </div>
-                <motion.button onClick={ () => displayFullModal(<CourseOptionsPanel course={ course }/>, true)} className={"button bg-white flex justify-center items-center drop-shadow-md"}>
-                    <FaBars size={15}/>
-                </motion.button>
+
+                <motion.div
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    className={"course-preview-container options bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 text-white"}>
+                    <div>
+                        <motion.button onClick={setEditMode} className={"flex hover:text-indigo-200 transition-colors gap-3 justify-center items-center"}> <FaEdit size={25}/></motion.button>
+                    </div>
+                    <button
+                        onClick={ () => displayFullModal(<CourseOptionsPanel course={ course }/>, true)}
+                        className={"hover:text-indigo-200 p-2 rounded-full flex justify-center items-center drop-shadow-md"}>
+                        <FaBars size={25}/>
+                    </button>
+                </motion.div>
             </div>
             <TagsDisplayView tags={ course.tags }/>
 

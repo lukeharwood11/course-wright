@@ -202,7 +202,6 @@ code {
 }
 
 .course-meta-edit {
-    padding: .5rem;
     grid-area: meta-data;
     display: grid;
     column-gap: 1rem;
@@ -211,14 +210,20 @@ code {
     "name code save delete";
 }
 
-.course-meta-edit {
-    padding: .5rem;
+.course-meta-view {
     grid-area: meta-data;
     display: grid;
     column-gap: 1rem;
-    grid-template-columns: 2fr 1fr 1fr .5fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-    "name code save delete";
+    "name name code options";
+}
+
+.options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    grid-area: options;
 }
 
 .selected {
@@ -248,10 +253,6 @@ code {
     min-width: 0;
 }
 
-.course-meta-view {
-    grid-area: meta-data;
-}
-
 .course-tags {
     grid-area: tags;
 }
@@ -271,11 +272,14 @@ code {
 }
 
 .course-tags-container {
-    border-radius: .5rem;
-    border: solid 1px lightgray;
     display: flex;
     flex-wrap: wrap;
+}
+
+.course-preview-container {
+    border: solid 1px lightgray;
     padding: .5rem 1rem;
+    border-radius: .5rem;
 }
 
 
