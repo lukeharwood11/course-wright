@@ -205,10 +205,10 @@ export const CoursePreviewView = ({ course, setEditMode }) => {
                     animate={{opacity: 1}}
                     transition={{ease: "backOut", duration: 1}}
                     exit={{opacity: 0, width: 0}}
-                    className={"flex justify-center items-center"}
+                    className={"flex justify-center items-center course-preview-container bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 text-white"}
                 >
                     <h2
-                        className={"course-code text-indigo-500 bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 text-white rounded-full bg-white p-2 outline-0"}
+                        className={"course-code text-2xl"}
                     >{ course.code }</h2>
                 </motion.div>
 
