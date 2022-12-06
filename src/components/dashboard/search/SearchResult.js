@@ -27,11 +27,6 @@ const SearchResult = ({ result }) => {
                 whileHover={{ scale: 1.1 }}>
                     <BsBoxArrowDownLeft size={ 20 }/>
                 </motion.button>
-                <motion.button
-                    onClick={ handleMoreOptions }
-                    whileHover={{ scale: 1.1 }}>
-                    <AiOutlineMore size={ 20 }/>
-                </motion.button>
             </div>
         </div>
     )

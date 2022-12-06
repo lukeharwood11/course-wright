@@ -18,7 +18,10 @@ const CourseComponentView = ({ directories, coursePage }) => {
                 type={"text"}
                 className={"course-filter-input text-indigo-500 bg-white inline rounded-full w-full text-sm"}
                 placeholder={"Search Course"}/>
-            { directories.map((d, i) => <ExpandableButton title={d.name} key={i}>{ d.pages.map((p, i) => <CourseComponent key={i} id={i} icon={"page"} name={ p }/>)} </ExpandableButton>) }
+            { directories.map((d, i) =>
+                <ExpandableButton
+                    menuOptions={[ { text: "rename" }, { text: "delete" } ]}
+                title={d.name} key={i}>{ d.pages.map((p, i) => <CourseComponent key={i} id={i} icon={"page"} name={ p }/>)} </ExpandableButton>) }
         </div>
     );
 }

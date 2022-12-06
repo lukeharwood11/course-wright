@@ -3,7 +3,20 @@ import React, {useEffect, useRef, useState} from "react";
 import CreatableSelect from "react-select/creatable";
 import makeAnimated from 'react-select/animated';
 
-const TagsDisplay = ({ tags, setTags }) => {
+export const TagsDisplayView = ({ tags }) => {
+    return (
+        <div className={"course-tags-container"}>
+            {
+                tags && tags.map(t => <h3 className={"text-xl course-button-tag font-bold bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 bg-clip-text bg-white text-transparent shadow-lg"}>{ t.value }</h3>)
+            }
+            {
+                (!tags || tags.length === 0) && <h3 className={"text-gray-300 w-full text-center"}>No course tags.</h3>
+            }
+        </div>
+    )
+}
+
+const TagsDisplayEdit = ({ tags, setTags }) => {
     const [input, setInput] = useState("")
     const animatedComponents = makeAnimated();
 
@@ -31,4 +44,4 @@ const TagsDisplay = ({ tags, setTags }) => {
     );
 }
 
-export default TagsDisplay;
+export default TagsDisplayEdit;

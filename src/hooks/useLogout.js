@@ -13,7 +13,7 @@ const useLogout = () => {
             "Content-Type": "application/json",
             withCredentials: true
         }).catch(e => console.log(e)).finally(() => {
-            toast.success("👋", { id: id })
+            toast("👋", { id: id })
         })
 
         setAuth({})

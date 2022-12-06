@@ -145,6 +145,7 @@ code {
     min-width: 0;
     grid-template-rows: .1fr .1fr 1fr;
     grid-template-columns: 1fr 1fr;
+    overflow-y: hidden;
     grid-template-areas:
     "meta-data meta-data"
     "tags enrollment"
@@ -210,6 +211,16 @@ code {
     "name code save delete";
 }
 
+.course-meta-edit {
+    padding: .5rem;
+    grid-area: meta-data;
+    display: grid;
+    column-gap: 1rem;
+    grid-template-columns: 2fr 1fr 1fr .5fr;
+    grid-template-areas:
+    "name code save delete";
+}
+
 .selected {
 
 
@@ -246,6 +257,7 @@ code {
 }
 
 .course-enrollment {
+    gap: .5rem;
     grid-area: enrollment;
     border-radius: .5rem;
     border: solid 1px lightgray;
@@ -255,6 +267,15 @@ code {
     grid-area: structure;
     border-radius: .5rem;
     border: solid 1px lightgray;
+    overflow-y: auto;
+}
+
+.course-tags-container {
+    border-radius: .5rem;
+    border: solid 1px lightgray;
+    display: flex;
+    flex-wrap: wrap;
+    padding: .5rem 1rem;
 }
 
 
@@ -277,7 +298,6 @@ code {
     align-items: center;
     font-size: 10px;
     border-radius: 2rem;
-    color: white;
     max-width: 10vw;
 }
 
@@ -505,6 +525,8 @@ code {
     position: fixed;
     inset: 0;
     z-index: 99;
+    width: 100%;
+    height: 100%;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
@@ -777,4 +799,45 @@ hr {
 
 .dark-text {
     color: #484848;
+}
+
+.new-account-entry {
+    box-shadow: black 1px 1px 5px -1px;
+}
+
+.new-account-entry-grid-top {
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+    gap: 1rem;
+}
+
+.new-account-entry-grid-bottom {
+    display: grid;
+    grid-template-columns: .5fr .5fr .2fr;
+    gap: 1rem;
+}
+
+.new-account-entry-input {
+    padding: .5rem 1rem;
+    outline: none;
+    border: lightgray 1px solid;
+    border-radius: .2rem;
+}
+
+.new-account-entry-input:focus {
+    box-shadow: rgb(0, 111, 255) 0 0 1px 1px;
+}
+
+.text-cursor:hover {
+    cursor: text;
+}
+
+.new-account-button {
+    border-radius: .2rem;
+    border: lightgray 1px solid;
+    outline: none;
+}
+
+.new-account-button:focus {
+    box-shadow: rgb(0, 111, 255) 0 0 1px 1px;
 }
