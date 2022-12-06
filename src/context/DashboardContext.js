@@ -3,11 +3,13 @@ import useMemoryState from "../hooks/useMemoryState";
 import { dashboardModes } from "../constants";
 import toast from "react-hot-toast";
 import DashboardSaveChangesPopup from "../components/dashboard/DashboardSaveChangesPopup";
+import useAuth from "../hooks/useAuth";
 
 export const DashboardContext = createContext({})
 
 const DashboardContextProvider = ({ children }) => {
 
+    const { auth } = useAuth()
     const [change, setChange] = useState(false)
     const [selectedCourse, setCourse] = useState({})
     const [courses, setCourses] = useState([])
@@ -15,6 +17,7 @@ const DashboardContextProvider = ({ children }) => {
     const [lockCourseCreation, setLockCourseCreation] = useState(false)
     const [fullModal, setFullModal] = useState(false)
     const [fullModalContent, setFullModalContent] = useState(<div></div>)
+    const [fullModalFullHeight, setFullModalFullHeight] = useState(false)
 
 
     const addCourse = (course) => {
@@ -33,19 +36,152 @@ const DashboardContextProvider = ({ children }) => {
         })
     }
 
+    const addMember = (member, courseId, section=true) => {
+
+    }
+
+
+    const addNewSection = (course) => {
+        const newCourse = {
+            name: course.name,
+            code: course.code,
+            id: course.id,
+            pcId: course.pcId,
+            subject: course.subject,
+            dateCreated: course.dateCreated,
+            lastModified: course.lastModified,
+            license: course.license,
+            visibility: course.visibility,
+            published: true,
+            tags: course.tags,
+            type: "pc",
+            accounts: [{
+                ...auth.user,
+                role: 20, // teacher/creator of section
+                status: "confirmed"
+            }]
+        }
+        setCourses((prevState) => {
+            const c = [...prevState]
+            c.push(newCourse)
+            if (!change) {
+                setSelectedCourse(course.pcId, 'pc')
+            }
+            return c
+        })
+    }
+
     const updateCourse = (course) => {
         setCourses((prevState) => {
             let courseCopy = [...prevState]
             courseCopy = courseCopy.map((c) => {
-                // FIXME, will this c.id === "new" cause issues?
-                if (c.id === course.id || c.id === "new") {
+                if (c.id === "new") {
                     return course
+                } else if (c.id === course.id) {
+                    // only update the fields that might have changed.
+                    console.log(course.accounts)
+                    return {
+                        ...c,
+                        name: course.name,
+                        code: course.code,
+                        tags: course.tags,
+                        accounts: course.accounts,
+                        published: course.published
+                    }
                 }
                 return c
             })
             return courseCopy
         })
     }
+
+    const addRemoveEditor = (courseId, account, add=true) => {
+        setCourses((prevState) => {
+            let courseCopy = [...prevState]
+            courseCopy = courseCopy.map((c) => {
+                if (c.id === courseId) {
+                    if (add) {
+                        return {
+                            ...c,
+                            accounts: [...c, account]
+                        }
+                    } else {
+                        return {
+                            ...c,
+                            accounts: c.accounts.filter(c => c.id !== account.id)
+                        }
+                    }
+
+                }
+                return c
+            })
+            return courseCopy
+        })
+    }
+
+
+    const addRemoveAccount = (courseId, account, add=true) => {
+        setCourses((prevState) => {
+            let courseCopy = [...prevState]
+            courseCopy = courseCopy.map((c) => {
+                if (c.pcId === courseId) {
+                    if (add) {
+                        return {
+                            ...c,
+                            accounts: [...c.accounts, account]
+                        }
+                    } else {
+                        return {
+                            ...c,
+                            accounts: c.accounts.filter(c => c.id !== account.id)
+                        }
+                    }
+
+                }
+                return c
+            })
+            return courseCopy
+        })
+    }
+
+    const setPublished = (courseId, published) => {
+        setCourses((prevState) => {
+            let courseCopy = [...prevState]
+            courseCopy = courseCopy.map((c) => {
+                if (c.id === courseId) {
+                    return {
+                        ...c,
+                        published
+                    }
+                }
+                return c
+            })
+            return courseCopy
+        })
+    }
+
+    const updateFields = (id, obj) => {
+        setCourses((prevState) => {
+            let courseCopy = [...prevState]
+            courseCopy = courseCopy.map((c) => {
+                if (c.id === id) {
+                    // only update the fields that might have changed.
+                    const newCourse = {
+                        ...c,
+                        ...obj
+                    }
+                    return newCourse
+                }
+                return c
+            })
+            return courseCopy
+        })
+    }
+
+    // debug
+    // useEffect(() => {
+    //     console.log("courses:", courses)
+    // }, [courses])
 
     const deleteCourse = (course) => {
         setCourses((prevState) => {
@@ -64,8 +200,9 @@ const DashboardContextProvider = ({ children }) => {
         }
     }
 
-    const displayFullModal = (content) => {
+    const displayFullModal = (content, fullHeight=false) => {
         setFullModalContent(content)
+        setFullModalFullHeight(fullHeight)
         setFullModal(true)
     }
 
@@ -75,7 +212,7 @@ const DashboardContextProvider = ({ children }) => {
 
     return (
         <DashboardContext.Provider
-            value={{handleCloseFullModal, displayFullModal, fullModal, fullModalContent, lockCourseCreation, setLockCourseCreation, addCourse,
+            value={{setPublished, addRemoveAccount, addRemoveEditor, updateFields, addNewSection, handleCloseFullModal, displayFullModal, fullModalFullHeight, fullModal, fullModalContent, lockCourseCreation, setLockCourseCreation, addCourse,
                 updateCourse, deleteCourse, change, setChange, selectedCourse,
                 setSelectedCourse, mode, setMode, courses, setCourses}}>
             {children}

@@ -6,6 +6,7 @@ import CustomModal from "../../elements/CustomModal";
 import useDashboardContext from "../../../hooks/useDashboardContext";
 import {IoCreateOutline} from "react-icons/io5";
 import {FaRecycle} from 'react-icons/fa'
+import {account} from "../../utils/defaults";
 const NewCourseButton = ({ handleCloseModal, displayModal, handleAddCourse, lockCourseCreation }) => {
 
     const { auth } = useAuth()
@@ -38,26 +39,7 @@ const NewCourseButton = ({ handleCloseModal, displayModal, handleAddCourse, lock
                     <motion.button
                         onClick={() => {
                             if (!lockCourseCreation) {
-                                handleAddCourse({
-                                    name: "My Course",
-                                    code: "MY-1010",
-                                    studentCount: 0,
-                                    id: "new",
-                                    role: 1010,
-                                    active: false,
-                                    subject: "",
-                                    dateCreated: "",
-                                    lastModified: "",
-                                    license: "",
-                                    visibility: "private",
-                                    published: false,
-                                    tags: [],
-                                    type: "c",
-                                    accounts: [{
-                                        ...auth.user,
-                                        role: 1010
-                                    }]
-                                })
+                                handleAddCourse(account(auth.user))
                                 handleCloseModal()
                             }
                         }}

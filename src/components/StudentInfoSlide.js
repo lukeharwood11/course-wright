@@ -4,7 +4,7 @@ import {RiLockPasswordFill, RiLockPasswordLine} from "react-icons/ri";
 import {BsLayerForward, BsArrowLeft} from "react-icons/bs";
 import React, {useEffect, useState} from "react";
 import useCreateAccountContext from "../hooks/useCreateAccountContext";
-import {passwordRegex} from "../regex/regex";
+import {passwordRegex} from "./utils/regex/regex";
 import { validate } from 'email-validator'
 
 const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
@@ -142,7 +142,7 @@ const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
                     onChange={ (e) => setRepeatPassword(e.target.value) }
                     value={ repeatPassword }
                     className={`${validMatchPassword() ? "text-indigo-500" : "text-red-400"} text-indigo-500 bg-white inline rounded-full p-3 w-5/6 text-xl m-2`}
-                    placeholder={"ConfirmDialog Password"}
+                    placeholder={"Confirm Password"}
                     type={"password"}/>
             </div>
             <AnimatePresence>

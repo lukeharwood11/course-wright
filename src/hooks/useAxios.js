@@ -2,10 +2,14 @@ import { axiosPrivate } from "../api/axios";
 import { useEffect } from 'react'
 import useAuth from './useAuth'
 import useRefresh from './useRefresh'
+import {useLocation, useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 
 const useAxios = () => {
 
     const { auth, setAuth } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
     const refresh = useRefresh()
     
     useEffect(() => {
@@ -24,12 +28,15 @@ const useAxios = () => {
                     ...config,
                     headers: config.headers.toJSON()
                 })
+            } else if (error?.response?.status === 403) {
+                toast.error("Session expired. Please Sign in.")
+                navigate("/sign-in", { replace: true, state: { from: location }})
             }
             return Promise.reject(error);
         });
     
         const request = axiosPrivate.interceptors.request.use((config) => {
-            // if we are retrying we already set the accessToken
+            // if we are retrying we already set the accessToken, so skip
             if (!config._retry && auth.accessToken) {
                 config.headers['Authorization'] = `Bearer ${auth.accessToken}`
             }

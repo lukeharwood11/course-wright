@@ -8,7 +8,9 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import CustomModal from "../../elements/CustomModal";
 import {useNavigate} from "react-router-dom";
 import {Item, Menu, Submenu, useContextMenu} from "react-contexify";
-import {parseCourseCode} from "../../../regex/regex";
+import {parseCourseCode} from "../../utils/regex/regex";
+import { permissions, verifyRole} from "../../utils/permissions";
+import {isSection} from "../../utils/courseUtils";
 
 const CourseTitleButton = ({selected, course, tags}) => {
     const {type, name, code, accounts, studentCount, id, pcId, published, role, active, subject, dateCreated, lastModified, license, visibility} = course
@@ -40,7 +42,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
     });
 
     const isEditable = () => {
-        return type === 'c' && (role === 1010 || role === 1011)
+        return !isSection(course) && verifyRole(role, permissions.courseEdit)
     }
 
     return (
@@ -72,7 +74,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
                 transition={{ ease: "anticipate", duration: .5 }}
                 exit={{opacity: 0, borderRadius: "50%"}}>
                 {
-                    !published &&
+                    !published && type === 'c' &&
                     <div
                         onMouseEnter={() => setTooltip(true)}
                         onMouseLeave={() => setTooltip(false)}

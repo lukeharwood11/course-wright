@@ -13,7 +13,8 @@ const CourseEnrollmentPreviewButton = ({ account }) => {
     }
 
     const isTeacher = () => {
-        return account.role === 1010 || account.role === 1011;
+        // section creator/admin | teacher/admin | teacher
+        return account.role === 20 || account.role === 21 || account.role === 22;
 
     }
 
@@ -30,7 +31,7 @@ const CourseEnrollmentPreviewButton = ({ account }) => {
     });
 
     return (
-        <motion.li onContextMenu={ (e) => e.preventDefault() }
+        <motion.li layout onContextMenu={ (e) => e.preventDefault() }
             className={`relative no-select course-enrollment-preview-button ${isTeacher() ? "teacher" : "student"}`}>
             {
                 isMe() && <p className={"me-tag"}>me</p>
