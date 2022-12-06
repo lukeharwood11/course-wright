@@ -2,7 +2,7 @@ import useDashboardContext from "../../../hooks/useDashboardContext";
 import MiniCourseViewDraggable from "./MiniCourseViewDraggable";
 import {Reorder, useDragControls} from "framer-motion";
 import {useEffect, useState} from "react";
-import {isSection} from "../../utils/courseUtils";
+import {isSection} from "../../../utils/courseUtils";
 
 const MiniCourseContainer = ({ handleClose }) => {
     const { courses, setCourses } = useDashboardContext()

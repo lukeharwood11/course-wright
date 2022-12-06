@@ -6,7 +6,7 @@ import CustomModal from "../../elements/CustomModal";
 import useDashboardContext from "../../../hooks/useDashboardContext";
 import {IoCreateOutline} from "react-icons/io5";
 import {FaRecycle} from 'react-icons/fa'
-import {account} from "../../utils/defaults";
+import {account} from "../../../utils/defaults";
 const NewCourseButton = ({ handleCloseModal, displayModal, handleAddCourse, lockCourseCreation }) => {
 
     const { auth } = useAuth()

@@ -1,5 +1,5 @@
 import { MdDragIndicator } from 'react-icons/md'
-import {parseCourseCode} from "../../utils/regex/regex";
+import {parseCourseCode} from "../../../utils/regex/regex";
 import {useNavigate} from "react-router-dom";
 import useDashboardContext from "../../../hooks/useDashboardContext";
 import {Reorder, useDragControls} from "framer-motion";

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import {parseDateTime} from "../../utils/regex/regex";
+import {parseDateTime} from "../../../utils/regex/regex";
 import toast from "react-hot-toast";
 import {CgMore } from "react-icons/cg";
 import { AiOutlineLoading } from "react-icons/ai";

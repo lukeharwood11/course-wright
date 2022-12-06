@@ -13,7 +13,7 @@ import CourseOptionsPanel from "./course-options/CourseOptionsPanel";
 import CourseEnrollmentPreview from "./CourseEnrollmentPreview";
 import CoursePreviewActions from "./CoursePreviewActions";
 import {CoursePreviewEditView, CoursePreviewView} from "./CoursePreviewView";
-import {isSection} from "../../utils/courseUtils";
+import {isSection} from "../../../utils/courseUtils";
 
 const CoursePreview = ({ }) => {
     const [course, setCourse] = useState(undefined)

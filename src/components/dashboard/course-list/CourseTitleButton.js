@@ -8,9 +8,9 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import CustomModal from "../../elements/CustomModal";
 import {useNavigate} from "react-router-dom";
 import {Item, Menu, Submenu, useContextMenu} from "react-contexify";
-import {parseCourseCode} from "../../utils/regex/regex";
-import { permissions, verifyRole} from "../../utils/permissions";
-import {isSection} from "../../utils/courseUtils";
+import {parseCourseCode} from "../../../utils/regex/regex";
+import { permissions, verifyRole} from "../../../utils/permissions";
+import {isSection} from "../../../utils/courseUtils";
 
 const CourseTitleButton = ({selected, course, tags}) => {
     const {type, name, code, accounts, studentCount, id, pcId, published, role, active, subject, dateCreated, lastModified, license, visibility} = course

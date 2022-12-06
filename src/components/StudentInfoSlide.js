@@ -4,7 +4,7 @@ import {RiLockPasswordFill, RiLockPasswordLine} from "react-icons/ri";
 import {BsLayerForward, BsArrowLeft} from "react-icons/bs";
 import React, {useEffect, useState} from "react";
 import useCreateAccountContext from "../hooks/useCreateAccountContext";
-import {passwordRegex} from "./utils/regex/regex";
+import {passwordRegex} from "../utils/regex/regex";
 import { validate } from 'email-validator'
 
 const StudentInfoSlide = ({handleCreateAccount, handleBack}) => {
