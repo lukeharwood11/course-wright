@@ -34,12 +34,6 @@ const Dashboard = (props) => {
             .finally(() => setSearchLoading(false))
     }
 
-    useEffect(() => {
-        return () => {
-            controller.abort()
-        }
-    }, [])
-
     return (
         <DashboardContextProvider>
             <div className="dashboard-layout">

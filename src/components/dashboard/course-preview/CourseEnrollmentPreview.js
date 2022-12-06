@@ -3,20 +3,44 @@ import React, {useContext} from "react";
 import CourseEnrollmentPreviewButton from "./CourseEnrollmentPreviewButton";
 import "react-contexify/ReactContexify.css"
 import {Item, Menu, Submenu, useContextMenu} from "react-contexify";
+import NewAccountEntry from "./NewAccountEntry";
+import useDashboardContext from "../../../hooks/useDashboardContext";
+import useAxios from "../../../hooks/useAxios";
 
-const CourseEnrollmentPreview = ({ course, allOptions=false, edit=false }) => {
+const CourseEnrollmentPreview = ({ handleAddRemoveAccount, course, allowScroll=false, allOptions=false, edit=false }) => {
+
+    const { addRemoveAccount, updateCourse } = useDashboardContext()
+    const axios = useAxios()
+
+    const handleAddNewAccount = (account, callback) => {
+        // TODO send post request to enrollment and add setCourseObj to then()
+        axios.post('/enroll', {
+            pcId: course.pcId,
+            account: account
+        })
+            .then(r => {
+                account.id = r.data.id
+                // propagate changes to the context
+                addRemoveAccount(course.pcId, account)
+                // propagate changes to the modal
+                handleAddRemoveAccount(account)
+                callback("Added user to section!")
+            })
+            .catch(err => {
+                callback(undefined, "Failed to add new account")
+            })
+    }
 
     return (
-        <motion.div
+        <div
             key={"course-students"}
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            transition={{ease: "backOut", duration: 1}}
-            exit={{opacity: 0, width: 0}}
-            type={"text"}
-            className={"course-enrollment drop-shadow-xl text-indigo-500  bg-white p-2 outline-0 flex flex-col gap-1"}>
+            className={`course-enrollment drop-shadow-xl text-indigo-500  bg-white p-2 outline-0 flex flex-col gap-1 ${allowScroll ? "overflow-y-auto": ""}`}>
             <h1 className={"text-xl"}>Members</h1>
-            <ul>
+            {
+                edit &&
+                <NewAccountEntry handleAddNewAccount={ handleAddNewAccount }/>
+            }
+            <ul className={"flex flex-col gap-1"}>
                 {
                     course && course.accounts.length > 0 &&
                     course.accounts.map((account, i) => {
@@ -24,18 +48,7 @@ const CourseEnrollmentPreview = ({ course, allOptions=false, edit=false }) => {
                     })
                 }
             </ul>
-            {
-                edit &&
-                <div className={"flex p-2 gap-2"}>
-                    <motion.button
-                        whileHover={{ scale: 1.1, borderRadius: 0 }}
-                        className={"button text-gray-100 bg-indigo-500"}>Add Student</motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.1, borderRadius: 0 }}
-                        className={"button bg-white shadow-lg"}>Add Teacher</motion.button>
-                </div>
-            }
-        </motion.div>
+        </div>
     )
 }
 
