@@ -10,6 +10,8 @@ import React, {useEffect, useState} from "react";
 import useDashboardContext from "../../../hooks/useDashboardContext";
 import toast from "react-hot-toast";
 import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../../hooks/useAuth";
+import {permissions, verifyRole} from "../../../utils/permissions";
 
 export const CoursePreviewEditView = ({ course, setEditMode }) => {
 
@@ -178,7 +180,13 @@ export const CoursePreviewEditView = ({ course, setEditMode }) => {
 export const CoursePreviewView = ({ course, setEditMode }) => {
 
     const { fullModal, fullModalContent, fullModalFullHeight, displayFullModal, handleCloseFullModal, lockCourseCreation, setLockCourseCreation, courses, selectedCourse, change, setChange, deleteCourse, updateCourse } = useDashboardContext()
+    const { auth } = useAuth()
 
+    const canEdit = () => {
+        return course.accounts.filter(a => {
+            return a.email === auth.user.email && verifyRole(a.role, permissions.courseEdit)
+        }).length > 0
+    }
     return (
         <>
             <div className={"course-meta-view"}>
@@ -208,9 +216,12 @@ export const CoursePreviewView = ({ course, setEditMode }) => {
                     initial={{ opacity: 0, rotate: 90 }}
                     animate={{ opacity: 1, rotate: 0 }}
                     className={"course-preview-container options bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 text-white"}>
-                    <div>
-                        <motion.button onClick={setEditMode} className={"flex hover:text-indigo-200 transition-colors gap-3 justify-center items-center"}> <FaEdit size={25}/></motion.button>
-                    </div>
+                    {
+                        canEdit() &&
+                        <div>
+                            <motion.button onClick={setEditMode} className={"flex hover:text-indigo-200 transition-colors gap-3 justify-center items-center"}> <FaEdit size={25}/></motion.button>
+                        </div>
+                    }
                     <button
                         onClick={ () => displayFullModal(<CourseOptionsPanel course={ course }/>, true)}
                         className={"hover:text-indigo-200 p-2 rounded-full flex justify-center items-center drop-shadow-md"}>
