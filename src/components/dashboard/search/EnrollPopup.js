@@ -81,13 +81,13 @@ const EnrollPopup = ({ course, handleCloseModal }) => {
             <div className={"text-2xl w-full grid-cols-2 gap-2 justify-center items-center grid text-gray-200"}>
                 <motion.button
                     onClick={ handleCreateSection }
-                    whileHover={{ scale: 1.1, x: -5 }}
+                    whileHover={{ scale: 1.02, x: -5 }}
                     className={"bg-blue-500 rounded-lg p-2"}>
                     Create Section
                 </motion.button>
                 <motion.button
                     onClick={ () => handleCloseModal()}
-                    whileHover={{ scale: 1.1, x: 7 }}
+                    whileHover={{ scale: 1.02, x: 2 }}
                     className={"bg-red-900 rounded-lg p-2"}>
                     Cancel
                 </motion.button>

@@ -6,5 +6,8 @@ export const permissions = {
 }
 
 export const verifyRole = (role, list) => {
+    if (role === undefined) {
+        return false
+    }
     return list.indexOf(role) !== -1
 }

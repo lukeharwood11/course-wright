@@ -343,6 +343,11 @@ code {
             "code student-count button";
 }
 
+.stacked-course {
+    box-shadow:
+            black -5px 0 0 -1px;
+}
+
 .course-button-more {
     display: flex;
     align-items: center;
@@ -726,7 +731,6 @@ code {
             "settings settings";
     width: 100%;
     height: 100%;
-    gap: 1rem;
     justify-content: center;
     align-items: center;
 }
@@ -786,13 +790,15 @@ code {
 }
 
 .search-result {
-    padding: .5rem 1rem;
+    padding: 0 .5rem;
     display: grid;
     gap: .5rem;
-    grid-template-columns: 1fr 1fr 1fr .5fr;
+    grid-template-columns: 2fr 1fr 1fr .5fr;
     justify-content: center;
     align-items: center;
     border-radius: .5rem;
+    width: 95%;
+    box-shadow: var(--purple) 0 5px 2px 0;
 }
 
 hr {

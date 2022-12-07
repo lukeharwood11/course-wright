@@ -17,9 +17,9 @@ const SearchResult = ({ result }) => {
     }
 
     return (
-        <div className={"no-select search-result bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 text-white"}>
-            <h1 className={"bg-white dark-text rounded-lg p-2 text-center"}>{ result.name }</h1>
-            <h2 className={"text-center p-2"}>{ result.code }</h2>
+        <div className={"no-select search-result dark-text course-preview-container"}>
+            <h1 className={"text-sm bg-white rounded-lg p-2 text-center"}>{ result.name }</h1>
+            <h2 className={"text-center"}>{ result.code }</h2>
             <h2>{ `${lastName}, ${firstName}`}</h2>
             <div className={"flex justify-around items-center gap-2"}>
                 <motion.button

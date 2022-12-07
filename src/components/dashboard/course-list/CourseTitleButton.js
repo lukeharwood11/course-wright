@@ -11,14 +11,16 @@ import {Item, Menu, Submenu, useContextMenu} from "react-contexify";
 import {parseCourseCode} from "../../../utils/regex/regex";
 import { permissions, verifyRole} from "../../../utils/permissions";
 import {isSection} from "../../../utils/courseUtils";
+import useAuth from "../../../hooks/useAuth";
 
 const CourseTitleButton = ({selected, course, tags}) => {
     const {type, name, code, accounts, studentCount, id, pcId, published, role, active, subject, dateCreated, lastModified, license, visibility} = course
-    const { setSelectedCourse } = useDashboardContext()
+    const { coursePairs, setSelectedCourse } = useDashboardContext()
     const formattedCode = parseCourseCode(name, code)
     const [modal, setModal] = useState(false)
     const [tooltip, setTooltip] = useState(false)
     const navigate = useNavigate()
+    const { auth } = useAuth()
 
     const handleMore = (e) => {
         e.stopPropagation()
@@ -42,7 +44,21 @@ const CourseTitleButton = ({selected, course, tags}) => {
     });
 
     const isEditable = () => {
+        if (isSection(course)) {
+            const c = coursePairs.find(obj => obj.section.pcId === course.pcId)?.course
+            if (c) {
+                return verifyRole(c.accounts.find(a => a.email === auth.user.email)?.role, permissions.courseEdit)
+            }
+            return false
+        }
         return !isSection(course) && verifyRole(role, permissions.courseEdit)
+    }
+
+    /**
+     * Return true if this is both a private course and a section
+     */
+    const isStacked = () => {
+        return isSection(course) && coursePairs.find(obj => obj.section.pcId === course.pcId)?.course !== undefined
     }
 
     return (
@@ -68,7 +84,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
                     const courseId = type === "c" ? id : pcId
                     setSelectedCourse(courseId, type)
                 }}
-                className={`course-button box-border drop-shadow-xl`}
+                className={`course-button box-border drop-shadow-xl ${isStacked() ? "stacked-course": ""}`}
                 initial={{ opacity: 0, y: "-1vh" }}
                 animate={{ opacity: 1, y:0 }}
                 transition={{ ease: "anticipate", duration: .5 }}

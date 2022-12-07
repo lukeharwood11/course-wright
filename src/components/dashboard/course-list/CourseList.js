@@ -16,7 +16,7 @@ import NewCourseButton from "./NewCourseButton";
 const CourseList = () => {
     const [modal, setModal] = useState(false)
     const [content, setContent] = useState(<div></div>)
-    const { courses, setCourses, addCourse, selectedCourse, setSelectedCourse, lockCourseCreation } = useDashboardContext()
+    const { coursePairs, courses, setCourses, addCourse, selectedCourse, setSelectedCourse, lockCourseCreation } = useDashboardContext()
     const [loading, setLoading] = useState(true)
     const axiosPrivate = useAxios();
     const { auth } = useAuth()
@@ -51,12 +51,13 @@ const CourseList = () => {
     }, []);
 
     useEffect(() => {
-        if (!selectedCourse.id && courses.length > 0) {
-            const course = courses[0]
+        console.log("Selection", coursePairs)
+        if (!selectedCourse.id && coursePairs.length > 0) {
+            const course = coursePairs[0].section ? coursePairs[0].section : coursePairs[0].course
             let id = course.type === "c" ? course.id : course.pcId
             setSelectedCourse(id, course.type)
         }
-    }, [courses, setSelectedCourse])
+    }, [coursePairs, setSelectedCourse])
 
     const handleCloseModal = () => {
         setModal(false)
@@ -77,7 +78,14 @@ const CourseList = () => {
                     }
                 </AnimatePresence>
                     <AnimatePresence mode={"sync"}>
-                { courses.slice(0, 8)?.map((course, i) => {
+                { coursePairs.slice(0, 8)?.map((obj, i) => {
+                    // hide courses with sections
+                    let course
+                    if (obj.section) {
+                        course = obj.section
+                    } else {
+                        course = obj.course
+                    }
                     const id = course.type === "c" ? course.id : course.pcId
                     return <CourseTitleButton index={i} selected={course.type === selectedCourse.type && selectedCourse.id === id} key={ id } course={ course }/>
                 })

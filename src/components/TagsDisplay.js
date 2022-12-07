@@ -7,7 +7,7 @@ export const TagsDisplayView = ({ tags }) => {
     return (
         <div className={"course-tags-container course-preview-container"}>
             {
-                tags && tags.map(t => <h3 className={"text-xl course-button-tag font-bold bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 bg-clip-text bg-white text-transparent shadow-lg"}>{ t.value }</h3>)
+                tags && tags.map(t => <h3 key={t.value} className={"text-xl course-button-tag font-bold bg-gradient-to-tr from-indigo-500 via-blue-500 to-purple-500 bg-clip-text bg-white text-transparent shadow-lg"}>{ t.value }</h3>)
             }
             {
                 (!tags || tags.length === 0) && <h3 className={"text-gray-300 w-full text-center"}>No course tags.</h3>

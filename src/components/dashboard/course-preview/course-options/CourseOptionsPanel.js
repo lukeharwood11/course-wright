@@ -143,12 +143,6 @@ const CourseOptionsPanel = ({ course }) => {
                             onClick={ handleDelete }
                             className={`delete-button button published-button inline-block text-white ${ courseObj.published ? "bg-red-900": "bg-indigo-500"}`}>{"delete"}</button>
                     </div>
-                    <div className={"border border-black"}>
-
-                    </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                     {
                         modal &&
                         <ConfirmationDialog handleClose={() => setModal(false)} confirmText={ confirmText } onCancel={ () => {} } onConfirm={ () => {} }/>

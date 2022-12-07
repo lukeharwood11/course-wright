@@ -4,6 +4,7 @@ import { dashboardModes } from "../constants";
 import toast from "react-hot-toast";
 import DashboardSaveChangesPopup from "../components/dashboard/DashboardSaveChangesPopup";
 import useAuth from "../hooks/useAuth";
+import {isSection} from "../utils/courseUtils";
 
 export const DashboardContext = createContext({})
 
@@ -11,6 +12,9 @@ const DashboardContextProvider = ({ children }) => {
 
     const { auth } = useAuth()
     const [change, setChange] = useState(false)
+
+    // holds a list of objects that match a courseSection with it's courseObj
+    const [coursePairs, setCoursePairs] = useState([])
     const [selectedCourse, setCourse] = useState({})
     const [courses, setCourses] = useState([])
     const [mode, setMode] = useMemoryState(dashboardModes.MESSAGE)
@@ -19,6 +23,28 @@ const DashboardContextProvider = ({ children }) => {
     const [fullModalContent, setFullModalContent] = useState(<div></div>)
     const [fullModalFullHeight, setFullModalFullHeight] = useState(false)
 
+    useEffect(() => {
+        const pairs = []
+        for (let i = 0; i < courses.length; ++i) {
+            const course = courses[i]
+            if (!isSection(course)) {
+                let obj = courses
+                    .filter((c) => c.id === course.id && c.type === 'pc')
+                    .map(c => {
+                        return {
+                            section: c,
+                            course: course
+                        }
+                    })
+                if (obj.length === 0) {
+                    obj = [{ course: course }]
+                }
+                pairs.push(...obj)
+            }
+        }
+        setCoursePairs(pairs)
+        console.log(pairs)
+    }, [courses])
 
     const addCourse = (course) => {
         setCourses((prevState) => {
@@ -211,7 +237,7 @@ const DashboardContextProvider = ({ children }) => {
 
     return (
         <DashboardContext.Provider
-            value={{setPublished, addRemoveAccount, addRemoveEditor, updateFields, addNewSection, handleCloseFullModal, displayFullModal, fullModalFullHeight, fullModal, fullModalContent, lockCourseCreation, setLockCourseCreation, addCourse,
+            value={{coursePairs, setPublished, addRemoveAccount, addRemoveEditor, updateFields, addNewSection, handleCloseFullModal, displayFullModal, fullModalFullHeight, fullModal, fullModalContent, lockCourseCreation, setLockCourseCreation, addCourse,
                 updateCourse, deleteCourse, change, setChange, selectedCourse,
                 setSelectedCourse, mode, setMode, courses, setCourses}}>
             {children}
