@@ -43,7 +43,6 @@ const DashboardContextProvider = ({ children }) => {
             }
         }
         setCoursePairs(pairs)
-        console.log(pairs)
     }, [courses])
 
     const addCourse = (course) => {
@@ -110,7 +109,6 @@ const DashboardContextProvider = ({ children }) => {
                         name: course.name,
                         code: course.code,
                         tags: course.tags,
-                        accounts: course.accounts,
                         published: course.published
                     }
                 }
@@ -237,7 +235,7 @@ const DashboardContextProvider = ({ children }) => {
 
     return (
         <DashboardContext.Provider
-            value={{coursePairs, setPublished, addRemoveAccount, addRemoveEditor, updateFields, addNewSection, handleCloseFullModal, displayFullModal, fullModalFullHeight, fullModal, fullModalContent, lockCourseCreation, setLockCourseCreation, addCourse,
+            value={{coursePairs, setCoursePairs, setPublished, addRemoveAccount, addRemoveEditor, updateFields, addNewSection, handleCloseFullModal, displayFullModal, fullModalFullHeight, fullModal, fullModalContent, lockCourseCreation, setLockCourseCreation, addCourse,
                 updateCourse, deleteCourse, change, setChange, selectedCourse,
                 setSelectedCourse, mode, setMode, courses, setCourses}}>
             {children}

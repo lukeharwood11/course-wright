@@ -9,7 +9,8 @@ import CourseHeader from "../CourseHeader";
 
 const CoursePage = () => {
     const [sideBarActive, setSideBarActive] = useState(true)
-
+    const {type, id} = useParams()
+    console.log(type, id)
     useEffect(() => {
         // TODO send a get request for this course
     }, [])

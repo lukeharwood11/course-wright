@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {isSection} from "../../../utils/courseUtils";
 
 const MiniCourseContainer = ({ handleClose }) => {
-    const { courses, setCourses } = useDashboardContext()
+    const { courses, setCourses, coursePairs, setCoursePairs  } = useDashboardContext()
 
     return (
         <Reorder.Group className={"w-full h-full"} axis="y" values={ courses } onReorder={ setCourses }>

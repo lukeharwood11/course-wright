@@ -3,34 +3,19 @@ import {useEffect, useState} from "react";
 import {AnimatePresence, motion } from "framer-motion";
 import CourseComponent from "./CourseComponent";
 
-const ExpandableButton = ({ selected, title, id, menuOptions, handleMenuClick, children }) => {
+const ExpandableButton = ({ selected, title, id, handleMenuClick, children }) => {
 
     const [expanded, setExpanded] = useState(false)
-
-    const { show } = useContextMenu({
-        id: id,
-    });
-
-    const handleContextMenu = (e) => {
-        if (menuOptions) {
-            show({ event: e })
-        }
-    }
 
     const handleExpand = () => {
         setExpanded(prevState => !prevState)
     }
 
     return (
-        <motion.div className={"expandable-button"} layout onContextMenu={ (e) => {
-            handleContextMenu(e)
-            e.preventDefault()
-            e.stopPropagation()
-        } }>
-            <Menu id={ id }>
-                { menuOptions && menuOptions.map((o) => <Item key={ o.text.toLowerCase() } id={o.text.toLowerCase()} data={o.text} onClick={ handleMenuClick }>{o.text}</Item>)}
-            </Menu>
-            <CourseComponent icon={expanded ? "expand-less" : "expand-more"} handleClick={ handleExpand } name={ title }/>
+        <motion.div className={"expandable-button"} layout >
+            <CourseComponent
+                icon={expanded ? "expand-less" : "expand-more"}
+                             handleClick={ handleExpand } name={ title }/>
             <AnimatePresence>
                 {
                     expanded &&

@@ -7,7 +7,7 @@ import {selectOptions} from "@testing-library/user-event/dist/select-options";
 
 const MiniCourseViewDraggable = ({ course, color, handleClose }) => {
     const { name, code, role, type } = course
-    const { setSelectedCourse } = useDashboardContext()
+    const { setSelectedCourse, coursePairs } = useDashboardContext()
     const navigate = useNavigate()
     const controls = useDragControls()
 

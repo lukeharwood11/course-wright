@@ -90,34 +90,35 @@ const PageView = () => {
     }
 
     return (
-        <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            end={{ opacity: 0 }}
-            layout
-            className={"page-view"}>
-            <AnimatePresence initial={false} mode={"popLayout"}>
-                {sections.map((section) => {
-                switch (section.type) {
-                    case "code":
-                        return <CodeElement onChange={handleChange} section={section} key={section.id} onSave={handleSave} onDelete={() => handleDelete(section.id)} id={section.id}/>
-                    case "video":
-                        return <VideoElement section={section} onChange={handleChange} onTitleChange={handleVideoTitleChanged} onUrlChange={handleVideoUrlChanged} key={section.id} onSave={handleSave} onDelete={() => handleDelete(section.id)} id={section.id}/>
-                    case "text":
-                        return <TextElement onTextTypeChange={handleTextTypeChanged} onChange={handleChange} section={section} key={section.id} onSave={handleSave} onDelete={() => handleDelete(section.id)} id={section.id}/>
-                    default:
-                        return
-                }
-            })}
-            </AnimatePresence>
-            <motion.div layout>
-
-                <motion.button whileHover={{scale: 1.2}} onClick={handleNewText} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsFillNodePlusFill/></motion.button>
-                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewVideo} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsYoutube/></motion.button>
-                <motion.button whileHover={{scale: 1.2}}  onClick={handleNewCode} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsCodeSlash/></motion.button>
-                <motion.button whileHover={{scale: 1.2}}  onClick={handleSaveAll} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-full px-4 py-2 m-2 bg-green text-indigo-500">Save All</motion.button>
-            </motion.div>
-        </motion.section>
+        <div className={"flex justify-center items-start overflow-y-auto"}>
+            <motion.section
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                end={{ opacity: 0 }}
+                layout
+                className={"page-view"}>
+                <AnimatePresence initial={false} mode={"popLayout"}>
+                    {sections.map((section) => {
+                        switch (section.type) {
+                            case "code":
+                                return <CodeElement onChange={handleChange} section={section} key={section.id} onSave={handleSave} onDelete={() => handleDelete(section.id)} id={section.id}/>
+                            case "video":
+                                return <VideoElement section={section} onChange={handleChange} onTitleChange={handleVideoTitleChanged} onUrlChange={handleVideoUrlChanged} key={section.id} onSave={handleSave} onDelete={() => handleDelete(section.id)} id={section.id}/>
+                            case "text":
+                                return <TextElement onTextTypeChange={handleTextTypeChanged} onChange={handleChange} section={section} key={section.id} onSave={handleSave} onDelete={() => handleDelete(section.id)} id={section.id}/>
+                            default:
+                                return
+                        }
+                    })}
+                </AnimatePresence>
+                <motion.div layout>
+                    <motion.button whileHover={{scale: 1.2}} onClick={handleNewText} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsFillNodePlusFill/></motion.button>
+                    <motion.button whileHover={{scale: 1.2}}  onClick={handleNewVideo} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsYoutube/></motion.button>
+                    <motion.button whileHover={{scale: 1.2}}  onClick={handleNewCode} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-md px-4 py-2 m-2 bg-white text-indigo-500"><BsCodeSlash/></motion.button>
+                    <motion.button whileHover={{scale: 1.2}}  onClick={handleSaveAll} className="border border-black font-semibold transition-colors hover:bg-gradient-to-tr from-indigo-400 via-blue-500 to-purple-500 hover:text-white rounded-full px-4 py-2 m-2 bg-green text-indigo-500">Save All</motion.button>
+                </motion.div>
+            </motion.section>
+        </div>
     );
 }
 

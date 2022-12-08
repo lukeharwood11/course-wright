@@ -1,6 +1,7 @@
 import { AiOutlineProfile } from 'react-icons/ai'
 import { motion } from 'framer-motion'
 import { MdExpandMore, MdExpandLess, MdOutlineGppMaybe, MdOutlineAssignmentLate, MdOutlineAssignment } from 'react-icons/md'
+import {Item, Menu, useContextMenu} from "react-contexify";
 
 const pageIcon = () => {
     return <AiOutlineProfile size={30}/>
@@ -38,6 +39,12 @@ const getIcon = (id) => {
 }
 
 const CourseComponent = ({ disableLayout=false, icon, name, handleClick }) => {
+
+    const handleMenuClick = ( ) => {
+
+    }
+
+    const menuOptions = [{ text: "Delete"}, { text: "Rename"}]
 
     return (
         <motion.div

@@ -31,7 +31,7 @@ function App() {
                     <Route element={<AuthorizeUser />}>
                         <Route path={"profile"} element={<ProfilePage />}/>
                         <Route path={"dashboard"} element={<Dashboard />} />
-                        <Route path={"course/:id"} element={<CoursePage/> } />
+                        <Route path={"course/:type/:id"} element={<CoursePage/> } />
                     </Route>
                 </Route>
                 <Route path={"*"} element={<NotFound />} />

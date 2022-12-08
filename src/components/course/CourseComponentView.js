@@ -20,8 +20,7 @@ const CourseComponentView = ({ directories, coursePage }) => {
                 placeholder={"Search Course"}/>
             { directories.map((d, i) =>
                 <ExpandableButton
-                    menuOptions={[ { text: "rename" }, { text: "delete" } ]}
-                title={d.name} key={i}>{ d.pages.map((p, i) => <CourseComponent key={i} id={i} icon={"page"} name={ p }/>)} </ExpandableButton>) }
+                title={d.name} key={i}>{ d.pages.map((p, i) => <CourseComponent key={i} icon={"page"} name={ p }/>)} </ExpandableButton>) }
         </div>
     );
 }

@@ -15,7 +15,7 @@ import useAuth from "../../../hooks/useAuth";
 
 const CourseTitleButton = ({selected, course, tags}) => {
     const {type, name, code, accounts, studentCount, id, pcId, published, role, active, subject, dateCreated, lastModified, license, visibility} = course
-    const { coursePairs, setSelectedCourse } = useDashboardContext()
+    const { coursePairs, selectedCourse, setSelectedCourse } = useDashboardContext()
     const formattedCode = parseCourseCode(name, code)
     const [modal, setModal] = useState(false)
     const [tooltip, setTooltip] = useState(false)
@@ -27,7 +27,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
         openModel()
     }
 
-    const closeModel = () => {
+    const closeModal = () => {
         setModal(false)
     }
 
@@ -45,7 +45,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
 
     const isEditable = () => {
         if (isSection(course)) {
-            const c = coursePairs.find(obj => obj.section.pcId === course.pcId)?.course
+            const c = coursePairs.find(obj => obj?.section?.pcId === course.pcId)?.course
             if (c) {
                 return verifyRole(c.accounts.find(a => a.email === auth.user.email)?.role, permissions.courseEdit)
             }
@@ -58,16 +58,49 @@ const CourseTitleButton = ({selected, course, tags}) => {
      * Return true if this is both a private course and a section
      */
     const isStacked = () => {
-        return isSection(course) && coursePairs.find(obj => obj.section.pcId === course.pcId)?.course !== undefined
+        return isSection(course) && coursePairs.find(obj => obj?.section?.pcId === course.pcId)?.course !== undefined
+    }
+
+    /**
+     * Returns a boolean of whether the course under the private course is selected
+     */
+    const stackedCourseSelected = () => {
+        // this will only be called if it is a section, so we can assume course.pcId exists
+        return coursePairs.find(obj => obj?.section?.pcId === course.pcId).course.id === selectedCourse.id
+    }
+
+    /**
+     * Get the style that corresponds to the state of the button
+     * (In regard to whether this is a stacked button)
+     */
+    const getStackedStyleClass = () => {
+        if (isStacked()) {
+            return stackedCourseSelected() ? "stacked-course-selected" : "stacked-course"
+        } else {
+            return ""
+        }
+    }
+
+    const setStackedCourse = () => {
+        const c = coursePairs.find(obj => obj?.section?.pcId === course.pcId)?.course
+        if (c) setSelectedCourse(c.id, 'c')
     }
 
     return (
         <>
             <AnimatePresence>
-                { modal && <CustomModal key={"modal"} handleClose={ closeModel }>
+                { modal && <CustomModal key={"modal"} handleClose={ closeModal }>
                     <div>
                         <h1 className={"font-thin"}>
-                            Course Options... Coming Soon
+                            {
+                                isStacked() &&
+                                <button
+                                    onClick={() => {
+                                        setStackedCourse()
+                                        closeModal()
+                                    }}
+                                >Select Editable Course</button>
+                            }
                         </h1>
                     </div>
                 </CustomModal> }
@@ -78,28 +111,35 @@ const CourseTitleButton = ({selected, course, tags}) => {
                     e.preventDefault()
                 }}
                 onDoubleClick={() => {
-                    navigate(`/course/${id}`)
+                    navigate(`/course/${type}/${id}`)
                 }}
                 onClick={() => {
                     const courseId = type === "c" ? id : pcId
+                    console.log(type, courseId)
                     setSelectedCourse(courseId, type)
                 }}
-                className={`course-button box-border drop-shadow-xl ${isStacked() ? "stacked-course": ""}`}
+                className={`course-button box-border drop-shadow-xl ${getStackedStyleClass()}`}
                 initial={{ opacity: 0, y: "-1vh" }}
                 animate={{ opacity: 1, y:0 }}
                 transition={{ ease: "anticipate", duration: .5 }}
                 exit={{opacity: 0, borderRadius: "50%"}}>
                 {
                     !published && type === 'c' &&
-                    <div
-                        onMouseEnter={() => setTooltip(true)}
+                    <motion.div
+                        layout
+                        id={"course-button-icon " + (!tooltip ? "rounded": "")}
+                        onMouseEnter={() => {
+                            setTooltip(true)
+                        }}
                         onMouseLeave={() => setTooltip(false)}
-                        className={"course-button-icon"}>
+                        className={"course-button-icon round"}>
                         {
                             tooltip && <p className={"tooltip"}>Not yet published</p>
                         }
-                        <AiOutlineEyeInvisible size={ 20 }/>
-                    </div>
+                        {
+                            !tooltip && <AiOutlineEyeInvisible size={ 20 }/>
+                        }
+                    </motion.div>
                 }
                 {
                     isEditable() && <FaEdit className={"course-button-editable-icon"} size={ 15 }/>

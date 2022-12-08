@@ -306,12 +306,15 @@ code {
 }
 
 .course-button-icon {
-    position: absolute;
+    position: fixed;
     top: -10px;
     right: -10px;
     background-color: white;
     box-shadow: black 1px 1px 3px 0;
     color: black;
+}
+
+.round {
     border-radius: 50%;
 }
 
@@ -328,7 +331,6 @@ code {
 }
 
 .course-button {
-
     min-height: 65px;
     cursor: pointer;
     border-radius: .5rem;
@@ -341,11 +343,16 @@ code {
     grid-template-areas:
             "code name button"
             "code student-count button";
+    transition: box-shadow 1s;
 }
 
 .stacked-course {
     box-shadow:
-            black -5px 0 0 -1px;
+            var(--indigo) 3px 3px 5px -1px;
+}
+
+.stacked-course-selected {
+    box-shadow: var(--purple) 3px 3px 5px -1px;
 }
 
 .course-button-more {
@@ -583,17 +590,17 @@ code {
     display: flex;
     grid-area: side-bar;
     border-radius: 0 .75rem .75rem 0;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .page-view {
     grid-area: page;
     display: flex;
-    justify-content: start;
-    align-items: center;
     flex-direction: column;
-    overflow-y: scroll;
+    align-items: center;
     overflow-x: hidden;
+    width: min(100%, 800px);
+    height: 100%;
 }
 
 .scrollable {
@@ -781,7 +788,6 @@ code {
 }
 
 .tooltip {
-    position: fixed;
     background-color: lightgray;
     border-radius: .5rem;
     color: #2f2f2f;

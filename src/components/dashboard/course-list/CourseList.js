@@ -51,7 +51,6 @@ const CourseList = () => {
     }, []);
 
     useEffect(() => {
-        console.log("Selection", coursePairs)
         if (!selectedCourse.id && coursePairs.length > 0) {
             const course = coursePairs[0].section ? coursePairs[0].section : coursePairs[0].course
             let id = course.type === "c" ? course.id : course.pcId
@@ -80,12 +79,7 @@ const CourseList = () => {
                     <AnimatePresence mode={"sync"}>
                 { coursePairs.slice(0, 8)?.map((obj, i) => {
                     // hide courses with sections
-                    let course
-                    if (obj.section) {
-                        course = obj.section
-                    } else {
-                        course = obj.course
-                    }
+                    const course = obj.section ? obj.section : obj.course
                     const id = course.type === "c" ? course.id : course.pcId
                     return <CourseTitleButton index={i} selected={course.type === selectedCourse.type && selectedCourse.id === id} key={ id } course={ course }/>
                 })

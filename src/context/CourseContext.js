@@ -1,4 +1,4 @@
-import {createContext} from "react";
+import {createContext, useState} from "react";
 import useChangeHandler from "../hooks/useChangeHandler";
 
 export const CourseContext = createContext({})
@@ -10,8 +10,13 @@ const CourseContextProvider = ({ children }) => {
         changeDetected, setChangeDetected
     ] = useChangeHandler({})
 
+    const [focus, setFocus] = useState({})
+
+
+
     return (
         <CourseContext.Provider value={{
+            focus, setFocus,
             course, courseObj, setCourse,
             setCourseObj, changeDetected, setChangeDetected
         }}>

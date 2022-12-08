@@ -187,6 +187,7 @@ export const CoursePreviewView = ({ course, setEditMode }) => {
             return a.email === auth.user.email && verifyRole(a.role, permissions.courseEdit)
         }).length > 0
     }
+
     return (
         <>
             <div className={"course-meta-view"}>
