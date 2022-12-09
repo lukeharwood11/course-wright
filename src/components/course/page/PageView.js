@@ -14,7 +14,11 @@ import InstructionsElement from "./elements/InstructionsElement";
 
 const PageView = () => {
     const [cells, setCells] = useMemoryState([], "activeSections")
-    const [selected, setSelected] = useState(true)
+    /**
+     * If a child has focus, this should be false
+     * else, if the user has selected it- it should be true
+     */
+    const [hasFocus, setHasFocus] = useState(true)
     const handleDelete = (id) => {
         const newCells = cells.filter((cell)=> cell.id !== id)
         setCells(newCells)
@@ -121,8 +125,13 @@ const PageView = () => {
         }
     ]
 
+    /**
+     * Handle quick keys
+     * TODO: add the ElementWrapper around the Elements and stop event propagation on keypress and click
+     * @param e
+     */
     const handleKeyPress = (e) => {
-        if (!selected) return
+        if (!hasFocus) return
         switch (e.key) {
             case "t":
                 handleNewText(e)
@@ -154,13 +163,13 @@ const PageView = () => {
     })
 
     return (
-        <div onKeyUp={handleKeyPress } onMouseEnter={() => setSelected(true)} onClick={() => setSelected(true)} onMouseLeave={() => setSelected(false)} className={"flex justify-center items-start overflow-y-auto"}>
+        <div onKeyUp={handleKeyPress } onMouseEnter={() => setHasFocus(true)} onClick={() => setHasFocus(true)} onMouseLeave={() => setHasFocus(false)} className={"flex justify-center items-start overflow-y-auto"}>
             <motion.section
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 end={{ opacity: 0 }}
                 layout
-                className={`page-view ${selected ? "selected": ""}`}>
+                className={`page-view ${hasFocus ? "selected": ""}`}>
                 <AnimatePresence initial={false}>
                     {cells.map((cell) => {
                         switch (cell.type) {
