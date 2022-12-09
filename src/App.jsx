@@ -25,7 +25,7 @@ function App() {
                     <Route index element={<HomePage />} />
                 </Route>
                 <Route path={"sign-in"} element={<SignInPage />} />
-                <Route path={"create-account"} element={<CreateAccountPage />}/>
+                <Route path={"create-profile"} element={<CreateAccountPage />}/>
                 {/* protected routes here */}
                 <Route element={<RefreshHandler />}>
                     <Route element={<AuthorizeUser />}>

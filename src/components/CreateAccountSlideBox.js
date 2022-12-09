@@ -65,7 +65,7 @@ const CreateAccountSlideBox = ({ setLoading }) => {
                 } else if (e?.response.status === 403) {
                     toast.error(e?.message, { id: id })
                 } else {
-                    toast.error("Failed to create account... please try again.", { id: id })
+                    toast.error("Failed to create profile... please try again.", { id: id })
                 }
             }
         } else {

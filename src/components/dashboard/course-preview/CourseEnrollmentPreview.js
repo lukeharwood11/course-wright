@@ -33,7 +33,7 @@ const CourseEnrollmentPreview = ({ handleAddRemoveAccount, course, allowScroll=f
                 if (err?.response?.status === 409) {
                     callback(undefined, "Account already enrolled.")
                 } else {
-                    callback(undefined, "Failed to add new account")
+                    callback(undefined, "Failed to add new profile")
                 }
             })
     }

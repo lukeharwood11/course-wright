@@ -33,14 +33,13 @@ const TextElement = ({onChange, onDelete, onSave, onTextTypeChange, section}) =>
             exit={{opacity: 0}}
             className="flex items-center flex-col w-full">
 
-            {!editMode &&
+            {!editMode ?
                 <motion.div
                 layout
                 transition={{layout: {duration: .2, ease: "linear"}}}
                 className={`mt-3 mb-3 w-full ${getTypeStyle()} markdown`} onClick={() => onSave(section.id, false)}>
-                <ReactMarkdown>{text}</ReactMarkdown>
-            </motion.div> }
-                {editMode &&
+                    <ReactMarkdown>{ text }</ReactMarkdown>
+                </motion.div> :
                     <>
                         <Textarea defaultValue={text} onChange={(event) => onChange(section.id, event)} className={`p-4 border-box resize-none mx-3 rounded-md bg-gray-100 ${renderValue("italic", "instructions")} w-full border border-black ${renderValue("font-bold bg-blue-100 text-indigo-500", "key")}`}/>
                         <motion.div

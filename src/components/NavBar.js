@@ -19,7 +19,7 @@ const NavBar = (props) => {
                 handleNav("/dashboard")
             }} whileHover={hover}> <BsHouseDoor className="text-indigo-500" size={40}/></motion.button>
             <motion.button whileHover={hover} onClick={() => {
-                handleNav("/sign-in")
+                handleNav("/profile")
             }}><RiUser3Line className="text-indigo-500" size={40}/></motion.button>
             <motion.button whileHover={{
                 ...hover,

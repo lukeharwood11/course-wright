@@ -19,6 +19,18 @@ html, body, #app, #app>div, root {
     --contexify-activeArrow-color: #fff;
 }
 
+.MuiSlider-root {
+    color: var(--purple)
+}
+
+.MuiSlider-root:hover {
+    color: var(--indigo);
+}
+
+.MuiSlider-root .MuiSlider-thumb {
+    border-radius: 1px;
+}
+
 :root {
     --indigo: #818cf8;
     --purple: #a855f7;
@@ -127,7 +139,7 @@ code {
     grid-template-areas:
     "left-top right"
     "left-bottom right"
-    "nav-bar nav-bar"
+    "nav-bar nav-bar";
 }
 
 .search {
@@ -599,7 +611,7 @@ code {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-    width: min(100%, 800px);
+    width: min(90%, 900px);
     height: 100%;
 }
 
@@ -615,6 +627,7 @@ code {
 .course-header {
     grid-area: header;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     font-size: 2rem;
     font-weight: lighter;
@@ -856,4 +869,30 @@ hr {
 
 .new-account-button:focus {
     box-shadow: rgb(0, 111, 255) 0 0 1px 1px;
+}
+
+.profile-page-layout {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: .5fr 2fr;
+    grid-template-rows: 1.6fr .2fr;
+    grid-template-areas:
+    "profile page"
+    "nav-bar nav-bar";
+    overflow: hidden;
+}
+
+.profile-panel {
+    grid-area: profile;
+}
+
+.cell-element-wrapper {
+    width: 100%;
+}
+
+.speed-dial-fab {
+    color: black;
+    background-color: purple;
+    padding: 2rem;
 }

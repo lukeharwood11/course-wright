@@ -105,7 +105,7 @@ const SignInPage = (props) => {
                         Log In</motion.button>
                 </div>
                 <p
-                    className={"text-right text-gray-200 p-2"}>Don't have an account? <a className={"text-gray-700 underline"} href={"/create-account"}>Create one!</a></p>
+                    className={"text-right text-gray-200 p-2"}>Don't have an account? <a className={"text-gray-700 underline"} href={"/create-profile"}>Create one!</a></p>
             </form>
         </motion.div>
     );
