@@ -8,7 +8,7 @@ const CourseHeader = ({ menuOpen, handleToggle, title}) => {
     const actions = []
     return (
         <section className={"course-header"}>
-            <div className={"flex items-center"}>
+            <div className={"flex items-center gap-3"}>
                 <motion.button
                     whileHover={{rotate: 180, borderRadius: "50%"}}
                     whileTap={{rotate: 90 }}

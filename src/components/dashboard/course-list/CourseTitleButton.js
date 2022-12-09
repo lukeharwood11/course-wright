@@ -109,6 +109,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
                 layout
                 onContextMenu={(e) => {
                     e.preventDefault()
+                    setModal(true)
                 }}
                 onDoubleClick={() => {
                     navigate(`/course/${type}/${id}`)

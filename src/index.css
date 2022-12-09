@@ -238,11 +238,6 @@ code {
     grid-area: options;
 }
 
-.selected {
-
-
-}
-
 .course-name {
     grid-area: name;
     min-width: 0;
@@ -606,6 +601,7 @@ code {
 }
 
 .page-view {
+    padding: 0 .5rem;
     grid-area: page;
     display: flex;
     flex-direction: column;
@@ -613,6 +609,10 @@ code {
     overflow-x: hidden;
     width: min(90%, 900px);
     height: 100%;
+}
+
+.selected {
+    box-shadow: black 0 0 10px 2px;
 }
 
 .scrollable {
@@ -891,8 +891,19 @@ hr {
     width: 100%;
 }
 
-.speed-dial-fab {
-    color: black;
-    background-color: purple;
-    padding: 2rem;
+.quick-keys-table, td, th {
+    padding: .2rem 2rem;
 }
+
+.quick-keys-table {
+    outline: lightgray solid 1px;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.quick-keys-table .bottom {
+    background-color: lightgray;
+    outline: gray 1px solid;
+}
+
+
