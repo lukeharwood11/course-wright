@@ -1,10 +1,10 @@
 import {motion} from "framer-motion";
 import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
-import {FcAbout} from 'react-icons/fc'
+import {AiOutlineInfoCircle} from 'react-icons/ai'
 import {SpeedDial, SpeedDialAction, SpeedDialIcon} from "@mui/material";
 import React from "react";
 
-const CourseHeader = ({ menuOpen, handleToggle, title}) => {
+const CourseHeader = ({ handleHelpOpen, menuOpen, handleToggle, title}) => {
     const actions = []
     return (
         <section className={"course-header"}>
@@ -24,6 +24,7 @@ const CourseHeader = ({ menuOpen, handleToggle, title}) => {
                 </motion.button>
                 <h1>{ title }</h1>
             </div>
+            <button onClick={ handleHelpOpen } className={"text-indigo-500"}><AiOutlineInfoCircle /></button>
 
             {/*<SpeedDial*/}
             {/*    ariaLabel="SpeedDial Open"*/}

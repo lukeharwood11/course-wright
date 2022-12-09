@@ -612,7 +612,7 @@ code {
 }
 
 .selected {
-    box-shadow: black 0 0 10px 2px;
+    box-shadow: var(--indigo) 0 0 50px 0;
 }
 
 .scrollable {
@@ -892,7 +892,8 @@ hr {
 }
 
 .quick-keys-table, td, th {
-    padding: .2rem 2rem;
+    padding: 0 2rem;
+    outline: rgba(211, 211, 211, 0.34) 1px solid;
 }
 
 .quick-keys-table {

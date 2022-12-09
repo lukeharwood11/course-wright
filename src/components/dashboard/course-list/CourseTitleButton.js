@@ -95,6 +95,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
                             {
                                 isStacked() &&
                                 <button
+                                    className={"bg-gray-200 rounded-lg p-2"}
                                     onClick={() => {
                                         setStackedCourse()
                                         closeModal()
@@ -109,6 +110,7 @@ const CourseTitleButton = ({selected, course, tags}) => {
                 layout
                 onContextMenu={(e) => {
                     e.preventDefault()
+                    if (!isStacked()) return
                     setModal(true)
                 }}
                 onDoubleClick={() => {
